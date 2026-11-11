@@ -35,7 +35,6 @@ body{
   font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
   background:var(--paper);color:var(--ink);line-height:1.65;
   -webkit-font-smoothing:antialiased;
-  padding-bottom:96px;
 }
 h1,h2,h3,.serif{font-family:"Noto Serif SC","Songti SC","SimSun",serif}
 a{color:inherit}
@@ -243,69 +242,83 @@ section{padding:52px 0 6px}
 .venue-body p{font-size:13.5px;color:var(--ink-soft)}
 .venue-body .open{margin-top:10px;font-size:13.5px;color:var(--cinnabar);font-weight:500}
 
-/* ---------- 音乐播放器 ---------- */
-.player{
-  position:fixed;right:20px;bottom:20px;z-index:80;
-  width:330px;background:rgba(255,253,249,.96);border:1px solid var(--line);
-  border-radius:20px;box-shadow:0 18px 44px rgba(58,38,26,.22);
-  padding:14px 16px;display:flex;gap:14px;align-items:center;
-  backdrop-filter:blur(10px);
+/* ---------- Hero 版式 ---------- */
+.hero-frame{position:absolute;inset:16px;border:1px solid rgba(248,239,227,.16);border-radius:14px;pointer-events:none}
+.hero-mark{
+  position:absolute;right:2%;bottom:-70px;font-family:"Noto Serif SC",serif;font-size:clamp(120px,18vw,230px);
+  font-weight:900;color:rgba(248,239,227,.055);line-height:1;pointer-events:none;user-select:none;
 }
-.disc-wrap{position:relative;width:76px;height:76px;flex:none;cursor:pointer;border:none;background:none;padding:0}
+.hero-grid{display:grid;gap:26px;align-items:start;position:relative;z-index:1}
+.meta-chip.countdown{background:rgba(201,162,94,.2);border-color:rgba(201,162,94,.5)}
+.meta-chip.countdown .value{color:#F2DDB4}
+
+/* ---------- 音乐播放器（Hero 内，开场即见） ---------- */
+.player{
+  position:relative;min-width:0;color:#FBF4E4;
+  background:rgba(38,22,18,.32);
+  border:1px solid rgba(248,239,227,.22);
+  border-radius:20px;padding:16px 18px 18px;
+  box-shadow:0 16px 40px rgba(40,18,12,.26);
+  backdrop-filter:blur(8px);
+}
+.p-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.p-eyebrow{font-size:11px;letter-spacing:.26em;color:rgba(248,239,227,.68);font-weight:700}
+.p-hint{font-size:11.5px;color:rgba(248,239,227,.5)}
+.p-body{display:flex;gap:16px;align-items:center}
+.disc-wrap{position:relative;width:88px;height:88px;flex:none;cursor:pointer;border:none;background:none;padding:0}
 .disc{
-  width:76px;height:76px;border-radius:50%;
+  width:88px;height:88px;border-radius:50%;
   background:
-    repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.10) 0 1.5px, rgba(0,0,0,.14) 1.5px 3px),
-    radial-gradient(circle at 42% 34%, #4C4038 0%, #2C2320 46%, #1B1512 100%);
-  box-shadow:inset 0 0 0 2px rgba(201,162,94,.45), 0 4px 12px rgba(0,0,0,.22);
+    repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.09) 0 1.5px, rgba(0,0,0,.16) 1.5px 3px),
+    radial-gradient(circle at 42% 34%, #4C4038 0%, #2C2320 46%, #15100E 100%);
+  box-shadow:inset 0 0 0 2px rgba(201,162,94,.5), 0 6px 18px rgba(0,0,0,.35);
   display:flex;align-items:center;justify-content:center;
   animation:spin 9s linear infinite;animation-play-state:paused;
 }
 .player.playing .disc{animation-play-state:running}
 .disc-label{
-  width:34px;height:34px;border-radius:50%;background:linear-gradient(150deg,#A63A3A,#822B2B);
+  width:38px;height:38px;border-radius:50%;background:linear-gradient(150deg,#B24343,#822B2B);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
-  box-shadow:0 0 0 3px rgba(201,162,94,.55);
+  box-shadow:0 0 0 3px rgba(201,162,94,.5);
 }
-.disc-label span{font-family:"Noto Serif SC",serif;color:#FBF4E4;font-size:13px;font-weight:700;line-height:1}
-.disc-label i{font-style:normal;font-size:6px;color:rgba(251,244,228,.75);letter-spacing:.06em}
+.disc-label span{font-family:"Noto Serif SC",serif;color:#FBF4E4;font-size:15px;font-weight:700;line-height:1}
+.disc-label i{font-style:normal;font-size:6px;color:rgba(251,244,228,.75);letter-spacing:.05em;white-space:nowrap}
 .disc-arm{
-  position:absolute;right:-4px;top:-6px;width:30px;height:44px;
-  transform-origin:22px 6px;transform:rotate(-18deg);transition:transform .4s ease;
+  position:absolute;right:-6px;top:-9px;width:34px;height:48px;
+  transform-origin:26px 7px;transform:rotate(-20deg);transition:transform .4s ease;
 }
-.player.playing .disc-arm{transform:rotate(4deg)}
+.player.playing .disc-arm{transform:rotate(3deg)}
 .disc-arm::before{
-  content:"";position:absolute;left:18px;top:4px;width:3px;height:34px;border-radius:2px;
-  background:linear-gradient(180deg,#C9A25E,#8C6C3C);box-shadow:0 1px 3px rgba(0,0,0,.25);
+  content:"";position:absolute;left:21px;top:5px;width:3px;height:38px;border-radius:2px;
+  background:linear-gradient(180deg,#E8C98A,#8C6C3C);box-shadow:0 1px 3px rgba(0,0,0,.3);
 }
 .disc-arm::after{
-  content:"";position:absolute;left:15px;top:0;width:9px;height:9px;border-radius:50%;background:#C9A25E;
+  content:"";position:absolute;left:18px;top:0;width:9px;height:9px;border-radius:50%;background:#C9A25E;
 }
 .player-info{flex:1;min-width:0}
-.p-title{font-family:"Noto Serif SC",serif;font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-sub{font-size:12px;color:var(--ink-faint);margin-top:1px}
-.p-bar{height:5px;border-radius:999px;background:var(--paper-2);margin-top:9px;overflow:hidden;cursor:pointer}
-.p-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cinnabar),#C9613F);border-radius:999px}
-.p-meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:5px;font-size:11px;color:var(--ink-faint)}
-.p-meta #pTip{color:var(--cinnabar)}
+.p-title{font-family:"Noto Serif SC",serif;font-weight:700;font-size:15px;color:#FFF8EE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-sub{font-size:12px;color:rgba(248,239,227,.58);margin-top:2px}
+.p-bar{height:5px;border-radius:999px;background:rgba(248,239,227,.18);margin-top:10px;overflow:hidden;cursor:pointer}
+.p-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#E8C98A,#C9A25E);border-radius:999px}
+.p-meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:6px;font-size:11px;color:rgba(248,239,227,.55)}
 .p-pick{
   border:none;background:none;padding:0;cursor:pointer;font-family:inherit;
-  font-size:11px;color:var(--cinnabar);text-decoration:underline;text-underline-offset:3px;
+  font-size:11px;color:#E8C98A;text-decoration:underline;text-underline-offset:3px;
 }
-.p-pick:hover{color:var(--cinnabar-deep)}
+.p-pick:hover{color:#FFF3D6}
 .p-btn{
-  flex:none;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
-  background:var(--cinnabar);color:#FFFDF9;display:flex;align-items:center;justify-content:center;
-  transition:.2s;box-shadow:0 4px 12px rgba(166,58,58,.3);
+  margin-top:14px;width:100%;min-height:44px;border-radius:12px;cursor:pointer;font-family:inherit;
+  border:1px solid rgba(201,162,94,.55);background:rgba(201,162,94,.16);color:#FBF4E4;
+  display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;letter-spacing:.06em;transition:.2s;
 }
-.p-btn:hover{background:var(--cinnabar-deep)}
-.p-btn svg{width:18px;height:18px}
-.p-load{
-  position:absolute;top:10px;right:12px;border:none;background:none;cursor:pointer;
-  font-size:11px;color:var(--ink-faint);font-family:inherit;padding:2px 4px;
-}
-.p-load:hover{color:var(--cinnabar)}
+.p-btn:hover{background:rgba(201,162,94,.32)}
+.p-btn svg{width:15px;height:15px}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* ---------- 章节分隔 ---------- */
+.divider{display:flex;align-items:center;gap:16px;margin:34px 0 0;color:var(--gold)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider span{font-family:"Noto Serif SC",serif;font-size:14px;letter-spacing:.28em;opacity:.8}
 .toast{
   position:fixed;left:50%;bottom:110px;transform:translate(-50%,10px);z-index:90;
   background:rgba(44,35,32,.94);color:#FBF4E4;font-size:13.5px;padding:10px 16px;border-radius:12px;
@@ -314,25 +327,29 @@ section{padding:52px 0 6px}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- 响应式 ---------- */
+@media (min-width:960px){
+  .hero-grid{grid-template-columns:minmax(0,1.32fr) minmax(0,.85fr);gap:44px;align-items:start}
+}
 @media (max-width:900px){
   .grid-3{grid-template-columns:repeat(2,1fr)}
-  .player{width:290px}
 }
 @media (max-width:760px){
   .grid-2,.grid-3,.venue-grid{grid-template-columns:1fr}
-  .hero{padding:44px 0 36px}
+  .hero{padding:38px 0 34px}
+  .hero-frame{inset:10px}
+  .hero-mark{bottom:-30px;right:-6%}
   section{padding:38px 0 4px}
   .lane-scroll,.lanes-tools,.lane-hint{display:none}
   .lanes{display:none}
   .role-mobile{display:block}
-  .player{
-    left:12px;right:12px;bottom:12px;width:auto;padding:12px 14px;gap:12px;
-  }
-  .disc-wrap,.disc{width:62px;height:62px}
-  .disc-label{width:28px;height:28px}
+  .player{padding:14px 15px 15px}
+  .p-body{gap:13px}
+  .disc-wrap,.disc{width:72px;height:72px}
+  .disc-label{width:32px;height:32px}
+  .disc-label span{font-size:13px}
   .p-title{font-size:14px}
-  .toast{bottom:96px}
-  body{padding-bottom:112px}
+  .p-btn{margin-top:12px}
+  .toast{bottom:24px}
 }
 @media (min-width:761px){
   .role-mobile{display:none}
@@ -362,30 +379,69 @@ section{padding:52px 0 6px}
 </nav>
 
 <header class="hero">
+  <div class="hero-frame" aria-hidden="true"></div>
+  <span class="hero-mark" aria-hidden="true">囍</span>
   <div class="wrap">
-    <div class="hero-kicker">2027.10.02 · 婚礼筹备</div>
-    <h1>小叶 <span class="amp">&amp;</span> 小倪</h1>
-    <p class="hero-sub">东林午宴 · 双林晚宴 ｜ 全天流程、人员分工与车辆安排一览</p>
-    <div class="hero-meta">
-      <div class="meta-chip">
-        <div class="label">婚期</div>
-        <div class="value">2027 年 10 月 2 日</div>
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="hero-kicker">2027.10.02 · 婚礼筹备</div>
+        <h1>小叶 <span class="amp">&amp;</span> 小倪</h1>
+        <p class="hero-sub">东林午宴 · 双林晚宴 ｜ 全天流程、人员分工与车辆安排一览</p>
+        <div class="hero-meta">
+          <div class="meta-chip">
+            <div class="label">婚期</div>
+            <div class="value">2027 年 10 月 2 日</div>
+          </div>
+          <div class="meta-chip">
+            <div class="label">午宴</div>
+            <div class="value">东明村文化礼堂</div>
+          </div>
+          <div class="meta-chip">
+            <div class="label">晚宴</div>
+            <div class="value">倪家滩宴会中心</div>
+          </div>
+          <div class="meta-chip countdown">
+            <div class="label">距婚礼还有</div>
+            <div class="value"><span id="daysLeft">—</span> 天</div>
+          </div>
+        </div>
+        <div class="hero-progress">
+          <div class="row">
+            <div>备婚清单完成进度</div>
+            <div class="num"><span id="heroDone">0</span> / <span id="heroTotal">0</span> 项</div>
+          </div>
+          <div class="bar"><i id="heroBar"></i></div>
+        </div>
       </div>
-      <div class="meta-chip">
-        <div class="label">午宴</div>
-        <div class="value">东明村文化礼堂</div>
-      </div>
-      <div class="meta-chip">
-        <div class="label">晚宴</div>
-        <div class="value">倪家滩宴会中心</div>
-      </div>
-    </div>
-    <div class="hero-progress">
-      <div class="row">
-        <div>备婚清单完成进度</div>
-        <div class="num"><span id="heroDone">0</span> / <span id="heroTotal">0</span> 项</div>
-      </div>
-      <div class="bar"><i id="heroBar"></i></div>
+
+      <!-- 音乐播放器：开场即见 -->
+      <aside class="player" id="player" aria-label="背景音乐播放器">
+        <div class="p-head">
+          <span class="p-eyebrow">BGM</span>
+          <span class="p-hint">点唱片开始</span>
+        </div>
+        <div class="p-body">
+          <button class="disc-wrap" id="discWrap" type="button" aria-label="播放或暂停">
+            <div class="disc" id="disc">
+              <div class="disc-label"><span>囍</span><i>今天你要嫁给我</i></div>
+            </div>
+            <div class="disc-arm"></div>
+          </button>
+          <div class="player-info">
+            <div class="p-title">今天你要嫁给我</div>
+            <div class="p-sub">陶喆 · 蔡依林</div>
+            <div class="p-bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="pFill"></i></div>
+            <div class="p-meta"><span id="pTime">00:00</span><button class="p-pick" id="pickBtn" type="button">换一首</button></div>
+          </div>
+        </div>
+        <button class="p-btn" id="pBtn" type="button" aria-label="播放">
+          <svg id="icoPlay" viewBox="0 0 24 24" fill="none"><path d="M7 4.5v15l13-7.5-13-7.5z" fill="currentColor"/></svg>
+          <svg id="icoPause" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+          <span class="p-btn-text" id="pBtnText">播放</span>
+        </button>
+        <audio id="audioRef" src="assets/bgm.mp3" loop preload="metadata"></audio>
+        <input type="file" id="fileInput" accept="audio/*" hidden>
+      </aside>
     </div>
   </div>
 </header>
@@ -422,6 +478,7 @@ section{padding:52px 0 6px}
   </section>
 
   <!-- ===== 人员配置 ===== -->
+  <div class="divider" aria-hidden="true"><span>囍</span></div>
   <section id="team">
     <div class="sec-head">
       <div class="eyebrow">TEAM</div>
@@ -442,6 +499,7 @@ section{padding:52px 0 6px}
   </section>
 
   <!-- ===== 备婚清单 ===== -->
+  <div class="divider" aria-hidden="true"><span>囍</span></div>
   <section id="checklist">
     <div class="sec-head">
       <div class="eyebrow">CHECKLIST</div>
@@ -473,6 +531,7 @@ section{padding:52px 0 6px}
   </section>
 
   <!-- ===== 场地位置 ===== -->
+  <div class="divider" aria-hidden="true"><span>囍</span></div>
   <section id="venue">
     <div class="sec-head">
       <div class="eyebrow">VENUE</div>
@@ -487,27 +546,6 @@ section{padding:52px 0 6px}
   小叶 &amp; 小倪 · 婚礼筹备总览 ｜ 内容整理自飞书文档《小叶&amp;小倪 婚礼筹备》
 </footer>
 
-<!-- ===== 音乐播放器 ===== -->
-<div class="player" id="player">
-  <button class="disc-wrap" id="discWrap" type="button" aria-label="播放或暂停">
-    <div class="disc" id="disc">
-      <div class="disc-label"><span>囍</span><i>今天你要嫁给我</i></div>
-    </div>
-    <div class="disc-arm"></div>
-  </button>
-  <div class="player-info">
-    <div class="p-title">今天你要嫁给我</div>
-    <div class="p-sub">陶喆 · 蔡依林</div>
-    <div class="p-bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="pFill"></i></div>
-    <div class="p-meta"><span id="pTime">00:00</span><button class="p-pick" id="pickBtn" type="button">选择本地音乐</button></div>
-  </div>
-  <button class="p-btn" id="pBtn" type="button" aria-label="播放">
-    <svg id="icoPlay" viewBox="0 0 24 24" fill="none"><path d="M7 4.5v15l13-7.5-13-7.5z" fill="currentColor"/></svg>
-    <svg id="icoPause" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
-  </button>
-  <audio id="audioRef" src="assets/bgm.mp3" loop preload="metadata"></audio>
-  <input type="file" id="fileInput" accept="audio/*" hidden>
-</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1044,6 +1082,8 @@ function setPlayingUI(playing){
   icoPlay.style.display = playing ? "none" : "block";
   icoPause.style.display = playing ? "block" : "none";
   pBtn.setAttribute("aria-label", playing ? "暂停" : "播放");
+  const t = $("#pBtnText");
+  if(t) t.textContent = playing ? "暂停" : "播放";
 }
 function safePlay(){
   const p = audio.play();
@@ -1122,6 +1162,15 @@ function setupReveal(){
   });
 }
 
+/* ================= 倒计时 ================= */
+function renderCountdown(){
+  const el = $("#daysLeft");
+  if(!el) return;
+  const target = new Date("2027-10-02T00:00:00+08:00").getTime();
+  const diff = Math.ceil((target - Date.now()) / 86400000);
+  el.textContent = diff > 0 ? diff : 0;
+}
+
 /* ================= 初始化 ================= */
 loadState();
 renderLanes();
@@ -1132,6 +1181,7 @@ renderPits();
 renderVenues();
 renderChecklist();
 renderProgress();
+renderCountdown();
 setupReveal();
 </script>
 </body>
