@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小叶 &amp; 小倪 · 婚礼筹备总览</title>
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="preconnect" href="https://sf3-scmcdn-cn.feishucdn.com" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23A63A3A'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='%23F6F1E8' font-family='serif' font-weight='700'%3E囍%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#F6F1E8;
+  --paper-2:#EFE7D9;
+  --card:#FFFDF9;
+  --ink:#2C2320;
+  --ink-soft:#6B5D55;
+  --ink-faint:#9A8B81;
+  --cinnabar:#A63A3A;
+  --cinnabar-deep:#822B2B;
+  --gold:#C9A25E;
+  --jade:#3E5C63;
+  --clay:#8A5A44;
+  --line:#E7DCCB;
+  --line-soft:#EEE5D6;
+  --shadow:0 10px 30px rgba(74,52,38,.10);
+  --shadow-sm:0 3px 12px rgba(74,52,38,.08);
+  --radius:18px;
+  --lane-time:132px;
+  --lane-w:150px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:96px;
+}
+h1,h2,h3,.serif{font-family:"Noto Serif SC","Songti SC","SimSun",serif}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* ---------- 顶部导航 ---------- */
+.topnav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(246,241,232,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topnav .wrap{display:flex;align-items:center;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+.brand{font-family:"Noto Serif SC",serif;font-weight:700;color:var(--cinnabar);white-space:nowrap;margin-right:14px;letter-spacing:.05em}
+.nav-link{
+  white-space:nowrap;font-size:14px;color:var(--ink-soft);text-decoration:none;
+  padding:7px 13px;border-radius:999px;transition:.2s;
+}
+.nav-link:hover{background:var(--paper-2);color:var(--ink)}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#822B2B 0%,#A63A3A 52%,#B8503F 100%);
+  color:#F8EFE3;padding:60px 0 50px;
+}
+.hero::before,.hero::after{content:"";position:absolute;border:1px solid rgba(248,239,227,.14);border-radius:50%}
+.hero::before{width:420px;height:420px;right:-140px;top:-160px}
+.hero::after{width:300px;height:300px;left:-110px;bottom:-150px}
+.hero .wrap{position:relative;z-index:1}
+.hero-kicker{display:flex;align-items:center;gap:10px;font-size:13.5px;letter-spacing:.22em;opacity:.85;margin-bottom:18px}
+.hero-kicker::before,.hero-kicker::after{content:"";height:1px;width:34px;background:rgba(248,239,227,.5)}
+.hero h1{font-size:clamp(30px,5.4vw,46px);font-weight:900;letter-spacing:.04em;line-height:1.25}
+.hero h1 .amp{color:var(--gold);margin:0 .15em}
+.hero-sub{margin-top:14px;font-size:clamp(15px,2.2vw,17px);opacity:.88}
+.hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.meta-chip{background:rgba(255,253,249,.13);border:1px solid rgba(255,253,249,.22);border-radius:12px;padding:12px 16px;min-width:150px}
+.meta-chip .label{font-size:12px;opacity:.75;letter-spacing:.08em}
+.meta-chip .value{font-family:"Noto Serif SC",serif;font-size:17px;font-weight:700;margin-top:3px}
+.hero-progress{margin-top:28px;background:rgba(255,253,249,.12);border-radius:16px;padding:18px 20px}
+.hero-progress .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hero-progress .num{font-family:"Noto Serif SC",serif;font-size:26px;font-weight:700;color:var(--gold)}
+.bar{height:10px;background:rgba(255,253,249,.18);border-radius:999px;margin-top:10px;overflow:hidden}
+.bar>i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--gold),#E8C98A);transition:width .6s ease}
+
+/* ---------- 区块 ---------- */
+section{padding:52px 0 6px}
+.sec-head{margin-bottom:24px}
+.sec-head .eyebrow{font-size:13px;letter-spacing:.26em;color:var(--cinnabar);font-weight:700}
+.sec-head h2{font-size:clamp(23px,3.4vw,30px);font-weight:700;margin-top:6px}
+.sec-head p{color:var(--ink-soft);margin-top:8px;max-width:680px}
+
+/* ---------- 流程：角色泳道时间线 ---------- */
+.lanes-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--paper-2);border-radius:12px;padding:4px;gap:2px}
+.seg button{
+  border:none;background:none;font-size:13.5px;padding:7px 12px;border-radius:9px;cursor:pointer;
+  color:var(--ink-soft);transition:.2s;font-family:inherit;
+}
+.seg button.active{background:var(--card);color:var(--cinnabar);font-weight:700;box-shadow:var(--shadow-sm)}
+.lane-hint{font-size:12.5px;color:var(--ink-faint);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.lane-hint svg{flex:none;opacity:.6}
+
+.lane-scroll{overflow-x:auto;padding-bottom:6px;border-radius:16px}
+.lanes{min-width:calc(var(--lane-time) + 10 * var(--lane-w));border-collapse:separate;border-spacing:0;width:100%;table-layout:fixed;background:var(--card)}
+.lanes col{}
+.lanes thead th{
+  text-align:left;font-weight:700;font-size:12.5px;color:var(--ink-soft);
+  padding:9px 10px;background:var(--paper-2);
+  border-bottom:1px solid var(--line);border-left:1px solid var(--line-soft);
+  white-space:nowrap;letter-spacing:.02em;
+}
+.lanes thead th:first-child{position:sticky;left:0;z-index:2;border-left:none;color:var(--ink-faint);letter-spacing:.1em}
+.lanes thead th:last-child{border-right:none}
+.lanes tbody td{
+  padding:10px;font-size:12.5px;line-height:1.55;color:var(--ink-soft);
+  border-top:1px solid var(--line-soft);border-left:1px solid var(--line-soft);vertical-align:top;
+}
+.lanes tbody td.empty{color:#CFC3B5;text-align:center;padding-top:12px}
+.lanes tbody td.tcell{
+  position:sticky;left:0;z-index:1;background:var(--card);border-left:none;
+  padding:12px 12px 12px 14px;
+}
+.lanes tbody td.tcell .step{font-family:"Noto Serif SC",serif;font-weight:700;font-size:13.5px;color:var(--ink);line-height:1.45}
+.lanes tbody td.tcell .seq{font-size:11.5px;color:var(--ink-faint);letter-spacing:.08em;margin-top:4px}
+.lanes tbody td.tcell::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);
+}
+.lanes tbody td.tcell{position:sticky;overflow:hidden}
+.lanes tr.bandrow td{
+  background:rgba(201,162,94,.12);padding:8px 12px;border-left:none;
+  font-family:"Noto Serif SC",serif;font-weight:700;font-size:13px;color:var(--cinnabar);
+  letter-spacing:.06em;
+}
+.lanes tr.bandrow td:first-child{position:sticky;left:0;z-index:2}
+.lanes tbody tr:hover td{background:rgba(201,162,94,.055)}
+.lanes tbody tr.bandrow:hover td{background:rgba(201,162,94,.12)}
+.lanes tbody td.tcell{background:var(--card)}
+
+/* 角色筛选后列数的 class 由 JS 设置 */
+.lanes.compact{min-width:calc(var(--lane-time) + 2 * var(--lane-w))}
+
+/* 移动端：单角色纵向时间线 */
+.role-mobile{display:none}
+.rm-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.rm-chips button{
+  border:1px solid var(--line);background:var(--card);border-radius:10px;
+  font-size:13px;padding:7px 12px;cursor:pointer;font-family:inherit;color:var(--ink-soft);
+  min-height:38px;
+}
+.rm-chips button.active{background:var(--cinnabar);color:#FFFDF9;border-color:var(--cinnabar);font-weight:700}
+.rm-list{position:relative;padding-left:26px}
+.rm-list::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.rm-item{position:relative;padding-bottom:18px}
+.rm-item::before{
+  content:"";position:absolute;left:-26px;top:5px;width:14px;height:14px;border-radius:50%;
+  background:var(--card);border:3px solid var(--gold);margin-left:1px;
+}
+.rm-phase{font-size:12px;color:var(--cinnabar);font-weight:700;letter-spacing:.06em}
+.rm-title{font-family:"Noto Serif SC",serif;font-weight:700;font-size:15px;margin-top:2px}
+.rm-text{font-size:13.5px;color:var(--ink-soft);margin-top:4px}
+.rm-empty{color:var(--ink-faint);font-size:13.5px}
+
+/* ---------- 人员 / 车辆 ---------- */
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.info-card{
+  background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow-sm);
+}
+.info-card h3{font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.info-card h3 .tag{font-size:11px;font-weight:500;color:var(--ink-faint);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
+.info-card p{font-size:14px;color:var(--ink-soft)}
+.vehicle-card{position:relative}
+.vehicle-card .price{font-family:"Noto Serif SC",serif;font-size:22px;font-weight:700;color:var(--cinnabar);margin-top:10px}
+.vehicle-card .plan-name{font-size:13px;color:var(--ink-faint);margin-top:2px}
+.vehicle-card.dropped{opacity:.55}
+.vehicle-card.dropped .price{text-decoration:line-through;color:var(--ink-faint)}
+.vehicle-card.recommended{border-color:var(--gold);background:linear-gradient(180deg,#FFFDF9,#FBF4E4)}
+.badge-rec{position:absolute;top:16px;right:16px;background:var(--gold);color:#fff;font-size:12px;border-radius:8px;padding:3px 10px}
+.car-note{margin-top:16px;background:var(--paper-2);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--ink-soft)}
+
+/* ---------- 备婚清单 ---------- */
+.check-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:20px}
+.seg button .cnt{font-size:12px;opacity:.7;margin-left:3px}
+.phase-group{margin-bottom:28px}
+.phase-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.phase-head h3{font-size:17px;font-weight:700}
+.phase-head .when{font-size:13px;color:var(--ink-faint)}
+.phase-head .prog{margin-left:auto;font-size:13px;color:var(--ink-soft)}
+.phase-head .prog b{color:var(--cinnabar)}
+.check-list{display:grid;gap:10px}
+.check-item{
+  display:flex;gap:14px;align-items:flex-start;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:16px;padding:15px 16px;cursor:pointer;
+  transition:.2s;box-shadow:var(--shadow-sm);
+}
+.check-item:hover{border-color:var(--gold);transform:translateY(-1px)}
+.check-item.done{background:#F7F3EA}
+.checkbox{
+  flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;margin-top:2px;transition:.2s;
+}
+.checkbox svg{opacity:0;transform:scale(.6);transition:.2s}
+.check-item.done .checkbox{background:var(--cinnabar);border-color:var(--cinnabar)}
+.check-item.done .checkbox svg{opacity:1;transform:scale(1)}
+.check-body{flex:1;min-width:0}
+.check-title{font-size:15px}
+.check-item.done .check-title{color:var(--ink-faint);text-decoration:line-through}
+.check-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:7px;align-items:center}
+.who{font-size:12px;border-radius:7px;padding:2px 9px;background:var(--paper-2);color:var(--ink-soft)}
+.who.groom{background:rgba(138,90,68,.12);color:var(--clay)}
+.who.bride{background:rgba(62,92,99,.12);color:var(--jade)}
+.who.both{background:rgba(166,58,58,.1);color:var(--cinnabar)}
+.check-tip{font-size:13px;color:var(--ink-faint);margin-top:6px}
+.empty-tip{text-align:center;color:var(--ink-faint);padding:30px 0;font-size:14px}
+
+/* ---------- 三个坑 ---------- */
+.pit-card{
+  background:linear-gradient(160deg,#FFFDF9,#FBF3EC);border:1px solid var(--line);
+  border-left:4px solid var(--cinnabar);border-radius:var(--radius);padding:22px 24px;
+}
+.pit-card h3{font-size:17px;margin-bottom:14px}
+.pit-list{display:grid;gap:12px}
+.pit-item{display:flex;gap:12px;font-size:14px;color:var(--ink-soft)}
+.pit-item .num{
+  flex:none;width:24px;height:24px;border-radius:50%;background:var(--cinnabar);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px;
+}
+
+/* ---------- 场地 ---------- */
+.venue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.venue-card{
+  display:block;text-decoration:none;background:var(--card);border:1px solid var(--line-soft);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:.2s;
+}
+.venue-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.venue-visual{height:110px;position:relative;display:flex;align-items:center;justify-content:center}
+.venue-visual.donglin{background:linear-gradient(135deg,#3E5C63,#5B7F86)}
+.venue-visual.shuanglin{background:linear-gradient(135deg,#8A5A44,#A97455)}
+.venue-visual .glyph{font-family:"Noto Serif SC",serif;font-size:40px;color:rgba(255,253,249,.22);font-weight:900}
+.venue-body{padding:18px 20px}
+.venue-body .vtag{font-size:12px;letter-spacing:.12em;color:var(--gold);font-weight:700}
+.venue-body h3{font-size:18px;margin:5px 0 4px}
+.venue-body p{font-size:13.5px;color:var(--ink-soft)}
+.venue-body .open{margin-top:10px;font-size:13.5px;color:var(--cinnabar);font-weight:500}
+
+/* ---------- 音乐播放器 ---------- */
+.player{
+  position:fixed;right:20px;bottom:20px;z-index:80;
+  width:330px;background:rgba(255,253,249,.96);border:1px solid var(--line);
+  border-radius:20px;box-shadow:0 18px 44px rgba(58,38,26,.22);
+  padding:14px 16px;display:flex;gap:14px;align-items:center;
+  backdrop-filter:blur(10px);
+}
+.disc-wrap{position:relative;width:76px;height:76px;flex:none;cursor:pointer;border:none;background:none;padding:0}
+.disc{
+  width:76px;height:76px;border-radius:50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.10) 0 1.5px, rgba(0,0,0,.14) 1.5px 3px),
+    radial-gradient(circle at 42% 34%, #4C4038 0%, #2C2320 46%, #1B1512 100%);
+  box-shadow:inset 0 0 0 2px rgba(201,162,94,.45), 0 4px 12px rgba(0,0,0,.22);
+  display:flex;align-items:center;justify-content:center;
+  animation:spin 9s linear infinite;animation-play-state:paused;
+}
+.player.playing .disc{animation-play-state:running}
+.disc-label{
+  width:34px;height:34px;border-radius:50%;background:linear-gradient(150deg,#A63A3A,#822B2B);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  box-shadow:0 0 0 3px rgba(201,162,94,.55);
+}
+.disc-label span{font-family:"Noto Serif SC",serif;color:#FBF4E4;font-size:13px;font-weight:700;line-height:1}
+.disc-label i{font-style:normal;font-size:6px;color:rgba(251,244,228,.75);letter-spacing:.06em}
+.disc-arm{
+  position:absolute;right:-4px;top:-6px;width:30px;height:44px;
+  transform-origin:22px 6px;transform:rotate(-18deg);transition:transform .4s ease;
+}
+.player.playing .disc-arm{transform:rotate(4deg)}
+.disc-arm::before{
+  content:"";position:absolute;left:18px;top:4px;width:3px;height:34px;border-radius:2px;
+  background:linear-gradient(180deg,#C9A25E,#8C6C3C);box-shadow:0 1px 3px rgba(0,0,0,.25);
+}
+.disc-arm::after{
+  content:"";position:absolute;left:15px;top:0;width:9px;height:9px;border-radius:50%;background:#C9A25E;
+}
+.player-info{flex:1;min-width:0}
+.p-title{font-family:"Noto Serif SC",serif;font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-sub{font-size:12px;color:var(--ink-faint);margin-top:1px}
+.p-bar{height:5px;border-radius:999px;background:var(--paper-2);margin-top:9px;overflow:hidden;cursor:pointer}
+.p-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cinnabar),#C9613F);border-radius:999px}
+.p-meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:5px;font-size:11px;color:var(--ink-faint)}
+.p-meta #pTip{color:var(--cinnabar)}
+.p-pick{
+  border:none;background:none;padding:0;cursor:pointer;font-family:inherit;
+  font-size:11px;color:var(--cinnabar);text-decoration:underline;text-underline-offset:3px;
+}
+.p-pick:hover{color:var(--cinnabar-deep)}
+.p-btn{
+  flex:none;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--cinnabar);color:#FFFDF9;display:flex;align-items:center;justify-content:center;
+  transition:.2s;box-shadow:0 4px 12px rgba(166,58,58,.3);
+}
+.p-btn:hover{background:var(--cinnabar-deep)}
+.p-btn svg{width:18px;height:18px}
+.p-load{
+  position:absolute;top:10px;right:12px;border:none;background:none;cursor:pointer;
+  font-size:11px;color:var(--ink-faint);font-family:inherit;padding:2px 4px;
+}
+.p-load:hover{color:var(--cinnabar)}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.toast{
+  position:fixed;left:50%;bottom:110px;transform:translate(-50%,10px);z-index:90;
+  background:rgba(44,35,32,.94);color:#FBF4E4;font-size:13.5px;padding:10px 16px;border-radius:12px;
+  opacity:0;pointer-events:none;transition:.28s;max-width:82vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:900px){
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .player{width:290px}
+}
+@media (max-width:760px){
+  .grid-2,.grid-3,.venue-grid{grid-template-columns:1fr}
+  .hero{padding:44px 0 36px}
+  section{padding:38px 0 4px}
+  .lane-scroll,.lanes-tools,.lane-hint{display:none}
+  .lanes{display:none}
+  .role-mobile{display:block}
+  .player{
+    left:12px;right:12px;bottom:12px;width:auto;padding:12px 14px;gap:12px;
+  }
+  .disc-wrap,.disc{width:62px;height:62px}
+  .disc-label{width:28px;height:28px}
+  .p-title{font-size:14px}
+  .toast{bottom:96px}
+  body{padding-bottom:112px}
+}
+@media (min-width:761px){
+  .role-mobile{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .player.playing .disc{animation:none!important}
+}
+@media print{
+  .player,.topnav,.toast{display:none}
+  body{padding-bottom:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <span class="brand">囍 筹备总览</span>
+    <a class="nav-link" href="#flow">当日流程</a>
+    <a class="nav-link" href="#team">人员配置</a>
+    <a class="nav-link" href="#cars">车辆配置</a>
+    <a class="nav-link" href="#checklist">备婚清单</a>
+    <a class="nav-link" href="#venue">场地位置</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-kicker">2027.10.02 · 婚礼筹备</div>
+    <h1>小叶 <span class="amp">&amp;</span> 小倪</h1>
+    <p class="hero-sub">东林午宴 · 双林晚宴 ｜ 全天流程、人员分工与车辆安排一览</p>
+    <div class="hero-meta">
+      <div class="meta-chip">
+        <div class="label">婚期</div>
+        <div class="value">2027 年 10 月 2 日</div>
+      </div>
+      <div class="meta-chip">
+        <div class="label">午宴</div>
+        <div class="value">东明村文化礼堂</div>
+      </div>
+      <div class="meta-chip">
+        <div class="label">晚宴</div>
+        <div class="value">倪家滩宴会中心</div>
+      </div>
+    </div>
+    <div class="hero-progress">
+      <div class="row">
+        <div>备婚清单完成进度</div>
+        <div class="num"><span id="heroDone">0</span> / <span id="heroTotal">0</span> 项</div>
+      </div>
+      <div class="bar"><i id="heroBar"></i></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== 当日流程：角色泳道时间线 ===== -->
+  <section id="flow">
+    <div class="sec-head">
+      <div class="eyebrow">WEDDING DAY</div>
+      <h2>当日流程</h2>
+      <p>从上往下是时间顺序，每一列是一位角色的时间线；同一行就是同一时刻大家在做什么。可用下方按钮只看某一组角色。</p>
+    </div>
+    <div class="lanes-tools">
+      <div class="seg" id="laneSeg">
+        <button data-g="all" class="active">全部角色</button>
+        <button data-g="couple">新人</button>
+        <button data-g="parents">父母至亲</button>
+        <button data-g="party">伴郎伴娘</button>
+        <button data-g="crew">服务团队</button>
+      </div>
+    </div>
+    <div class="lane-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      表格较宽，可左右滑动查看全部角色；左侧时间列固定在边上
+    </div>
+    <div class="lane-scroll">
+      <table class="lanes" id="lanesTable"></table>
+    </div>
+    <div class="role-mobile" id="roleMobile">
+      <div class="rm-chips" id="rmChips"></div>
+      <div class="rm-list" id="rmList"></div>
+    </div>
+  </section>
+
+  <!-- ===== 人员配置 ===== -->
+  <section id="team">
+    <div class="sec-head">
+      <div class="eyebrow">TEAM</div>
+      <h2>人员配置</h2>
+    </div>
+    <div class="grid grid-2" id="teamGrid"></div>
+  </section>
+
+  <!-- ===== 车辆配置 ===== -->
+  <section id="cars">
+    <div class="sec-head">
+      <div class="eyebrow">TRANSPORT</div>
+      <h2>车辆配置</h2>
+      <p>婚车方案为湖州本地参考报价，国庆好日子商家可能上浮；最终车型与价格以签订的租车合同为准。</p>
+    </div>
+    <div class="grid grid-3" id="carGrid"></div>
+    <div class="car-note" id="carNote"></div>
+  </section>
+
+  <!-- ===== 备婚清单 ===== -->
+  <section id="checklist">
+    <div class="sec-head">
+      <div class="eyebrow">CHECKLIST</div>
+      <h2>备婚清单</h2>
+      <p>勾选状态会自动保存在本机浏览器；已完成事项划线弱化，可按状态与负责方筛选查看。</p>
+    </div>
+    <div class="check-toolbar">
+      <div class="seg" id="statusSeg">
+        <button data-f="all" class="active">全部</button>
+        <button data-f="todo">未完成</button>
+        <button data-f="done">已完成</button>
+      </div>
+      <div class="seg" id="whoSeg">
+        <button data-w="all" class="active">全部负责方</button>
+        <button data-w="both">双方</button>
+        <button data-w="groom">男方 · 新郎</button>
+        <button data-w="bride">女方 · 新娘</button>
+      </div>
+    </div>
+    <div id="checklistWrap"></div>
+  </section>
+
+  <!-- ===== 容易踩的坑 ===== -->
+  <section id="pits">
+    <div class="pit-card">
+      <h3>最容易踩的三个坑</h3>
+      <div class="pit-list" id="pitList"></div>
+    </div>
+  </section>
+
+  <!-- ===== 场地位置 ===== -->
+  <section id="venue">
+    <div class="sec-head">
+      <div class="eyebrow">VENUE</div>
+      <h2>场地位置</h2>
+    </div>
+    <div class="venue-grid" id="venueGrid"></div>
+  </section>
+
+</main>
+
+<footer>
+  小叶 &amp; 小倪 · 婚礼筹备总览 ｜ 内容整理自飞书文档《小叶&amp;小倪 婚礼筹备》
+</footer>
+
+<!-- ===== 音乐播放器 ===== -->
+<div class="player" id="player">
+  <button class="disc-wrap" id="discWrap" type="button" aria-label="播放或暂停">
+    <div class="disc" id="disc">
+      <div class="disc-label"><span>囍</span><i>今天你要嫁给我</i></div>
+    </div>
+    <div class="disc-arm"></div>
+  </button>
+  <div class="player-info">
+    <div class="p-title">今天你要嫁给我</div>
+    <div class="p-sub">陶喆 · 蔡依林</div>
+    <div class="p-bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="pFill"></i></div>
+    <div class="p-meta"><span id="pTime">00:00</span><button class="p-pick" id="pickBtn" type="button">选择本地音乐</button></div>
+  </div>
+  <button class="p-btn" id="pBtn" type="button" aria-label="播放">
+    <svg id="icoPlay" viewBox="0 0 24 24" fill="none"><path d="M7 4.5v15l13-7.5-13-7.5z" fill="currentColor"/></svg>
+    <svg id="icoPause" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+  </button>
+  <audio id="audioRef" src="assets/bgm.mp3" loop preload="metadata"></audio>
+  <input type="file" id="fileInput" accept="audio/*" hidden>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+const ROLES = [
+  {key:"groom",    name:"新郎",            group:"couple"},
+  {key:"bride",    name:"新娘",            group:"couple"},
+  {key:"groomSide",name:"新郎父母 · 至亲",   group:"parents"},
+  {key:"brideSide",name:"新娘父母 · 至亲",   group:"parents"},
+  {key:"groomsman",name:"伴郎",            group:"party"},
+  {key:"bridesmaid",name:"伴娘",           group:"party"},
+  {key:"mc",       name:"司仪团队",        group:"crew"},
+  {key:"camera",   name:"摄像团队",        group:"crew"},
+  {key:"photo",    name:"摄影师",          group:"crew"},
+  {key:"makeup",   name:"跟妆团队",        group:"crew"}
+];
+const ROLE_MAP = {};
+ROLES.forEach(r=>{ ROLE_MAP[r.key] = r; });
+
+const PHASES = [
+  {key:"morning",   name:"上午"},
+  {key:"noon",      name:"午宴"},
+  {key:"afternoon", name:"下午"},
+  {key:"evening",   name:"晚宴"},
+  {key:"night",     name:"晚上"}
+];
+
+const FLOW = [
+  {phase:"morning", title:"车队从双林出发，前往东林接亲",
+   note:"同行：新郎、伴郎；完整车队到场，提前与司机确认当天路线。",
+   roles:{
+     groom:"带队出发，坐头车，清点伴郎、红包、手捧花",
+     bride:"东林家妆造、藏鞋，等车队到",
+     groomSide:"亲友团驾车直达东林宴会厅，不进女方家",
+     brideSide:"在家迎候，门口接车队、递喜烟",
+     groomsman:"①管手捧花、戒指、红包袋；②管烟糖、催车队发车",
+     bridesmaid:"①贴身跟新娘、管裙摆和随身包；②布置拦门关卡、藏鞋",
+     mc:"不到场，音响师清点设备、装车",
+     camera:"A 跟新郎拍出门上车；B 在东林拍新娘准备",
+     photo:"东林拍妆造、出门前合影",
+     makeup:"①东林：新娘+新娘妈妈；②双林：新郎+新郎妈妈"
+   }},
+  {phase:"morning", title:"女方家接亲：拦门游戏、进门",
+   note:"控制时长，不用搞得太复杂。",
+   roles:{
+     groom:"敲门、塞红包、闯关，抱新娘出门",
+     bride:"坐床、伴娘设关卡、配合找鞋",
+     groomSide:"不在场，在宴会厅迎宾",
+     brideSide:"开门、招呼、递茶递烟",
+     groomsman:"①递红包、陪新郎喊门；②后面压阵、接东西",
+     bridesmaid:"①房内陪新娘；②门口把门、出题、收红包",
+     mc:"不到场",
+     camera:"A 拍敲门闯关；B 拍屋内反应",
+     photo:"拍拦门、进门、抱出门",
+     makeup:"①守在新娘旁随时补妆；②双林收工后赶往东林"
+   }},
+  {phase:"morning", title:"女方家敬茶改口",
+   note:"只留新人、伴郎伴娘、摄影摄像完成仪式。",
+   roles:{
+     groom:"向岳父母敬茶、改口、接红包",
+     bride:"向父母敬茶、改口、收红包",
+     groomSide:"不在场，已在宴会厅",
+     brideSide:"上座受茶、给改口红包、说两句",
+     groomsman:"端茶盘、递纸巾、接红包",
+     bridesmaid:"①理裙摆、递茶；②保管改口红包",
+     mc:"不到场，按流程只留摄影摄像",
+     camera:"A、B 双机位拍敬茶（正机位+反机位）",
+     photo:"拍敬茶、改口、全家合影",
+     makeup:"①理裙摆、递纸巾；②到东林汇合待命"
+   }},
+  {phase:"morning", title:"车队前往东林宴会厅",
+   note:"新人、伴娘坐婚车；亲友已提前抵达宴会厅。",
+   roles:{
+     groom:"与新娘同车，先到门口等候",
+     bride:"车上补妆、整理裙摆",
+     groomSide:"已到场，迎宾、核对桌数",
+     brideSide:"同行或自驾到，走正门入席",
+     groomsman:"①随头车；②押尾车、点人数",
+     bridesmaid:"①陪新娘坐车；②先到礼堂看化妆间",
+     mc:"司仪团队自备车辆前往东林礼堂",
+     camera:"A 跟车队拍行进；B 先到礼堂拍空镜",
+     photo:"跟婚车拍到达、下车",
+     makeup:"①车上补妆；②礼堂化妆间待命"
+   }},
+  {phase:"noon", title:"东林午宴",
+   note:"女方主场，按正常流程走。",
+   roles:{
+     groom:"陪同敬酒、致答谢词、照应伴郎团",
+     bride:"主位、换敬酒服、先敬女方长辈",
+     groomSide:"主桌陪同、向女方长辈敬酒",
+     brideSide:"主场主位、致辞、带新人逐桌敬酒",
+     groomsman:"①管酒水、替新郎挡酒；②盯桌数、补烟糖",
+     bridesmaid:"①陪换敬酒服；②管随身物品、盯补妆",
+     mc:"主持婚礼午宴",
+     camera:"A 主机位拍台上；B 拍亲友反应",
+     photo:"拍签到、主桌、逐桌敬酒",
+     makeup:"①午宴前换敬酒服；②帮两位妈妈补妆"
+   }},
+  {phase:"afternoon", title:"午宴结束，转场回双林",
+   note:"只保留头车 + 3 台 E；其余 4 台 E 当日服务结束。新郎亲友团同时回双林。",
+   roles:{
+     groom:"招呼男方亲友上车、清点人数",
+     bride:"换装、收随身物品、准备上车",
+     groomSide:"先回双林，家里准备下午流程",
+     brideSide:"留东林善后，稍后随亲友团驾车去双林",
+     groomsman:"①点男方亲友上车；②收物料、拎箱",
+     bridesmaid:"①陪新娘上车；②收礼服、鞋、红包袋",
+     mc:"收麦、随车转双林，路上对一遍晚宴流程",
+     camera:"A 随新人车；B 拍女方至亲上车",
+     photo:"拍转场、车上花絮",
+     makeup:"①跟新娘车；②先回双林摆第三套"
+   }},
+  {phase:"afternoon", title:"新人回到双林男方家",
+   note:"稍作休整，时间宽裕就简单休息。",
+   roles:{
+     groom:"开门、引新娘进屋、发开门红包",
+     bride:"进门、坐床、补妆休整",
+     groomSide:"门口迎候、递茶、安排房间",
+     brideSide:"尚未到场，在去双林路上",
+     groomsman:"①开门、放礼花；②搬行李、递茶",
+     bridesmaid:"①陪新娘进屋、理裙摆；②看管物品",
+     mc:"到双林宴会厅试麦、盯场布与席位",
+     camera:"A 拍进门、坐床；B 拍家里布置",
+     photo:"拍进门、房间、家人合影",
+     makeup:"①给新娘换第三套；②回双林待命"
+   }},
+  {phase:"afternoon", title:"男方家敬茶改口",
+   note:"只留新人、伴郎伴娘、摄影摄像完成仪式。",
+   roles:{
+     groom:"向父母敬茶、改口、接红包",
+     bride:"向公婆敬茶、改口、收红包",
+     groomSide:"上座受茶、给改口红包",
+     brideSide:"不在场，已到宴会厅",
+     groomsman:"递茶盘、收红包、递纸巾",
+     bridesmaid:"①扶新娘；②递纸巾、收红包",
+     mc:"不在场，按流程只留摄影摄像",
+     camera:"A、B 双机位拍敬茶改口",
+     photo:"拍敬茶、改口、合影",
+     makeup:"①补妆；②给两位妈妈补妆"
+   }},
+  {phase:"afternoon", title:"外景拍摄",
+   note:"国庆挑个冷门小众的景点或公园。",
+   roles:{
+     groom:"配合摆拍、盯时间",
+     bride:"补妆换造型、控制时长",
+     groomSide:"回宴会厅准备迎宾",
+     brideSide:"在宴会厅等候、确认席位",
+     groomsman:"①撑伞递水；②看车、看包",
+     bridesmaid:"①理裙、随时补妆位；②管手机和鞋",
+     mc:"宴会厅盯布置、候场迎宾",
+     camera:"A 跟拍外景；B 拍空镜与宾客",
+     photo:"主拍外景，控在 1 小时内",
+     makeup:"①全程跟外景补妆；②宴会厅待命"
+   }},
+  {phase:"afternoon", title:"新娘父母与至亲前往双林宴会厅",
+   note:"直开双林宴会厅，不去男方家里等候接亲。",
+   roles:{
+     groom:"宴会厅门口迎接",
+     bride:"陪父母入席",
+     groomSide:"门口迎宾、引导入座",
+     brideSide:"车辆直达，正门入席",
+     groomsman:"宴会厅门口迎候、引车入位",
+     bridesmaid:"①陪新娘候场；②引女方长辈入席",
+     mc:"司仪团队自备车辆前往双林宴会厅",
+     camera:"A 拍新人在场；B 拍女方长辈到场",
+     photo:"拍长辈到场、席位",
+     makeup:"①化妆间待命；②补妈妈妆"
+   }},
+  {phase:"evening", title:"双林晚宴",
+   note:"男方主场，按正常流程走。",
+   roles:{
+     groom:"主位、致辞、带新人敬酒",
+     bride:"主位、换第三套造型、敬酒",
+     groomSide:"主场主位、致辞、逐桌敬酒",
+     brideSide:"坐前排、致辞、接受敬酒",
+     groomsman:"①管酒、替新郎挡酒；②带路敬酒、补烟",
+     bridesmaid:"①跟换装补妆；②管红包和随身物品",
+     mc:"主持婚礼晚宴",
+     camera:"A 主机位；B 侧机位拍亲友",
+     photo:"拍签到、台上、全场合影",
+     makeup:"①跟新娘补妆；②跟新郎与妈妈"
+   }},
+  {phase:"night", title:"晚宴结束，圆满收尾",
+   note:"新人留宿双林；中巴统一送新娘父母、至亲、伴娘回东林；伴娘住宿待定。",
+   roles:{
+     groom:"送客、结清尾款、收物料",
+     bride:"清点礼金和随身物品、换便装",
+     groomSide:"送女方长辈上车、安排留宿",
+     brideSide:"由中巴送回东林，交代两句",
+     groomsman:"①结尾款、收物料；②送客、搬箱",
+     bridesmaid:"①陪新娘卸妆；②清点物品、送伴娘回酒店",
+     mc:"串场致谢、收设备",
+     camera:"拍送客、全家福，当晚双备份",
+     photo:"拍送客、最后合影，导初选",
+     makeup:"①帮新娘卸妆；②清点造型工具"
+   }}
+];
+
+const TEAM = [
+  {title:"婚庆公司", tag:"统筹", text:"大四喜。"},
+  {title:"伴郎伴娘", tag:"4 人", text:"伴郎 2 人（戒指、红包、手捧花、烟糖）；伴娘 2 人——①贴身跟新娘，管裙摆随身物品；②把门与联络，管拦门、藏鞋、对接跟妆。"},
+  {title:"司仪团队", tag:"司仪＋音响师＋督导", text:"同一司仪团队，午宴、晚宴各主持一场，自驾转场。"},
+  {title:"摄影摄像", tag:"双机位", text:"摄像 2 人：A 跟男方线（双林出发→接亲→敬茶→外景→晚宴），B 跟女方线（东林妆造→午宴→转场→晚宴）；摄影 1 人全程跟新人。"},
+  {title:"跟妆团队", tag:"2 人起", text:"跟妆 2 人：①全程跟新娘；②早妆后跟新郎与双方妈妈，人手可加到 3 人。"},
+  {title:"总管对接", tag:"车辆与人员", text:"各定一名总管，管车辆调度和人员清点；筹备总群与当天执行群里都要拉上婚庆、车队。"}
+];
+
+const CARS = [
+  {name:"方案一 · 主流参考", price:"3200 元", rec:true,
+   text:"头车：奔驰 S400L（黑色）×1；跟车：奔驰 E300L（黑色）×5。800 + 480×5 = 3200 元。"},
+  {name:"方案二 · 迈巴赫", price:"3800 元", rec:false,
+   text:"头车：迈巴赫 S480（原厂迈巴赫，严禁奔驰 S 改装套件冒充，黑色）×1；跟车：奔驰 E300L（黑色）×5。1400 + 480×5 = 3800 元。"},
+  {name:"方案三 · 帕拉梅拉", price:"3500 元", dropped:true,
+   text:"头车：保时捷帕拉梅拉（行政加长版，黑色）×1；跟车：奔驰 E300L（黑色）×5。1100 + 480×5 = 3500 元。"}
+];
+
+const CAR_NOTE = "流程大于半天，超出费用要按时间 / 里程另计；主流方案（方案一 1S5E）预计控制在 4500 元。保留车辆数量、解散时间、加班边界、转场路线，全部落实到婚车合同文字，不要只口头约定。中巴单独租赁，与婚车车队分开：" +
+  "上午双林→东林宴会厅、晚宴结束双林宴会厅→东林，午间至傍晚待命不接其他任务，同样写进协议。";
+
+const PITS = [
+  "宾客标签：「全程参加」和「只吃一场」必须分开统计，否则两场桌数都会失准。",
+  "敬茶现场的「人」：东林敬茶时男方父母在宴会厅、双林敬茶时女方父母在宴会厅，要提前跟亲戚长辈说明，别让人白等。",
+  "转场车辆：午饭后男方亲属团回双林、下午女方至亲去双林，各要一趟专车加一份点名清单。"
+];
+
+const VENUES = [
+  {tag:"午宴", name:"东明村文化礼堂", desc:"女方主场，接亲结束后由此入席；停车与进门路线提前确认。", cls:"donglin",
+   url:"https://ditu.amap.com/ssr/place/B0MB55KSK7?id=B0MB55KSK7&name=%E4%B8%9C%E6%98%8E%E6%9D%91%E6%96%87%E5%8C%96%E7%A4%BC%E5%A0%82&source=map"},
+  {tag:"晚宴", name:"倪家滩宴会中心", desc:"男方主场；晚宴结束后女方父母、至亲、伴娘由此返程回东林。", cls:"shuanglin",
+   url:"https://ditu.amap.com/ssr/place/B0M2ZX3N3A?id=B0M2ZX3N3A&name=%E5%80%AA%E5%AE%B6%E6%BB%A9%E5%AE%B4%E4%BC%9A%E4%B8%AD%E5%BF%83&source=history"}
+];
+/* whoKey: both 双方 / groom 男方·新郎 / bride 女方·新娘 */
+const CHECKLIST = [
+  {phase:"提前 12 个月", when:"2026.11–12", items:[
+    {t:"初步交流整体流程、婚礼形式", who:"双方", k:"both", tip:"地点双林或东林都行，一次谈完当场记下来，写成几条共识", done:true},
+    {t:"请人看日子，确认 10.02 及午宴、晚宴的开席时辰", who:"双方", k:"both", tip:"按双方生辰合日子；开席时间要配合「上午接亲、下午转场」的节奏", done:true},
+    {t:"各定一名「总管」，建筹备总群 + 当天执行群", who:"双方", k:"both", tip:"总管管车辆调度、人员清点；群里必须有婚庆、车队", done:false},
+    {t:"先摸东林午宴的规模、长辈意见和礼堂档期", who:"女方", k:"bride", tip:"大致桌数先有数，后面订场地才好谈餐标", done:true}
+  ]},
+  {phase:"提前 9 个月", when:"2027.01", items:[
+    {t:"订双林晚宴场地", who:"男方", k:"groom", tip:"桌数区间、定金、能否自带厨师、停车位、音响、雨天备案", done:true},
+    {t:"订东林午宴场地（文化礼堂）", who:"女方", k:"bride", tip:"用电、厨房、桌椅、外场布置空间、开门人电话", done:true},
+    {t:"宾客初步统计", who:"双方", k:"both", tip:"摸底桌数、规模", done:false},
+    {t:"给宾客打标签：全程（两场都到）／只到东林／只到双林，出初版人数", who:"双方", k:"both", tip:"父母与主要至亲默认两场都到，这是两场酒席最容易乱的一步", done:false},
+    {t:"接亲路线熟悉：双林到东林，定出发时间、到达时间和下午返程路线", who:"男方", k:"groom", tip:"国庆路上可能会堵", done:false},
+    {t:"定婚庆或一站式（布置、灯光、督导）", who:"双方", k:"both", tip:"一套团队要跑两个场地，要问清加价和转场时间够不够", done:true},
+    {t:"定伴郎 2 人", who:"新郎", k:"groom", tip:"伴郎管红包、烟糖、对接总管", done:false},
+    {t:"定伴娘 2 人", who:"女方", k:"bride", tip:"伴娘管拦门、换装、随身物品和改口红包", done:true}
+  ]},
+  {phase:"提前 6 个月", when:"2027.04", items:[
+    {t:"婚纱照拍摄，倒排到 8 月前出片", who:"双方", k:"both", tip:"请柬、易拉宝、签到背景都要用这套片", done:false},
+    {t:"定婚车", who:"男方", k:"groom", tip:"国庆好日子早订锁价，合同写清超时与超公里怎么算", done:false},
+    {t:"定跟妆团队（至少 2 人，含试妆）", who:"双方", k:"both", tip:"一早分头去双林跟新郎、东林跟新娘；含两位妈妈妆与三次换装", done:true},
+    {t:"定摄影摄像：双机位跟拍", who:"双方", k:"both", tip:"排班写清：上午东林、下午双林外景、晚上双林晚宴", done:false},
+    {t:"定司仪团队（司仪＋音响师＋督导）", who:"双方", k:"both", tip:"午宴、晚宴各主持一场；转场不加价，须含彩排", done:true},
+    {t:"定新娘全套、妈妈装、伴娘服", who:"女方", k:"bride", tip:"午宴一套造型、晚宴一套造型，跟妆要跟一整天、跑两个场地", done:false},
+    {t:"定酒水烟糖（按两场总人数×1.2 备）", who:"双方", k:"both", tip:"", done:false},
+    {t:"定伴手礼、回礼，两场分别配货", who:"双方", k:"both", tip:"", done:false}
+  ]},
+  {phase:"提前 4 个月", when:"2027.06", items:[
+    {t:"宾客终版名单与两场桌数分别锁定，发「预留档期」通知", who:"双方", k:"both", tip:"两场桌数各自算，不要合并成一个总数", done:false},
+    {t:"请柬定稿：东林午宴版、双林晚宴版各一套", who:"双方", k:"both", tip:"时间、地址、停车指引分开写", done:false},
+    {t:"东林礼堂屏幕视频素材、剪辑", who:"新人", k:"both", tip:"", done:false}
+  ]},
+  {phase:"提前 3 个月", when:"2027.07", items:[
+    {t:"司仪与主持稿框架，两场各有主场", who:"双方", k:"both", tip:"待沟通设计", done:false},
+    {t:"双林婚房布置（喜字、床品、压床娃娃）", who:"男方", k:"groom", tip:"当晚新人留宿双林，房间要能直接住", done:false},
+    {t:"改口茶具、敬茶顺序、改口红包", who:"双方", k:"both", tip:"两边各备一份，金额两家先对齐", done:false},
+    {t:"接亲红包、拦门红包、小孩红包的份数与金额", who:"男方", k:"groom", tip:"分袋装好贴标签，当天不现场数钱", done:false},
+    {t:"婚庆布置沟通", who:"双方", k:"both", tip:"礼堂要提前一天进场，问清能不能过夜", done:false}
+  ]},
+  {phase:"提前 2 个月", when:"2027.08", items:[
+    {t:"发正式请柬（纸质/电子）", who:"双方", k:"both", tip:"对「两场都到」的亲友单独说明交通和住宿", done:false},
+    {t:"订双林这边外地亲友住宿（含 10.1 晚）", who:"男方", k:"groom", tip:"国庆房价涨，早点订", done:false},
+    {t:"订东林这边外地亲友住宿与接送", who:"女方", k:"bride", tip:"同上，两边的住宿不要混在一起订", done:false},
+    {t:"车队二次确认：集合点、出发时间、头车跟车编号、司机电话", who:"男方", k:"groom", tip:"上午从双林出发，别让车队等新郎", done:false},
+    {t:"伴娘住宿", who:"女方", k:"bride", tip:"流程里写的「东林或双林酒店待定」，记得落定", done:false},
+    {t:"婚纱照出片，易拉宝、签到本、桌卡定稿", who:"双方", k:"both", tip:"桌卡按两场两份名单做", done:false}
+  ]},
+  {phase:"提前 1 个月", when:"2027.09 上旬", items:[
+    {t:"全流程彩排", who:"双方", k:"both", tip:"重点确认「东林敬茶时男方父母不在场、双林敬茶时女方父母不在场」，提前跟长辈说明", done:false},
+    {t:"两家父母分工落人：迎宾、致辞、烟酒、对接厨房、送客", who:"双方", k:"both", tip:"男方父母下午要提前回双林，分工得留出这个空档", done:false},
+    {t:"电子时间表，人手一份", who:"双方", k:"both", tip:"每个环节后面都要有负责人名字和电话", done:false},
+    {t:"女方家当天人手：开门、端茶、管红包、引导停车", who:"女方", k:"bride", tip:"拦门的人也要定，别当天临时抓人", done:false},
+    {t:"男方家当天人手与下午接应安排", who:"男方", k:"groom", tip:"下午 4 点前家里要有人接应新人", done:false}
+  ]},
+  {phase:"婚礼前 2 周", when:"2027.09 中下旬", items:[
+    {t:"两场分别报最终人数给场地，各加 2 桌备桌", who:"双方", k:"both", tip:"确认结算方式：按桌还是按人、尾款几时付", done:false},
+    {t:"取婚纱礼服、秀禾，试妆、美甲、皮肤护理", who:"女方", k:"bride", tip:"两场两套造型，提前两周规律生活，做脸、别起痘", done:false},
+    {t:"新郎西装、伴郎服、剪发、婚车清洗装饰", who:"男方", k:"groom", tip:"头车装饰最好提前一天做", done:false},
+    {t:"红包全部分装贴标签：接亲、拦门、改口、司机、摄影、总管、小孩", who:"双方", k:"both", tip:"做一张红包清单，写清每种几封、谁保管", done:false},
+    {t:"物料运到双林：烟酒糖茶、签到本、桌卡、易拉宝、礼花", who:"男方", k:"groom", tip:"集中放一处，双林宴会厅有专门婚礼储物室，指定一人管钥匙", done:false},
+    {t:"定伴娘、伴郎分工", who:"双方", k:"both", tip:"沟通流程，分工", done:false},
+    {t:"物料运到东林礼堂，确认钥匙和开门人", who:"女方", k:"bride", tip:"钥匙要有人当天早上就能拿到", done:false},
+    {t:"证件与手续：结婚证、户口本、身份证，婚检和生育登记如涉及一并办", who:"双方", k:"both", tip:"结婚证建议提前领，别挤在国庆假期", done:false}
+  ]},
+  {phase:"婚礼前 1 周", when:"2027.09.25–10.01", items:[
+    {t:"最终版流程、定位、电话发到每个人，逐个电话确认", who:"双方", k:"both", tip:"不要只在群里发，长辈不看群", done:false},
+    {t:"天气与雨天备案：接车备伞", who:"男方", k:"groom", tip:"关注国庆湖州天气", done:false},
+    {t:"东林家：大扫除、贴喜字、茶具糖盘水果摆好、门口路线留空", who:"女方", k:"bride", tip:"摄影要拍进门和敬茶，走位提前留出来", done:false},
+    {t:"两场宴席尾款支付人与方式确认", who:"双方", k:"both", tip:"谁刷卡、发票开给谁，当天别为付款跑腿", done:false},
+    {t:"10.1 晚新郎住双林或就近，定 10.2 车队集合时间", who:"男方", k:"groom", tip:"集合时间要比出发时间早 40 分钟", done:false},
+    {t:"10.1 晚新娘住东林，伴娘就位，定化妆师到场时间", who:"女方", k:"bride", tip:"化妆至少留 2.5 小时", done:false}
+  ]},
+  {phase:"婚礼当天", when:"2027.10.02", items:[
+    {t:"早上：车队集合、贴喜字、带齐红包烟糖，新郎与伴郎出发东林", who:"男方", k:"groom", tip:"男方父母与主要至亲坐中巴直达东林宴会厅，不进女方家", done:false},
+    {t:"东林：拦门游戏、进门、敬茶改口", who:"新娘", k:"bride", tip:"只留新人、伴郎伴娘、摄影摄像，长辈在宴会厅等", done:false},
+    {t:"午宴（女方主场）：签到、致辞、敬酒", who:"女方", k:"bride", tip:"敬酒先女方长辈、再男方父母，顺序提前排好", done:false},
+    {t:"午饭后：男方亲属团回双林，父母先回准备下午流程", who:"男方", k:"groom", tip:"谁跟哪辆车走，按名单点人，别漏人", done:false},
+    {t:"下午：双林敬茶改口、外景拍摄", who:"男方", k:"groom", tip:"外景控制在 1 小时内，别压晚宴", done:false},
+    {t:"新娘父母与至亲直达双林宴会厅", who:"女方", k:"bride", tip:"不进男方家，直接入席", done:false},
+    {t:"晚宴（男方主场）：签到、致辞、敬酒", who:"男方", k:"groom", tip:"新娘父母与至亲坐前排，席位卡提前摆", done:false},
+    {t:"收尾：尾款结清、物料回收、礼金当晚两人一起清点；女方亲友返东林，伴娘随车", who:"双方", k:"both", tip:"礼金别隔夜，账和红包当场对", done:false}
+  ]},
+  {phase:"婚礼后", when:"2027.10.03 起", items:[
+    {t:"回门：两边都走，先回东林再回双林，可视情况安排", who:"双方", k:"both", tip:"两家各吃一顿，形式从简", done:false},
+    {t:"男方这边答谢：总管、司机、摄影、伴郎、帮忙的亲戚", who:"男方", k:"groom", tip:"可当日或次日表示感谢，别拖到下次见面", done:false},
+    {t:"女方这边答谢：伴娘、女方总管、帮忙的亲戚", who:"女方", k:"bride", tip:"同上", done:false},
+    {t:"礼金登记入账、婚礼照片与视频跟进", who:"双方", k:"both", tip:"出片周期一般 1–2 个月，合同里约定交付时间", done:false}
+  ]}
+];
+/* ================= 渲染：角色泳道时间线 ================= */
+const $ = (s)=>document.querySelector(s);
+let laneGroup = "all";
+
+function rolesInView(){
+  return laneGroup === "all" ? ROLES.slice() : ROLES.filter(r=>r.group === laneGroup);
+}
+function phaseName(key){
+  const p = PHASES.find(x=>x.key === key);
+  return p ? p.name : key;
+}
+function renderLanes(){
+  const roles = rolesInView();
+  const table = $("#lanesTable");
+  const timeW = 132, laneW = 150;
+  table.style.minWidth = (timeW + roles.length * laneW) + "px";
+
+  const cols = `<colgroup><col style="width:${timeW}px">` + roles.map(()=>`<col style="width:${laneW}px">`).join("") + `</colgroup>`;
+  const head = `<thead><tr><th>时间 · 环节</th>` + roles.map(r=>`<th>${r.name}</th>`).join("") + `</tr></thead>`;
+
+  let body = "", phase = "";
+  FLOW.forEach((n, idx)=>{
+    if(n.phase !== phase){
+      phase = n.phase;
+      const count = FLOW.filter(x=>x.phase === phase).length;
+      body += `<tr class="bandrow"><td colspan="${roles.length+1}">${phaseName(phase)} · ${count} 个环节</td></tr>`;
+    }
+    body += `<tr>
+      <td class="tcell"><div class="step">${n.title}</div><div class="seq">STEP ${String(idx+1).padStart(2,"0")}</div></td>` +
+      roles.map(r=>{
+        const txt = n.roles[r.key];
+        return `<td class="${txt ? "" : "empty"}">${txt || "—"}</td>`;
+      }).join("") + `</tr>`;
+  });
+
+  table.innerHTML = cols + head + `<tbody>${body}</tbody>`;
+}
+
+/* ================= 渲染：移动端单角色时间线 ================= */
+let mobileRole = "groom";
+function renderMobile(){
+  $("#rmChips").innerHTML = ROLES.map(r=>
+    `<button type="button" data-k="${r.key}" class="${r.key===mobileRole?"active":""}">${r.name}</button>`
+  ).join("");
+  const items = FLOW.map((n,idx)=> ({...n, idx})).filter(n=>n.roles[mobileRole]);
+  $("#rmList").innerHTML = items.length ? items.map(n=>`
+    <div class="rm-item">
+      <div class="rm-phase">STEP ${String(n.idx+1).padStart(2,"0")} · ${phaseName(n.phase)}</div>
+      <div class="rm-title">${n.title}</div>
+      <div class="rm-text">${n.roles[mobileRole]}</div>
+    </div>`).join("") : `<div class="rm-empty">这位角色当天没有单独任务。</div>`;
+}
+
+/* ================= 其它板块 ================= */
+function renderTeam(){
+  $("#teamGrid").innerHTML = TEAM.map(t=>`
+    <div class="info-card">
+      <h3>${t.title} <span class="tag">${t.tag}</span></h3>
+      <p>${t.text}</p>
+    </div>`).join("");
+}
+function renderCars(){
+  $("#carGrid").innerHTML = CARS.map(c=>`
+    <div class="info-card vehicle-card ${c.dropped?"dropped":""} ${c.rec?"recommended":""}">
+      ${c.rec?'<span class="badge-rec">主流参考</span>':""}
+      <div class="plan-name">${c.name}</div>
+      <div class="price">${c.price}</div>
+      <p style="margin-top:10px">${c.text}</p>
+    </div>`).join("");
+  $("#carNote").textContent = CAR_NOTE;
+}
+function renderPits(){
+  $("#pitList").innerHTML = PITS.map((p,i)=>`
+    <div class="pit-item"><span class="num">${i+1}</span><span>${p}</span></div>`).join("");
+}
+function renderVenues(){
+  $("#venueGrid").innerHTML = VENUES.map(v=>`
+    <a class="venue-card" href="${v.url}" target="_blank" rel="noopener">
+      <div class="venue-visual ${v.cls}"><span class="glyph">囍</span></div>
+      <div class="venue-body">
+        <div class="vtag">${v.tag}</div>
+        <h3>${v.name}</h3>
+        <p>${v.desc}</p>
+        <div class="open">在高德地图中查看 →</div>
+      </div>
+    </a>`).join("");
+}
+
+/* ================= 备婚清单 ================= */
+const STORE_KEY = "wedding-checklist-v1";
+let statusFilter = "all", whoFilter = "all";
+const FLAT = [];
+CHECKLIST.forEach((g,gi)=>g.items.forEach((it,ii)=>FLAT.push({gi,ii,...it})));
+
+function loadState(){
+  let saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){}
+  FLAT.forEach((it,idx)=>{ if(typeof saved[idx] === "boolean") it.done = saved[idx]; });
+}
+function persist(){
+  const saved = {};
+  FLAT.forEach((it,idx)=>{ saved[idx] = it.done; });
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(saved)); }catch(e){}
+}
+function whoMatch(k){
+  if(whoFilter === "all") return true;
+  return k === whoFilter;
+}
+function statusMatch(done){
+  if(statusFilter === "all") return true;
+  return statusFilter === "done" ? done : !done;
+}
+function renderChecklist(){
+  const wrap = $("#checklistWrap");
+  let html = "";
+  CHECKLIST.forEach((g,gi)=>{
+    const items = g.items.map((it,ii)=>{
+      const idx = FLAT.findIndex(x=>x.gi===gi && x.ii===ii);
+      return {...it, idx};
+    }).filter(it=>whoMatch(it.k) && statusMatch(it.done));
+    if(!items.length) return;
+    const groupDone = FLAT.filter(x=>x.gi===gi && x.done).length;
+    const cards = items.map(it=>`
+      <div class="check-item ${it.done?"done":""}" data-idx="${it.idx}" role="checkbox" aria-checked="${it.done}" tabindex="0">
+        <div class="checkbox">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8.5l3 3 7-7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="check-body">
+          <div class="check-title">${it.t}</div>
+          <div class="check-meta"><span class="who ${it.k}">${it.who}</span></div>
+          ${it.tip?`<div class="check-tip">${it.tip}</div>`:""}
+        </div>
+      </div>`).join("");
+    html += `
+      <div class="phase-group">
+        <div class="phase-head">
+          <h3>${g.phase}</h3><span class="when">${g.when}</span>
+          <span class="prog">已完成 <b>${groupDone}</b> / ${g.items.length}</span>
+        </div>
+        <div class="check-list">${cards}</div>
+      </div>`;
+  });
+  wrap.innerHTML = html || `<div class="empty-tip">当前筛选条件下暂无事项。</div>`;
+  wrap.querySelectorAll(".check-item").forEach(el=>{
+    const toggle = ()=>{
+      const idx = +el.dataset.idx;
+      FLAT[idx].done = !FLAT[idx].done;
+      persist(); renderChecklist(); renderProgress();
+    };
+    el.addEventListener("click", toggle);
+    el.addEventListener("keydown", e=>{
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggle(); }
+    });
+  });
+}
+function renderProgress(){
+  const total = FLAT.length, done = FLAT.filter(x=>x.done).length;
+  $("#heroDone").textContent = done;
+  $("#heroTotal").textContent = total;
+  $("#heroBar").style.width = (total ? Math.round(done/total*100) : 0) + "%";
+}
+
+/* ================= 交互绑定 ================= */
+$("#laneSeg").addEventListener("click", e=>{
+  const btn = e.target.closest("button"); if(!btn) return;
+  laneGroup = btn.dataset.g;
+  $("#laneSeg").querySelectorAll("button").forEach(b=>b.classList.toggle("active", b===btn));
+  renderLanes();
+});
+$("#rmChips").addEventListener("click", e=>{
+  const btn = e.target.closest("button"); if(!btn) return;
+  mobileRole = btn.dataset.k;
+  renderMobile();
+});
+$("#statusSeg").addEventListener("click", e=>{
+  const btn = e.target.closest("button"); if(!btn) return;
+  statusFilter = btn.dataset.f;
+  $("#statusSeg").querySelectorAll("button").forEach(b=>b.classList.toggle("active", b===btn));
+  renderChecklist();
+});
+$("#whoSeg").addEventListener("click", e=>{
+  const btn = e.target.closest("button"); if(!btn) return;
+  whoFilter = btn.dataset.w;
+  $("#whoSeg").querySelectorAll("button").forEach(b=>b.classList.toggle("active", b===btn));
+  renderChecklist();
+});
+
+/* ================= 音乐播放器 ================= */
+const audio = $("#audioRef");
+const player = $("#player"), pBtn = $("#pBtn"), discWrap = $("#discWrap");
+const icoPlay = $("#icoPlay"), icoPause = $("#icoPause");
+const pFill = $("#pFill"), pBar = $("#pBar"), pTime = $("#pTime"), pickBtn = $("#pickBtn");
+const fileInput = $("#fileInput");
+let hasTrack = true, objectUrl = null;
+
+let toastTimer = null;
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 3200);
+}
+function fmt(sec){
+  if(!isFinite(sec) || sec <= 0) return "00:00";
+  const m = Math.floor(sec/60), s = Math.floor(sec%60);
+  return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+}
+function setPlayingUI(playing){
+  player.classList.toggle("playing", playing);
+  icoPlay.style.display = playing ? "none" : "block";
+  icoPause.style.display = playing ? "block" : "none";
+  pBtn.setAttribute("aria-label", playing ? "暂停" : "播放");
+}
+function safePlay(){
+  const p = audio.play();
+  if(p && p.catch) p.catch(()=>{ toast("浏览器拦下了自动播放，再点一次播放按钮"); setPlayingUI(false); });
+}
+function togglePlay(){
+  if(!hasTrack){ toast("还没载入音乐，先选一个本地音频文件"); fileInput.click(); return; }
+  if(audio.paused) safePlay(); else audio.pause();
+}
+function pickTrack(){ fileInput.click(); }
+
+pBtn.addEventListener("click", togglePlay);
+discWrap.addEventListener("click", togglePlay);
+pickBtn.addEventListener("click", pickTrack);
+
+fileInput.addEventListener("change", ()=>{
+  const file = fileInput.files && fileInput.files[0];
+  if(!file) return;
+  if(objectUrl) URL.revokeObjectURL(objectUrl);
+  objectUrl = URL.createObjectURL(file);
+  audio.src = objectUrl;
+  hasTrack = true;
+  pickBtn.textContent = "换一首";
+  pTime.textContent = "00:00";
+  safePlay();
+  toast("已载入《" + file.name.replace(/\.[^.]+$/, "") + "》");
+});
+audio.addEventListener("play", ()=>setPlayingUI(true));
+audio.addEventListener("loadedmetadata", ()=>{ if(!hasTrack){ hasTrack = true; } pickBtn.textContent = "换一首"; });
+audio.addEventListener("pause", ()=>setPlayingUI(false));
+audio.addEventListener("ended", ()=>setPlayingUI(false));
+audio.addEventListener("error", ()=>{
+  setPlayingUI(false);
+  hasTrack = false;
+  pickBtn.textContent = "选择本地音乐";
+  toast("音乐没有加载成功：确认 assets/bgm.mp3 和 index.html 一起上传了，或点「选择本地音乐」临时用本地文件");
+});
+audio.addEventListener("timeupdate", ()=>{
+  const d = audio.duration;
+  const pct = (isFinite(d) && d > 0) ? (audio.currentTime / d) * 100 : 0;
+  pFill.style.width = pct + "%";
+  pBar.setAttribute("aria-valuenow", Math.round(pct));
+  pTime.textContent = fmt(audio.currentTime) + (isFinite(d) && d > 0 ? " / " + fmt(d) : "");
+});
+function seekAt(clientX){
+  const d = audio.duration;
+  if(!hasTrack || !isFinite(d) || d <= 0) return;
+  const rect = pBar.getBoundingClientRect();
+  const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+  audio.currentTime = ratio * d;
+}
+pBar.addEventListener("click", e=>seekAt(e.clientX));
+pBar.addEventListener("keydown", e=>{
+  if(!hasTrack) return;
+  if(e.key === "ArrowRight"){ audio.currentTime = Math.min(audio.duration||0, audio.currentTime + 5); }
+  if(e.key === "ArrowLeft"){ audio.currentTime = Math.max(0, audio.currentTime - 5); }
+});
+
+/* ================= 入场动效（克制） ================= */
+function setupReveal(){
+  if(!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.style.opacity = 1;
+        en.target.style.transform = "none";
+        io.unobserve(en.target);
+      }
+    });
+  },{threshold:.06});
+  document.querySelectorAll(".info-card,.venue-card,.pit-card,.phase-group").forEach(el=>{
+    el.style.opacity = 0;
+    el.style.transform = "translateY(12px)";
+    el.style.transition = "opacity .5s ease, transform .5s ease";
+    io.observe(el);
+  });
+}
+
+/* ================= 初始化 ================= */
+loadState();
+renderLanes();
+renderMobile();
+renderTeam();
+renderCars();
+renderPits();
+renderVenues();
+renderChecklist();
+renderProgress();
+setupReveal();
+</script>
+</body>
+</html>
