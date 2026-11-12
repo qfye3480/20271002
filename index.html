@@ -69,6 +69,12 @@ a{color:inherit}
 .hero-kicker::before,.hero-kicker::after{content:"";height:1px;width:34px;background:rgba(248,239,227,.5)}
 .hero h1{font-size:clamp(30px,5.4vw,46px);font-weight:900;letter-spacing:.04em;line-height:1.25}
 .hero h1 .amp{color:var(--gold);margin:0 .15em}
+.hero-poem{
+  margin-top:16px;font-family:"Noto Serif SC",serif;font-weight:500;
+  font-size:clamp(16px,2.6vw,21px);letter-spacing:.2em;line-height:1.5;
+  color:#F2DDB4;text-shadow:0 1px 12px rgba(24,4,3,.5);
+}
+.hero-poem::after{content:"";display:block;width:52px;height:1px;margin-top:14px;background:linear-gradient(90deg,rgba(201,162,94,.85),rgba(201,162,94,0))}
 .hero-sub{margin-top:14px;font-size:clamp(15px,2.2vw,17px);opacity:.88}
 .hero-note{margin-top:7px;font-size:12.5px;color:rgba(248,239,227,.55);letter-spacing:.02em}
 /* 倒计时：无框、数字为主 */
@@ -443,6 +449,7 @@ section{padding:52px 0 6px}
       <div class="hero-main">
         <div class="hero-kicker">2027.10.02 · 婚礼筹备</div>
         <h1>小叶 <span class="amp">&amp;</span> 小倪</h1>
+        <p class="hero-poem">不辞青山，相随与共</p>
         <p class="hero-sub">东林午宴 · 双林晚宴 ｜ 全天流程、人员分工与车辆安排一览</p>
         <p class="hero-note">页面旨在提供备婚信息概览，仍在迭代中。</p>
         <div class="cd" aria-label="距婚礼倒计时">
