@@ -10,8 +10,9 @@
 ```
 Love_Proj/
 ├─ index.html          ← 网站入口（GitHub Pages 根目录默认访问这个文件）
-├─ assets/
-│   └─ bgm.mp3         ← 背景音乐《今天你要嫁给我》（10.8 MB）
+├─ music/
+│   ├─ just-say-hello.mp3            ← 默认背景音乐（4.4 MB）
+│   └─ tianjin-ni-yao-jia-gei-wo.mp3 ← 《今天你要嫁给我》（10.4 MB）
 ├─ 启动本地预览.bat     ← 双击即可在电脑起本地服务，方便手机同 WiFi 访问
 └─ README.md
 ```
@@ -22,7 +23,7 @@ Love_Proj/
 
 ## 一、电脑上看
 
-直接双击 `index.html`，用 Chrome / Edge 打开即可。音乐来自 `assets/bgm.mp3`，点首屏右侧唱片卡上的「播放」开始，黑胶才会转。
+直接双击 `index.html`，用 Chrome / Edge 打开即可。音乐来自 `music/just-say-hello.mp3`，点「下一首」会在 `music/` 目录里的两首歌之间切换，点首屏右侧唱片卡上的「播放」开始，黑胶才会转。
 
 > 音乐不会自动播放，这是浏览器的硬规则：必须有一次用户点击。
 
@@ -48,7 +49,7 @@ git commit -m "说明这次改了什么"
 git push
 ```
 
-- 远端已是 HTTPS 形式，`qfye3480` 的 token 存进了 Windows 凭据管理器，push 不需要再输密码。
+- 远端是 SSH（`git@github.com:qfye3480/20271002.git`），SSH 走 `ssh.github.com:443`，所以 `github.com` 网页被墙也不影响推送；私钥在 `C:\Users\Administrator\.ssh\id_ed25519_github`。
 - 推送完成后到 <https://qfye3480.github.io/20271002/> 刷新（或手机下拉刷新）就是最新版，链接永远不变。
 - 想发微信群：直接把上面那条链接发出去即可；iOS 可在 Safari 里「添加到主屏幕」，看起来像 App。
 
@@ -56,7 +57,7 @@ git push
 
 这台网络环境下 `github.com` 网页经常超时，但 `api.github.com` 和 `ssh.github.com:443` 通常仍可用（`~/.ssh/config` 已把 github.com 的 SSH 指向 443）。所以：
 
-- **推代码**：走 HTTPS + 已存的 token，不受网页封锁影响。
+- **推代码**：走 SSH 的 443 端口，不受网页封锁影响。
 - **改仓库设置 / 开 Pages**：可以让我用 GitHub API 改，或用手机流量试。
 - **只想让人看页面**：`.github.io` 域名本身是通的，链接照发。
 
@@ -73,14 +74,14 @@ git push
 | 备婚清单 | `CHECKLIST` 数组；`done:true/false` 控制已完成 / 未完成 |
 | 人员、车辆、场地 | `TEAM` / `CARS` / `PITS` / `VENUES` 数组 |
 | 婚期倒计时 | `renderCountdown()` 里的 `2027-10-02T00:00:00+08:00` |
-| 换背景音乐 | 新 mp3 改名 `bgm.mp3` 覆盖 `assets/bgm.mp3`，代码不用动 |
-| 加图片 | 图片放 `assets/`，在 html 里用 `assets/图片名.jpg` 相对路径 |
+| 换背景音乐 | 把音频放进 `music/`（文件名用英文，别带空格和 #），再改 `PLAYLIST` 里的标题与路径 |
+| 加图片 | 图片放 `images/`（新建目录），html 里用 `images/图片名.jpg` 相对路径；文件名同样避免中文与空格 |
 | 留底 | 大改前把 `index.html` 复制到 `_backup/`（该目录不上传、不部署） |
 
 ## 五、常见问题
 
 - **手机没声音**：先点首屏唱片卡上的「播放」；iPhone 记得关掉侧边静音开关。
-- **音乐 10.8MB 偏大**：建议压到 64–128kbps 的 mp3（约 3–5MB），手机首屏更快，听感几乎没差别。压缩后覆盖 `assets/bgm.mp3` 再 push 即可。
+- **音乐 10.8MB 偏大**：建议压到 64–128kbps 的 mp3（约 3–5MB），手机首屏更快，听感几乎没差别。压缩后覆盖 `music/` 里同名文件再 push 即可。
 - **改了但看到的是旧页面**：Pages 构建 1–2 分钟，加上浏览器缓存，稍等并强制刷新。
 - **勾选状态不同步**：清单勾选存在每个浏览者自己的浏览器里，各看各的进度，不会互相同步，也不会回写到 `index.html`。
 - **隐私**：链接可能被转发，页面里别放手机号、身份证、具体住址等敏感信息。

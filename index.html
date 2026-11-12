@@ -69,6 +69,7 @@ a{color:inherit}
 .hero h1{font-size:clamp(30px,5.4vw,46px);font-weight:900;letter-spacing:.04em;line-height:1.25}
 .hero h1 .amp{color:var(--gold);margin:0 .15em}
 .hero-sub{margin-top:14px;font-size:clamp(15px,2.2vw,17px);opacity:.88}
+.hero-note{margin-top:7px;font-size:12.5px;color:rgba(248,239,227,.55);letter-spacing:.02em}
 .hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .meta-chip{background:rgba(255,253,249,.13);border:1px solid rgba(255,253,249,.22);border-radius:12px;padding:12px 16px;min-width:150px}
 .meta-chip .label{font-size:12px;opacity:.75;letter-spacing:.08em}
@@ -414,6 +415,7 @@ section{padding:52px 0 6px}
         <div class="hero-kicker">2027.10.02 · 婚礼筹备</div>
         <h1>小叶 <span class="amp">&amp;</span> 小倪</h1>
         <p class="hero-sub">东林午宴 · 双林晚宴 ｜ 全天流程、人员分工与车辆安排一览</p>
+        <p class="hero-note">页面旨在提供备婚信息概览，仍在迭代中。</p>
         <div class="hero-meta">
           <div class="meta-chip">
             <div class="label">婚期</div>
@@ -447,15 +449,15 @@ section{padding:52px 0 6px}
         <div class="p-body">
           <button class="disc-wrap" id="discWrap" type="button" aria-label="播放或暂停">
             <div class="disc" id="disc">
-              <div class="disc-label"><span>囍</span><i>今天你要嫁给我</i></div>
+              <div class="disc-label"><span>囍</span><i id="discSong">Just Say Hello</i></div>
             </div>
             <div class="disc-arm"></div>
           </button>
           <div class="player-info">
-            <div class="p-title">今天你要嫁给我</div>
-            <div class="p-sub">陶喆 · 蔡依林</div>
+            <div class="p-title" id="pTitle">Just Say Hello</div>
+            <div class="p-sub" id="pSub">背景音乐 · 循环播放</div>
             <div class="p-bar" id="pBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="pFill"></i></div>
-            <div class="p-meta"><span id="pTime">00:00</span><button class="p-pick" id="pickBtn" type="button">换一首</button></div>
+            <div class="p-meta"><span id="pTime">00:00</span><button class="p-pick" id="pickBtn" type="button">下一首</button></div>
           </div>
         </div>
         <button class="p-btn" id="pBtn" type="button" aria-label="播放">
@@ -463,8 +465,7 @@ section{padding:52px 0 6px}
           <svg id="icoPause" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
           <span class="p-btn-text" id="pBtnText">播放</span>
         </button>
-        <audio id="audioRef" src="assets/bgm.mp3" loop preload="metadata"></audio>
-        <input type="file" id="fileInput" accept="audio/*" hidden>
+        <audio id="audioRef" src="music/just-say-hello.mp3" loop preload="metadata"></audio>
       </aside>
     </div>
   </div>
@@ -477,7 +478,7 @@ section{padding:52px 0 6px}
     <div class="sec-head">
       <div class="eyebrow">WEDDING DAY</div>
       <h2>当日流程</h2>
-      <p>从上往下是时间顺序，每一列是一位角色的时间线；同一行就是同一时刻大家在做什么。可用下方按钮只看某一组角色。</p>
+      <p>点击下方按钮查看各角色时间轴（时间表待补充）</p>
     </div>
     <div class="lanes-tools">
       <div class="seg" id="laneSeg">
@@ -565,10 +566,6 @@ section{padding:52px 0 6px}
   </section>
 
 </main>
-
-<footer>
-  小叶 &amp; 小倪 · 婚礼筹备总览 ｜ 内容整理自飞书文档《小叶&amp;小倪 婚礼筹备》
-</footer>
 
 <div class="toast" id="toast"></div>
 
@@ -753,12 +750,12 @@ const FLOW = [
      makeup:"①跟新娘补妆；②跟新郎与妈妈"
    }},
   {phase:"night", title:"晚宴结束，圆满收尾",
-   note:"新人留宿双林；中巴统一送新娘父母、至亲、伴娘回东林；伴娘住宿待定。",
+   note:"新人留宿双林；女方父母、至亲、伴娘由亲友车送回东林；伴娘住宿待定。",
    roles:{
      groom:"送客、结清尾款、收物料",
      bride:"清点礼金和随身物品、换便装",
      groomSide:"送女方长辈上车、安排留宿",
-     brideSide:"由中巴送回东林，交代两句",
+     brideSide:"搭亲友车回东林，交代两句",
      groomsman:"①结尾款、收物料；②送客、搬箱",
      bridesmaid:"①陪新娘卸妆；②清点物品、送伴娘回酒店",
      mc:"串场致谢、收设备",
@@ -786,8 +783,8 @@ const CARS = [
    text:"头车：保时捷帕拉梅拉（行政加长版，黑色）×1；跟车：奔驰 E300L（黑色）×5。1100 + 480×5 = 3500 元。"}
 ];
 
-const CAR_NOTE = "流程大于半天，超出费用要按时间 / 里程另计；主流方案（方案一 1S5E）预计控制在 4500 元。保留车辆数量、解散时间、加班边界、转场路线，全部落实到婚车合同文字，不要只口头约定。中巴单独租赁，与婚车车队分开：" +
-  "上午双林→东林宴会厅、晚宴结束双林宴会厅→东林，午间至傍晚待命不接其他任务，同样写进协议。";
+const CAR_NOTE = "流程大于半天，超出费用要按时间 / 里程另计；主流方案（方案一 1S5E）预计控制在 4500 元。保留车辆数量、解散时间、加班边界、转场路线，全部落实到婚车合同文字，不要只口头约定。" +
+  "亲友统一用亲友自己的车接送：集合点、出发时间、走哪条路线，提前在群里发一份点名清单。";
 
 const PITS = [
   "宾客标签：「全程参加」和「只吃一场」必须分开统计，否则两场桌数都会失准。",
@@ -875,7 +872,7 @@ const CHECKLIST = [
     {t:"10.1 晚新娘住东林，伴娘就位，定化妆师到场时间", who:"女方", k:"bride", tip:"化妆至少留 2.5 小时", done:false}
   ]},
   {phase:"婚礼当天", when:"2027.10.02", items:[
-    {t:"早上：车队集合、贴喜字、带齐红包烟糖，新郎与伴郎出发东林", who:"男方", k:"groom", tip:"男方父母与主要至亲坐中巴直达东林宴会厅，不进女方家", done:false},
+    {t:"早上：车队集合、贴喜字、带齐红包烟糖，新郎与伴郎出发东林", who:"男方", k:"groom", tip:"男方父母与主要至亲坐亲友车直达东林宴会厅，不进女方家", done:false},
     {t:"东林：拦门游戏、进门、敬茶改口", who:"新娘", k:"bride", tip:"只留新人、伴郎伴娘、摄影摄像，长辈在宴会厅等", done:false},
     {t:"午宴（女方主场）：签到、致辞、敬酒", who:"女方", k:"bride", tip:"敬酒先女方长辈、再男方父母，顺序提前排好", done:false},
     {t:"午饭后：男方亲属团回双林，父母先回准备下午流程", who:"男方", k:"groom", tip:"谁跟哪辆车走，按名单点人，别漏人", done:false},
@@ -1108,13 +1105,19 @@ $("#whoSeg").addEventListener("click", e=>{
   renderChecklist();
 });
 
-/* ================= 音乐播放器 ================= */
+/* ================= 音乐播放器（music/ 文件夹内切歌） ================= */
 const audio = $("#audioRef");
 const player = $("#player"), pBtn = $("#pBtn"), discWrap = $("#discWrap");
 const icoPlay = $("#icoPlay"), icoPause = $("#icoPause");
 const pFill = $("#pFill"), pBar = $("#pBar"), pTime = $("#pTime"), pickBtn = $("#pickBtn");
-const fileInput = $("#fileInput");
-let hasTrack = true, objectUrl = null;
+const pTitleEl = $("#pTitle"), pSubEl = $("#pSub"), discSongEl = $("#discSong");
+
+const PLAYLIST = [
+  {title:"Just Say Hello", sub:"背景音乐 · 循环播放", src:"music/just-say-hello.mp3"},
+  {title:"今天你要嫁给我", sub:"陶喆 · 蔡依林", src:"music/tianjin-ni-yao-jia-gei-wo.mp3"}
+];
+let trackIndex = 0;
+let hasTrack = true;
 
 let toastTimer = null;
 function toast(msg){
@@ -1141,37 +1144,36 @@ function safePlay(){
   const p = audio.play();
   if(p && p.catch) p.catch(()=>{ toast("浏览器拦下了自动播放，再点一次播放按钮"); setPlayingUI(false); });
 }
+function applyTrack(){
+  const t = PLAYLIST[trackIndex];
+  audio.src = t.src;
+  pTitleEl.textContent = t.title;
+  pSubEl.textContent = t.sub;
+  discSongEl.textContent = t.title;
+  pTime.textContent = "00:00";
+  pFill.style.width = "0%";
+}
+function nextTrack(){
+  const wasPlaying = !audio.paused;
+  trackIndex = (trackIndex + 1) % PLAYLIST.length;
+  applyTrack();
+  if(wasPlaying) safePlay();
+  toast("已切到《" + PLAYLIST[trackIndex].title + "》");
+}
 function togglePlay(){
-  if(!hasTrack){ toast("还没载入音乐，先选一个本地音频文件"); fileInput.click(); return; }
   if(audio.paused) safePlay(); else audio.pause();
 }
-function pickTrack(){ fileInput.click(); }
 
 pBtn.addEventListener("click", togglePlay);
 discWrap.addEventListener("click", togglePlay);
-pickBtn.addEventListener("click", pickTrack);
-
-fileInput.addEventListener("change", ()=>{
-  const file = fileInput.files && fileInput.files[0];
-  if(!file) return;
-  if(objectUrl) URL.revokeObjectURL(objectUrl);
-  objectUrl = URL.createObjectURL(file);
-  audio.src = objectUrl;
-  hasTrack = true;
-  pickBtn.textContent = "换一首";
-  pTime.textContent = "00:00";
-  safePlay();
-  toast("已载入《" + file.name.replace(/\.[^.]+$/, "") + "》");
-});
+pickBtn.addEventListener("click", nextTrack);
 audio.addEventListener("play", ()=>setPlayingUI(true));
-audio.addEventListener("loadedmetadata", ()=>{ if(!hasTrack){ hasTrack = true; } pickBtn.textContent = "换一首"; });
+audio.addEventListener("loadedmetadata", ()=>{ hasTrack = true; });
 audio.addEventListener("pause", ()=>setPlayingUI(false));
 audio.addEventListener("ended", ()=>setPlayingUI(false));
 audio.addEventListener("error", ()=>{
   setPlayingUI(false);
-  hasTrack = false;
-  pickBtn.textContent = "选择本地音乐";
-  toast("音乐没有加载成功：确认 assets/bgm.mp3 和 index.html 一起上传了，或点「选择本地音乐」临时用本地文件");
+  toast("这首没加载出来：确认 music/ 文件夹随网页一起上传了，或点「下一首」换一首");
 });
 audio.addEventListener("timeupdate", ()=>{
   const d = audio.duration;
