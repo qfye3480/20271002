@@ -70,13 +70,26 @@ a{color:inherit}
 .hero h1 .amp{color:var(--gold);margin:0 .15em}
 .hero-sub{margin-top:14px;font-size:clamp(15px,2.2vw,17px);opacity:.88}
 .hero-note{margin-top:7px;font-size:12.5px;color:rgba(248,239,227,.55);letter-spacing:.02em}
-.hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.meta-chip{background:rgba(255,253,249,.13);border:1px solid rgba(255,253,249,.22);border-radius:12px;padding:12px 16px;min-width:150px}
-.meta-chip .label{font-size:12px;opacity:.75;letter-spacing:.08em}
-.meta-chip .value{font-family:"Noto Serif SC",serif;font-size:17px;font-weight:700;margin-top:3px}
-.hero-progress{margin-top:28px;background:rgba(255,253,249,.12);border-radius:16px;padding:18px 20px}
-.hero-progress .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.hero-progress .num{font-family:"Noto Serif SC",serif;font-size:26px;font-weight:700;color:var(--gold)}
+/* 倒计时：无框、数字为主 */
+.cd{margin-top:26px}
+.cd-cap{font-size:12px;letter-spacing:.18em;color:rgba(248,239,227,.6)}
+.cd-row{display:flex;align-items:flex-end;gap:10px;margin-top:9px}
+.cd-unit{display:flex;align-items:baseline;gap:5px}
+.cd-unit b{
+  font-family:"Noto Serif SC",serif;font-weight:700;color:#FBF4E4;
+  font-size:clamp(26px,4.4vw,38px);line-height:1;
+  font-variant-numeric:tabular-nums;min-width:1.6em;text-align:center;
+}
+.cd-unit b.sm{font-size:clamp(19px,3.1vw,27px);color:#F2DDB4}
+.cd-unit span{font-size:11.5px;color:rgba(248,239,227,.5);letter-spacing:.1em}
+.cd-sep{width:1px;height:20px;background:rgba(248,239,227,.2);margin-bottom:3px}
+/* 清单进度：细线，不占面积 */
+.hero-progress{margin-top:20px;max-width:520px}
+.hp-line{display:flex;align-items:baseline;gap:10px;font-size:12.5px;color:rgba(248,239,227,.6);letter-spacing:.06em}
+.hp-line .val{margin-left:auto;font-family:"Noto Serif SC",serif;color:#F2DDB4;font-size:13px}
+.hp-line .val b{font-size:19px;color:#FBF4E4}
+.hp-bar{display:block;height:2px;background:rgba(248,239,227,.16);margin-top:8px;position:relative;overflow:hidden}
+.hp-bar i{position:absolute;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,#E8C98A,#C9A25E);transition:width .45s ease}
 .bar{height:10px;background:rgba(255,253,249,.18);border-radius:999px;margin-top:10px;overflow:hidden}
 .bar>i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--gold),#E8C98A);transition:width .6s ease}
 
@@ -226,32 +239,21 @@ section{padding:52px 0 6px}
   display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px;
 }
 
-/* ---------- 场地 ---------- */
+/* ---------- 场地（无图卡片） ---------- */
 .venue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .venue-card{
-  display:block;text-decoration:none;background:var(--card);border:1px solid var(--line-soft);
-  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:.2s;
+  position:relative;display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--line-soft);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow-sm);transition:.2s;padding:20px 22px 18px;
 }
-.venue-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.venue-visual{height:156px;position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
-.venue-visual.donglin{--map-ground:#E7EDE9;--map-block:#D6DFDA;--map-road:#FCFAF5;--map-water:#B7CDD1;--map-pin:#3E5C63}
-.venue-visual.shuanglin{--map-ground:#F2EAE2;--map-block:#E4D6C9;--map-road:#FCFAF5;--map-water:#C6D6D8;--map-pin:#8A5A44}
-.vmap{position:absolute;inset:0;width:100%;height:100%;display:block}
-.vmap .ground{fill:var(--map-ground)}
-.vmap .water{fill:var(--map-water);opacity:.8}
-.vmap .blocks rect{fill:var(--map-block);stroke:rgba(255,255,255,.35);stroke-width:1}
-.vmap .roads path{stroke:var(--map-road);stroke-width:7;stroke-linecap:round}
-.vmap .roads path.minor{stroke-width:3.5;opacity:.75}
-.vmap .pulse{fill:var(--map-pin);opacity:.5;transform-box:fill-box;transform-origin:center;animation:mapPulse 2.8s ease-out infinite}
-.vmap .halo{fill:var(--map-pin);opacity:.16}
-.vmap .dot{fill:var(--map-pin)}
-.vmap .label{fill:rgba(58,43,36,.45);font-size:10.5px;letter-spacing:.14em}
-@keyframes mapPulse{0%{transform:scale(.35);opacity:.5}75%{transform:scale(1);opacity:0}100%{transform:scale(1);opacity:0}}
-.venue-body{padding:16px 18px}
+.venue-card::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%}
+.venue-card.donglin::before{background:#3E5C63}
+.venue-card.shuanglin::before{background:#8A5A44}
+.venue-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--gold)}
 .venue-body .vtag{font-size:11.5px;letter-spacing:.12em;color:var(--gold);font-weight:700}
-.venue-body h3{font-size:17px;margin:4px 0 3px}
-.venue-body p{font-size:13px;color:var(--ink-soft)}
-.venue-body .open{margin-top:9px;font-size:13px;color:var(--cinnabar);font-weight:500}
+.venue-body h3{font-size:19px;margin:5px 0 5px;font-family:"Noto Serif SC",serif}
+.venue-body p{font-size:13px;color:var(--ink-soft);line-height:1.7}
+.venue-body .open{margin-top:12px;font-size:13px;color:var(--cinnabar);font-weight:500}
 
 /* ---------- Hero 版式 ---------- */
 .hero-frame{position:absolute;inset:16px;border:1px solid rgba(248,239,227,.16);border-radius:14px;pointer-events:none}
@@ -260,13 +262,6 @@ section{padding:52px 0 6px}
   font-weight:900;color:rgba(248,239,227,.055);line-height:1;pointer-events:none;user-select:none;
 }
 .hero-grid{display:grid;gap:26px;align-items:start;position:relative;z-index:1}
-.meta-chip.countdown{background:rgba(201,162,94,.2);border-color:rgba(201,162,94,.5)}
-.meta-chip.countdown .value{color:#F2DDB4;font-family:"Noto Serif SC",serif}
-.meta-chip.countdown .value b{font-size:22px;font-weight:700;letter-spacing:.02em}
-.meta-chip.countdown .cd-hms{
-  display:inline-block;margin-left:6px;font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;
-  font-size:13px;letter-spacing:.06em;color:#F7EBCE;opacity:.9;
-}
 .hero-venues{
   display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
   margin-top:14px;font-size:13.5px;color:rgba(248,239,227,.75);
@@ -416,14 +411,16 @@ section{padding:52px 0 6px}
         <h1>小叶 <span class="amp">&amp;</span> 小倪</h1>
         <p class="hero-sub">东林午宴 · 双林晚宴 ｜ 全天流程、人员分工与车辆安排一览</p>
         <p class="hero-note">页面旨在提供备婚信息概览，仍在迭代中。</p>
-        <div class="hero-meta">
-          <div class="meta-chip">
-            <div class="label">婚期</div>
-            <div class="value">2027 年 10 月 2 日</div>
-          </div>
-          <div class="meta-chip countdown">
-            <div class="label">距婚礼还有</div>
-            <div class="value"><b id="cdDays">—</b> 天<span class="cd-hms" id="cdHms">00:00:00</span></div>
+        <div class="cd" aria-label="距婚礼倒计时">
+          <div class="cd-cap">距 2027.10.02 还有</div>
+          <div class="cd-row">
+            <div class="cd-unit"><b id="cdDays">—</b><span>天</span></div>
+            <div class="cd-sep" aria-hidden="true"></div>
+            <div class="cd-unit"><b id="cdHours" class="sm">00</b><span>时</span></div>
+            <div class="cd-sep" aria-hidden="true"></div>
+            <div class="cd-unit"><b id="cdMins" class="sm">00</b><span>分</span></div>
+            <div class="cd-sep" aria-hidden="true"></div>
+            <div class="cd-unit"><b id="cdSecs" class="sm">00</b><span>秒</span></div>
           </div>
         </div>
         <div class="hero-venues">
@@ -432,11 +429,11 @@ section{padding:52px 0 6px}
           <span><i>晚宴</i><em>倪家滩宴会中心</em></span>
         </div>
         <div class="hero-progress">
-          <div class="row">
-            <div>备婚清单完成进度</div>
-            <div class="num"><span id="heroDone">0</span> / <span id="heroTotal">0</span> 项</div>
+          <div class="hp-line">
+            <span>备婚清单完成</span>
+            <span class="val"><b id="heroDone">0</b> / <span id="heroTotal">0</span> 项</span>
           </div>
-          <div class="bar"><i id="heroBar"></i></div>
+          <span class="hp-bar"><i id="heroBar"></i></span>
         </div>
       </div>
 
@@ -607,7 +604,7 @@ const FLOW = [
      mc:"不到场，音响师清点设备、装车",
      camera:"A 跟新郎拍出门上车；B 在东林拍新娘准备",
      photo:"东林拍妆造、出门前合影",
-     makeup:"①东林：新娘+新娘妈妈；②双林：新郎+新郎妈妈"
+     makeup:"东林 2 人：新娘＋新娘妈妈；双林 1 人：新郎＋新郎妈妈"
    }},
   {phase:"morning", title:"女方家接亲：拦门游戏、进门",
    note:"控制时长，不用搞得太复杂。",
@@ -770,7 +767,7 @@ const TEAM = [
   {title:"伴郎伴娘", tag:"4 人", text:"伴郎 2 人（戒指、红包、手捧花、烟糖）；伴娘 2 人——①贴身跟新娘，管裙摆随身物品；②把门与联络，管拦门、藏鞋、对接跟妆。"},
   {title:"司仪团队", tag:"司仪＋音响师＋督导", text:"同一司仪团队，午宴、晚宴各主持一场，自驾转场。"},
   {title:"摄影摄像", tag:"双机位", text:"摄像 2 人：A 跟男方线（双林出发→接亲→敬茶→外景→晚宴），B 跟女方线（东林妆造→午宴→转场→晚宴）；摄影 1 人全程跟新人。"},
-  {title:"跟妆团队", tag:"2 人起", text:"跟妆 2 人：①全程跟新娘；②早妆后跟新郎与双方妈妈，人手可加到 3 人。"},
+  {title:"跟妆团队", tag:"3 人", text:"跟妆 3 人：2 人在东林（全程跟新娘＋新娘妈妈），1 人去双林（新郎＋新郎妈妈）。"},
   {title:"总管对接", tag:"车辆与人员", text:"各定一名总管，管车辆调度和人员清点；筹备总群与当天执行群里都要拉上婚庆、车队。"}
 ];
 
@@ -963,38 +960,9 @@ function renderPits(){
   $("#pitList").innerHTML = PITS.map((p,i)=>`
     <div class="pit-item"><span class="num">${i+1}</span><span>${p}</span></div>`).join("");
 }
-function venueMapSvg(){
-  return `<svg class="vmap" viewBox="0 0 340 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <rect class="ground" x="0" y="0" width="340" height="170"/>
-      <path class="water" d="M0 132 C 54 120 92 108 138 116 C 190 125 232 148 340 134 L340 170 L0 170 Z"/>
-      <g class="blocks">
-        <rect x="24" y="18" width="58" height="30" rx="4"/><rect x="96" y="12" width="42" height="24" rx="4"/>
-        <rect x="152" y="24" width="52" height="28" rx="4"/><rect x="218" y="16" width="60" height="32" rx="4"/>
-        <rect x="292" y="24" width="38" height="26" rx="4"/><rect x="30" y="96" width="48" height="24" rx="4"/>
-        <rect x="96" y="100" width="44" height="22" rx="4"/><rect x="212" y="98" width="56" height="24" rx="4"/>
-        <rect x="284" y="94" width="44" height="28" rx="4"/><rect x="40" y="60" width="54" height="22" rx="4"/>
-        <rect x="118" y="58" width="30" height="20" rx="4"/><rect x="206" y="60" width="46" height="22" rx="4"/>
-      </g>
-      <g class="roads">
-        <path d="M0 46 C 70 46 110 44 170 46 C 240 48 280 46 340 46"/>
-        <path d="M0 85 H340"/>
-        <path d="M170 0 V170"/>
-        <path class="minor" d="M0 120 H340"/>
-        <path class="minor" d="M64 0 V170"/>
-        <path class="minor" d="M266 0 V170"/>
-      </g>
-      <g>
-        <circle class="pulse" cx="170" cy="85" r="30"/>
-        <circle class="halo" cx="170" cy="85" r="14"/>
-        <circle class="dot" cx="170" cy="85" r="5.5"/>
-      </g>
-      <text class="label" x="16" y="158">区位示意</text>
-    </svg>`;
-}
 function renderVenues(){
   $("#venueGrid").innerHTML = VENUES.map(v=>`
-    <a class="venue-card" href="${v.url}" target="_blank" rel="noopener">
-      <div class="venue-visual ${v.cls}">${venueMapSvg()}</div>
+    <a class="venue-card ${v.cls}" href="${v.url}" target="_blank" rel="noopener">
       <div class="venue-body">
         <div class="vtag">${v.tag}</div>
         <h3>${v.name}</h3>
@@ -1220,17 +1188,14 @@ function setupReveal(){
 function pad2(n){ return n < 10 ? "0" + n : "" + n; }
 
 function renderCountdown(){
-  const daysEl = $("#cdDays");
-  const hmsEl = $("#cdHms");
-  if(!daysEl || !hmsEl) return;
+  const dEl = $("#cdDays"), hEl = $("#cdHours"), mEl = $("#cdMins"), sEl = $("#cdSecs");
+  if(!dEl || !hEl || !mEl || !sEl) return;
   const target = new Date("2027-10-02T00:00:00+08:00").getTime();
   const diff = Math.max(0, target - Date.now());
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-  daysEl.textContent = days;
-  hmsEl.textContent = pad2(hours) + ":" + pad2(mins) + ":" + pad2(secs);
+  dEl.textContent = Math.floor(diff / 86400000);
+  hEl.textContent = pad2(Math.floor((diff % 86400000) / 3600000));
+  mEl.textContent = pad2(Math.floor((diff % 3600000) / 60000));
+  sEl.textContent = pad2(Math.floor((diff % 60000) / 1000));
 }
 
 /* ================= 初始化 ================= */
