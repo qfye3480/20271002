@@ -7,3 +7,8 @@ desktop.ini
 # 原始素材与旧副本（正式使用的是 index.html 与 assets/bgm.mp3）
 今天你要嫁给我-陶喆.蔡依林#bfid.mp3
 task.html
+
+# 本地音频素材不纳入公开仓库（公开仓库不适合存放版权音乐）
+music/
+*.mp3
+!assets/bgm.mp3
