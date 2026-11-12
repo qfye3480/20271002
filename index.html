@@ -379,15 +379,20 @@ section{padding:52px 0 6px}
   .role-mobile{display:none}
 }
 /* ---------- 结尾：日落剪影 ---------- */
-.finale{position:relative;overflow:hidden;background:#171010;height:min(82vh,780px);min-height:440px}
-.finale img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;display:block}
+.finale{position:relative;overflow:hidden;background:#171010;aspect-ratio:4/5}
+.finale img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:24% 60%;display:block}
 .finale-veil{position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(18,10,8,.62) 0%,rgba(18,10,8,.16) 30%,rgba(18,10,8,.34) 62%,rgba(18,10,8,.82) 100%)}
-.finale-txt{position:absolute;left:0;right:0;bottom:clamp(28px,6vh,64px);text-align:center;color:#F8EFE3;padding:0 24px}
+  linear-gradient(180deg,rgba(246,241,232,1) 0px,rgba(246,241,232,.62) 30px,rgba(246,241,232,0) 120px),
+  linear-gradient(180deg,rgba(18,10,8,.16) 0%,rgba(18,10,8,.08) 34%,rgba(18,10,8,.44) 66%,rgba(18,10,8,.86) 100%)}
+.finale-txt{position:absolute;left:0;right:0;bottom:clamp(26px,6vh,60px);text-align:center;color:#F8EFE3;padding:0 24px}
 .finale-txt .fd{font-size:12px;letter-spacing:.28em;color:rgba(242,221,180,.92)}
 .finale-txt h2{font-family:"Noto Serif SC",serif;font-size:clamp(24px,4.4vw,34px);font-weight:900;letter-spacing:.07em;margin-top:12px}
 .finale-rule{width:42px;height:1px;background:rgba(201,162,94,.85);margin:15px auto 0}
 .finale-txt p{font-size:13px;letter-spacing:.1em;color:rgba(248,239,227,.72);margin-top:12px}
+@media (min-width:761px){
+  .finale{height:min(78vh,740px);aspect-ratio:auto}
+  .finale img{height:100%;object-position:center 88%}
+}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
