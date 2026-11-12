@@ -7,3 +7,7 @@ desktop.ini
 # 原始素材与旧副本（页面播放的是 music/ 下两首）
 今天你要嫁给我-陶喆.蔡依林#bfid.mp3
 task.html
+
+# 草稿与原始照片（站点实际用的是 images/ 里裁好的版本）
+_preview/
+pics/
