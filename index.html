@@ -379,8 +379,9 @@ section{padding:52px 0 6px}
   .role-mobile{display:none}
 }
 /* ---------- 结尾：日落剪影（满幅，顶部由纸色渐入） ---------- */
-.finale{position:relative;background:var(--paper);padding-top:clamp(84px,12vh,124px)}
-.finale-mark{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:clamp(30px,5vh,44px)}
+.finale{position:relative;display:flex;flex-direction:column;background:#171010;padding:0;margin:0}
+.finale-top{background:var(--paper);padding-top:clamp(84px,12vh,124px);padding-bottom:clamp(30px,5vh,44px)}
+.finale-mark{display:flex;align-items:center;justify-content:center;gap:14px}
 .finale-mark i{display:block;width:46px;height:1px;background:rgba(166,58,58,.28)}
 .finale-mark span{font-family:"Noto Serif SC",serif;font-size:17px;color:var(--cinnabar);opacity:.85;letter-spacing:.1em}
 .finale-shot{position:relative;overflow:hidden;background:#171010;aspect-ratio:4/5}
@@ -598,7 +599,9 @@ section{padding:52px 0 6px}
 </main>
 
 <section class="finale" aria-label="结尾">
-  <div class="finale-mark" aria-hidden="true"><i></i><span>囍</span><i></i></div>
+  <div class="finale-top">
+    <div class="finale-mark" aria-hidden="true"><i></i><span>囍</span><i></i></div>
+  </div>
   <div class="finale-shot">
     <img src="images/finale-sunset.jpg" alt="黄昏海边的剪影">
     <div class="finale-veil" aria-hidden="true"></div>
