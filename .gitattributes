@@ -1,0 +1,12 @@
+# 统一换行符：文本一律 LF 入库，Windows 的 .bat 保持 CRLF
+* text=auto eol=lf
+
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.webp binary
+*.mp3 binary
+*.mp4 binary
+
+*.bat text eol=crlf
