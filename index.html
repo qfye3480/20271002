@@ -309,6 +309,22 @@ section{padding:52px 0 6px}
   transform-origin:26px 7px;transform:rotate(-20deg);transition:transform .4s ease;
 }
 .player.playing .disc-arm{transform:rotate(3deg)}
+/* 黑胶反光：盘面一道高光持续扫过 */
+.disc-gloss{
+  position:absolute;inset:2px;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0 34%,rgba(255,255,255,.13) 44%,rgba(255,255,255,.045) 53%,transparent 64% 100%);
+  animation:gloss 2.6s linear infinite;animation-play-state:paused;
+}
+.player.playing .disc-gloss{animation-play-state:running}
+/* 外圈进度金环 */
+.disc-ring{
+  position:absolute;inset:-6px;border-radius:50%;pointer-events:none;
+  background:conic-gradient(#C9A25E calc(var(--p,0) * 1deg),rgba(248,239,227,.08) 0);
+  -webkit-mask:radial-gradient(circle,transparent 0 47px,#000 48px);
+          mask:radial-gradient(circle,transparent 0 47px,#000 48px);
+  opacity:.9;
+}
+@keyframes gloss{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .disc-arm::before{
   content:"";position:absolute;left:21px;top:5px;width:3px;height:38px;border-radius:2px;
   background:linear-gradient(180deg,#E8C98A,#8C6C3C);box-shadow:0 1px 3px rgba(0,0,0,.3);
@@ -362,7 +378,7 @@ section{padding:52px 0 6px}
   .grid-2,.grid-3,.venue-grid{grid-template-columns:1fr}
   .hero{padding:38px 0 34px}
   /* 手机端换用竖构图专用图，避免横图裁中间被放大 */
-  .hero-photo{background-image:url("images/hero-mobile.jpg");background-size:auto 115%;background-position:center 62px}
+  .hero-photo{background-image:url("images/hero-mobile.jpg");background-position:center 44%}
   .hero-frame{inset:10px}
   .hero-mark{bottom:-30px;right:-6%}
   section{padding:38px 0 4px}
@@ -384,6 +400,10 @@ section{padding:52px 0 6px}
   .player{padding:14px 15px 15px}
   .p-body{gap:13px}
   .disc-wrap,.disc{width:72px;height:72px}
+  .disc-ring{
+    -webkit-mask:radial-gradient(circle,transparent 0 39px,#000 40px);
+            mask:radial-gradient(circle,transparent 0 39px,#000 40px);
+  }
   .disc-label{width:32px;height:32px}
   .disc-label span{font-size:13px}
   .p-title{font-size:14px}
@@ -490,7 +510,9 @@ section{padding:52px 0 6px}
         </div>
         <div class="p-body">
           <button class="disc-wrap" id="discWrap" type="button" aria-label="播放或暂停">
+            <span class="disc-ring" id="discRing"></span>
             <div class="disc" id="disc">
+              <div class="disc-gloss"></div>
               <div class="disc-label"><span>囍</span><i id="discSong">Just Say Hello</i></div>
             </div>
             <div class="disc-arm"></div>
@@ -1133,7 +1155,7 @@ $("#whoSeg").addEventListener("click", e=>{
 const audio = $("#audioRef");
 const player = $("#player"), pBtn = $("#pBtn"), discWrap = $("#discWrap");
 const icoPlay = $("#icoPlay"), icoPause = $("#icoPause");
-const pFill = $("#pFill"), pBar = $("#pBar"), pTime = $("#pTime"), pickBtn = $("#pickBtn");
+const pFill = $("#pFill"), pBar = $("#pBar"), pTime = $("#pTime"), pickBtn = $("#pickBtn"), discRing = $("#discRing");
 const pTitleEl = $("#pTitle"), pSubEl = $("#pSub"), discSongEl = $("#discSong");
 
 const PLAYLIST = [
@@ -1203,6 +1225,7 @@ audio.addEventListener("timeupdate", ()=>{
   const d = audio.duration;
   const pct = (isFinite(d) && d > 0) ? (audio.currentTime / d) * 100 : 0;
   pFill.style.width = pct + "%";
+  if(discRing) discRing.style.setProperty("--p", (pct * 3.6).toFixed(1));
   pBar.setAttribute("aria-valuenow", Math.round(pct));
   pTime.textContent = fmt(audio.currentTime) + (isFinite(d) && d > 0 ? " / " + fmt(d) : "");
 });
