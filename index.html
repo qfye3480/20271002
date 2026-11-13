@@ -362,7 +362,7 @@ section{padding:52px 0 6px}
   .grid-2,.grid-3,.venue-grid{grid-template-columns:1fr}
   .hero{padding:38px 0 34px}
   /* 手机端换用竖构图专用图，避免横图裁中间被放大 */
-  .hero-photo{background-image:url("images/hero-mobile.jpg");background-position:center 44%}
+  .hero-photo{background-image:url("images/hero-mobile.jpg");background-size:auto 115%;background-position:center 62px}
   .hero-frame{inset:10px}
   .hero-mark{bottom:-30px;right:-6%}
   section{padding:38px 0 4px}
@@ -631,7 +631,7 @@ const ROLES = [
   {key:"bridesmaid",name:"伴娘",           group:"party"},
   {key:"mc",       name:"司仪",            group:"crew"},
   {key:"camera",   name:"摄像",            group:"crew"},
-  {key:"photo",    name:"摄影师",          group:"crew"},
+  {key:"photo",    name:"摄影",            group:"crew"},
   {key:"makeup",   name:"跟妆",            group:"crew"}
 ];
 const ROLE_MAP = {};
