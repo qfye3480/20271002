@@ -160,6 +160,7 @@ section{padding:52px 0 6px}
 /* 移动端：单角色纵向时间线 */
 .role-mobile{display:none}
 .rm-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.rm-div{flex:0 0 auto;width:1px;height:14px;background:var(--line);align-self:center;margin:0 2px}
 .rm-chips button{
   border:1px solid var(--line);background:var(--card);border-radius:10px;
   font-size:13px;padding:7px 12px;cursor:pointer;font-family:inherit;color:var(--ink-soft);
@@ -372,6 +373,18 @@ section{padding:52px 0 6px}
   .lane-scroll,.lanes-tools,.lane-hint{display:none}
   .lanes{display:none}
   .role-mobile{display:block}
+  /* 角色筛选：单行横向滚动，替代多行折行 */
+  .rm-chips{
+    flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+    scroll-snap-type:x proximity;
+    padding:2px 14px 4px;margin-left:-2px;margin-right:-2px;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 22px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 22px),transparent 100%);
+  }
+  .rm-chips::-webkit-scrollbar{display:none}
+  .rm-chips button{flex:0 0 auto;white-space:nowrap;scroll-snap-align:center}
   .player{padding:14px 15px 15px}
   .p-body{gap:13px}
   .disc-wrap,.disc{width:72px;height:72px}
@@ -983,9 +996,11 @@ function renderLanes(){
 /* ================= 渲染：移动端单角色时间线 ================= */
 let mobileRole = "groom";
 function renderMobile(){
-  $("#rmChips").innerHTML = ROLES.map(r=>
-    `<button type="button" data-k="${r.key}" class="${r.key===mobileRole?"active":""}">${r.name}</button>`
-  ).join("");
+  $("#rmChips").innerHTML = ROLES.map((r,i)=>{
+    const prev = ROLES[i-1];
+    const div = prev && prev.group !== r.group ? '<i class="rm-div" aria-hidden="true"></i>' : '';
+    return div + `<button type="button" data-k="${r.key}" class="${r.key===mobileRole?"active":""}">${r.name}</button>`;
+  }).join("");
   const items = FLOW.map((n,idx)=> ({...n, idx})).filter(n=>n.roles[mobileRole]);
   $("#rmList").innerHTML = items.length ? items.map(n=>`
     <div class="rm-item">
@@ -1116,6 +1131,8 @@ $("#rmChips").addEventListener("click", e=>{
   const btn = e.target.closest("button"); if(!btn) return;
   mobileRole = btn.dataset.k;
   renderMobile();
+  const act = $("#rmChips").querySelector("button.active");
+  if(act) act.scrollIntoView({inline:"center", block:"nearest", behavior:"smooth"});
 });
 $("#statusSeg").addEventListener("click", e=>{
   const btn = e.target.closest("button"); if(!btn) return;
