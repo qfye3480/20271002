@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>播放器样式对比</title>
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap">
+<style>
+:root{
+  --paper:#FBF4E4; --gold:#C9A25E; --gold-lt:#E8C98A;
+  --cinnabar:#822B2B; --ink:#2C1A16;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(120% 70% at 20% 0%, #3A2020 0%, #2A1512 46%, #21100E 100%) fixed;
+  color:var(--paper);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  padding:26px 18px 44px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:900px;margin:0 auto}
+h1{
+  font-family:"Noto Serif SC",Georgia,serif;
+  font-size:clamp(20px,5.4vw,27px);font-weight:700;letter-spacing:.1em;
+  margin:0 0 8px;
+}
+.lead{font-size:13.5px;line-height:1.9;color:rgba(251,244,228,.62);margin:0 0 26px}
+.lead b{color:var(--gold-lt);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.panel{
+  border:1px solid rgba(248,239,227,.15);
+  border-radius:18px;padding:16px 16px 18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  backdrop-filter:blur(6px);
+}
+.tag{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.tag .n{
+  font-family:"Noto Serif SC",serif;font-weight:700;font-size:15px;letter-spacing:.04em;color:#FFF8EE;
+}
+.badge{
+  font-size:10.5px;letter-spacing:.1em;color:var(--gold);
+  border:1px solid rgba(201,162,94,.45);border-radius:6px;padding:2px 6px;
+}
+.desc{font-size:12.5px;line-height:1.75;color:rgba(251,244,228,.55);margin:0 0 14px;min-height:3.4em}
+
+/* ---- 唱片区（四种共用骨架） ---- */
+.stage{display:flex;justify-content:center;padding:6px 0 14px}
+.disc-wrap{
+  position:relative;width:124px;height:124px;border:none;background:none;padding:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.disc{
+  position:relative;width:96px;height:96px;border-radius:50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.085) 0 1.5px, rgba(0,0,0,.17) 1.5px 3px),
+    radial-gradient(circle at 42% 34%, #4C4038 0%, #2C2320 46%, #15100E 100%);
+  box-shadow:inset 0 0 0 2px rgba(201,162,94,.45), 0 8px 22px rgba(0,0,0,.42);
+  display:flex;align-items:center;justify-content:center;
+  will-change:transform;
+}
+.disc .label{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(150deg,#B24343,#822B2B);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  box-shadow:0 0 0 3px rgba(201,162,94,.5);
+}
+.disc .label span{font-family:"Noto Serif SC",serif;color:#FBF4E4;font-size:16px;font-weight:700;line-height:1}
+.disc .label i{font-style:normal;font-size:6px;color:rgba(251,244,228,.78);letter-spacing:.04em;white-space:nowrap}
+.arm{
+  position:absolute;right:2px;top:-2px;width:44px;height:60px;
+  transform-origin:34px 9px;transform:rotate(-22deg);
+  transition:transform .42s ease;
+}
+.arm .bar{
+  position:absolute;left:32px;top:7px;width:3px;height:44px;border-radius:2px;
+  background:linear-gradient(180deg,#E8C98A,#8C6C3C);box-shadow:0 1px 3px rgba(0,0,0,.35);
+}
+.arm .pivot{
+  position:absolute;left:28px;top:2px;width:12px;height:12px;border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#F0D8A8,#C9A25E 60%,#8C6C3C);
+  box-shadow:0 1px 3px rgba(0,0,0,.35);
+}
+.player.playing .arm{transform:rotate(6deg)}
+
+/* 通用：信息与控件 */
+.info{margin-top:2px}
+.song{font-family:"Noto Serif SC",serif;font-weight:600;font-size:14.5px;color:#FFF8EE}
+.sub{font-size:11.5px;color:rgba(251,244,228,.5);margin-top:3px}
+.bar{height:4px;border-radius:999px;background:rgba(248,239,227,.16);margin-top:11px;overflow:hidden;cursor:pointer}
+.bar>i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--gold-lt),var(--gold))}
+.meta{display:flex;justify-content:space-between;margin-top:6px;font-size:10.5px;color:rgba(251,244,228,.45);letter-spacing:.04em}
+.btn{
+  margin-top:13px;width:100%;min-height:44px;border-radius:11px;cursor:pointer;font-family:inherit;
+  border:1px solid rgba(201,162,94,.5);background:rgba(201,162,94,.14);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;letter-spacing:.08em;
+  transition:.2s;
+}
+.btn:hover{background:rgba(201,162,94,.28)}
+audio{display:none}
+
+/* ============ ① 原版：匀速转 + 唱针落下 ============ */
+.v1 .disc{animation:spin 9s linear infinite;animation-play-state:paused}
+.v1.playing .disc{animation-play-state:running}
+
+/* ============ ② 弹簧唱针 + 惯性起转 ============ */
+.v2 .arm{transition:transform .72s cubic-bezier(.34,1.56,.64,1)}
+/* 转速由 JS 用 WAAPI 控制，从 0 渐变到匀速 */
+
+/* ============ ③ 声波涟漪 + 囍字呼吸 ============ */
+.v3 .disc{box-shadow:inset 0 0 0 2px rgba(201,162,94,.45), 0 8px 22px rgba(0,0,0,.42)}
+.v3 .wave{
+  position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-48px 0 0 -48px;
+  border-radius:50%;border:1px solid rgba(201,162,94,.55);opacity:0;pointer-events:none;
+}
+.v3.playing .wave{animation:ripple 2.6s ease-out infinite}
+.v3.playing .wave.w2{animation-delay:1.3s}
+.v3.playing .disc .label{animation:breath 2.6s ease-in-out infinite}
+.v3 .arm{transition:transform .42s ease}
+
+/* ============ ④ 黑胶反光 + 边缘进度环 ============ */
+.v4 .disc{animation:spin 9s linear infinite;animation-play-state:paused}
+.v4.playing .disc{animation-play-state:running}
+.v4 .gloss{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg, transparent 0 38%, rgba(255,255,255,.13) 46%, rgba(255,255,255,.05) 52%, transparent 60% 100%);
+  animation:gloss 2.4s linear infinite;animation-play-state:paused;
+}
+.v4.playing .gloss{animation-play-state:running}
+.v4 .ringwrap{
+  position:absolute;inset:-8px;border-radius:50%;pointer-events:none;
+  background:conic-gradient(var(--gold) calc(var(--p,0) * 1deg), rgba(248,239,227,.1) 0);
+  -webkit-mask:radial-gradient(circle, transparent 0 52px, #000 53px);
+          mask:radial-gradient(circle, transparent 0 52px, #000 53px);
+  opacity:.9;
+}
+
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes gloss{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes ripple{
+  0%{transform:scale(1);opacity:.5}
+  70%{opacity:.12}
+  100%{transform:scale(1.62);opacity:0}
+}
+@keyframes breath{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 3px rgba(201,162,94,.5)}
+  50%{transform:scale(1.045);box-shadow:0 0 0 3px rgba(201,162,94,.5), 0 0 16px rgba(232,201,138,.55)}
+}
+@media (prefers-reduced-motion:reduce){
+  .disc,.gloss,.v3 .wave,.v3 .disc .label{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>播放器 · 四种样子</h1>
+  <p class="lead">每张卡都能直接点开试听。<b>①</b> 你现在的版本，作为对照；<b>②③④</b> 是我另外做的三个方向，差别都在“唱片”和“唱针”的动作上。</p>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+var VARIANTS = [
+  {k:"v1", name:"原版 · 唱针落下", badge:"当前", desc:"唱片匀速转；唱针从 22° 落下压到盘面。稳妥，最像真唱机。"},
+  {k:"v2", name:"弹簧唱针 · 惯性起转", badge:"更真实", desc:"唱针落下时带一点回弹的阻尼感；唱片从静止慢慢加速到匀速，像真唱机启动马达。"},
+  {k:"v3", name:"声波涟漪 · 囍字呼吸", badge:"最安静", desc:"唱片不转。播放时外圈泛起两层声波向外散开，中心囍字轻轻呼吸发光。"},
+  {k:"v4", name:"黑胶反光 · 进度金环", badge:"最精致", desc:"盘面有一道高光持续扫过（真黑胶的反射）；外圈一圈金环随播放进度一点点走满。"}
+];
+
+var grid = document.getElementById("grid");
+VARIANTS.forEach(function(v){
+  var panel = document.createElement("section");
+  panel.className = "panel player " + v.k;
+  panel.innerHTML =
+    '<div class="tag"><span class="n">' + v.name + '</span><span class="badge">' + v.badge + '</span></div>' +
+    '<p class="desc">' + v.desc + '</p>' +
+    '<div class="stage">' +
+      '<button class="disc-wrap" type="button" aria-label="播放' + v.name + '">' +
+        '<span class="wave w1"></span><span class="wave w2"></span>' +
+        '<span class="ringwrap"></span>' +
+        '<span class="disc"><span class="gloss"></span><span class="label"><span>囍</span><i>JUST SAY HELLO</i></span></span>' +
+        '<span class="arm"><span class="bar"></span><span class="pivot"></span></span>' +
+      '</button>' +
+    '</div>' +
+    '<div class="info">' +
+      '<div class="song">Just Say Hello</div>' +
+      '<div class="sub">背景音乐 · 单曲循环</div>' +
+      '<div class="bar"><i></i></div>' +
+      '<div class="meta"><span class="t-cur">00:00</span><span class="t-dur">00:00</span></div>' +
+    '</div>' +
+    '<button class="btn" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>播放</span></button>' +
+    '<audio src="https://qfye3480.github.io/20271002/music/just-say-hello.mp3" preload="metadata" loop></audio>';
+  grid.appendChild(panel);
+});
+
+function fmt(s){
+  if(!isFinite(s)) return "00:00";
+  var m = Math.floor(s/60), x = Math.floor(s%60);
+  return (m<10?"0":"") + m + ":" + (x<10?"0":"") + x;
+}
+
+document.querySelectorAll(".panel").forEach(function(p){
+  var audio = p.querySelector("audio");
+  var btn   = p.querySelector(".btn");
+  var btnTxt= btn.querySelector("span");
+  var discW = p.querySelector(".disc-wrap");
+  var disc  = p.querySelector(".disc");
+  var bar   = p.querySelector(".bar");
+  var fill  = bar.querySelector("i");
+  var cur   = p.querySelector(".t-cur");
+  var dur   = p.querySelector(".t-dur");
+  var spin  = null;
+
+  if(p.classList.contains("v2")){
+    disc.style.animation = "none";
+  }
+
+  function startSpin(){
+    if(p.classList.contains("v2")){
+      if(!spin){
+        spin = disc.animate(
+          [{transform:"rotate(0deg)"},{transform:"rotate(360deg)"}],
+          {duration:9000, iterations:Infinity}
+        );
+      }
+      spin.play();
+      spin.playbackRate = 0;
+      var t0 = performance.now();
+      (function ramp(){
+        var k = Math.min(1, (performance.now()-t0)/1300);
+        spin.playbackRate = k*k;
+        if(k < 1) setTimeout(ramp, 30);
+      })();
+    }
+  }
+  function stopSpin(){
+    if(spin) spin.pause();
+  }
+
+  function toggle(){
+    if(audio.paused){
+      audio.play().then(function(){
+        p.classList.add("playing");
+        btnTxt.textContent = "暂停";
+        startSpin();
+      }).catch(function(){
+        btnTxt.textContent = "点一次再试";
+      });
+    } else {
+      audio.pause();
+      p.classList.remove("playing");
+      btnTxt.textContent = "继续播放";
+      stopSpin();
+    }
+  }
+
+  btn.addEventListener("click", toggle);
+  discW.addEventListener("click", toggle);
+
+  audio.addEventListener("loadedmetadata", function(){ dur.textContent = fmt(audio.duration); });
+  audio.addEventListener("timeupdate", function(){
+    var d = audio.duration || 0;
+    var r = d ? audio.currentTime/d : 0;
+    fill.style.width = (r*100) + "%";
+    cur.textContent = fmt(audio.currentTime);
+    if(p.classList.contains("v4")) p.querySelector(".ringwrap").style.setProperty("--p", String(r*360));
+  });
+  audio.addEventListener("ended", function(){
+    p.classList.remove("playing");
+    btnTxt.textContent = "再播一次";
+    stopSpin();
+  });
+
+  bar.addEventListener("click", function(e){
+    var d = audio.duration;
+    if(!d) return;
+    var r = bar.getBoundingClientRect();
+    audio.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left)/r.width)) * d;
+  });
+});
+</script>
+</body>
+</html>
