@@ -272,14 +272,6 @@ section{padding:52px 0 6px}
   font-weight:900;color:rgba(248,239,227,.055);line-height:1;pointer-events:none;user-select:none;
 }
 .hero-grid{display:grid;gap:26px;align-items:start;position:relative;z-index:1}
-.hero-venues{
-  display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
-  margin-top:14px;font-size:13.5px;color:rgba(248,239,227,.75);
-}
-.hero-venues span{display:inline-flex;align-items:baseline;gap:7px}
-.hero-venues i{font-style:normal;font-size:11.5px;letter-spacing:.16em;color:rgba(201,162,94,.9)}
-.hero-venues em{font-style:normal;color:#FBF4E4}
-.hero-venues .sep{width:1px;height:12px;background:rgba(248,239,227,.26);display:inline-block}
 
 /* ---------- 音乐播放器（Hero 内，开场即见） ---------- */
 .player{
@@ -481,11 +473,6 @@ section{padding:52px 0 6px}
             <div class="cd-unit"><b id="cdSecs" class="sm">00</b><span>秒</span></div>
           </div>
         </div>
-        <div class="hero-venues">
-          <span><i>午宴</i><em>东明村文化礼堂</em></span>
-          <span class="sep" aria-hidden="true"></span>
-          <span><i>晚宴</i><em>倪家滩宴会中心</em></span>
-        </div>
         <div class="hero-progress">
           <div class="hp-line">
             <span>备婚清单完成</span>
@@ -642,10 +629,10 @@ const ROLES = [
   {key:"brideSide",name:"新娘父母 · 至亲",   group:"parents"},
   {key:"groomsman",name:"伴郎",            group:"party"},
   {key:"bridesmaid",name:"伴娘",           group:"party"},
-  {key:"mc",       name:"司仪团队",        group:"crew"},
-  {key:"camera",   name:"摄像团队",        group:"crew"},
+  {key:"mc",       name:"司仪",            group:"crew"},
+  {key:"camera",   name:"摄像",            group:"crew"},
   {key:"photo",    name:"摄影师",          group:"crew"},
-  {key:"makeup",   name:"跟妆团队",        group:"crew"}
+  {key:"makeup",   name:"跟妆",            group:"crew"}
 ];
 const ROLE_MAP = {};
 ROLES.forEach(r=>{ ROLE_MAP[r.key] = r; });
