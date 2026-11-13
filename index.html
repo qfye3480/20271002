@@ -190,13 +190,24 @@ section{padding:52px 0 6px}
 .info-card h3{font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .info-card h3 .tag{font-size:11px;font-weight:500;color:var(--ink-faint);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
 .info-card p{font-size:14px;color:var(--ink-soft)}
-.vehicle-card{position:relative}
-.vehicle-card .price{font-family:"Noto Serif SC",serif;font-size:22px;font-weight:700;color:var(--cinnabar);margin-top:10px}
-.vehicle-card .plan-name{font-size:13px;color:var(--ink-faint);margin-top:2px}
-.vehicle-card.dropped{opacity:.55}
+/* 车辆方案：紧凑报价卡 */
+#carGrid{gap:12px}
+.vehicle-card{position:relative;padding:15px 16px 14px}
+.vehicle-card p{font-size:12.5px;line-height:1.65;color:var(--ink-soft);margin-top:6px}
+.vehicle-card .car-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:18px}
+.vehicle-card .plan-name{font-size:12px;letter-spacing:.06em;color:var(--ink-faint)}
+.vehicle-card .price{
+  font-family:"Noto Serif SC",serif;font-size:17.5px;font-weight:700;line-height:1.2;
+  color:var(--cinnabar);margin-top:5px;
+}
+.vehicle-card .price i{font-style:normal;font-size:11px;font-weight:500;color:var(--ink-faint);margin-left:3px}
+.vehicle-card.dropped{opacity:.5;box-shadow:none}
 .vehicle-card.dropped .price{text-decoration:line-through;color:var(--ink-faint)}
 .vehicle-card.recommended{border-color:var(--gold);background:linear-gradient(180deg,#FFFDF9,#FBF4E4)}
-.badge-rec{position:absolute;top:16px;right:16px;background:var(--gold);color:#fff;font-size:12px;border-radius:8px;padding:3px 10px}
+.badge-rec{
+  flex:none;font-size:10.5px;letter-spacing:.08em;color:var(--cinnabar);
+  background:#fff;border:1px solid rgba(166,58,58,.28);border-radius:6px;padding:1px 7px;
+}
 .car-note{margin-top:16px;background:var(--paper-2);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--ink-soft)}
 
 /* ---------- 备婚清单（紧凑版） ---------- */
@@ -233,19 +244,6 @@ section{padding:52px 0 6px}
 .who.both{background:rgba(166,58,58,.1);color:var(--cinnabar)}
 .check-tip{font-size:12px;color:var(--ink-faint);margin-top:3px;line-height:1.5}
 .empty-tip{text-align:center;color:var(--ink-faint);padding:24px 0;font-size:13.5px}
-
-/* ---------- 三个坑 ---------- */
-.pit-card{
-  background:linear-gradient(160deg,#FFFDF9,#FBF3EC);border:1px solid var(--line);
-  border-left:4px solid var(--cinnabar);border-radius:var(--radius);padding:22px 24px;
-}
-.pit-card h3{font-size:17px;margin-bottom:14px}
-.pit-list{display:grid;gap:12px}
-.pit-item{display:flex;gap:12px;font-size:14px;color:var(--ink-soft)}
-.pit-item .num{
-  flex:none;width:24px;height:24px;border-radius:50%;background:var(--cinnabar);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px;
-}
 
 /* ---------- 场地（无图卡片） ---------- */
 .venue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
@@ -599,13 +597,6 @@ section{padding:52px 0 6px}
   </section>
 
   <!-- ===== 容易踩的坑 ===== -->
-  <section id="pits">
-    <div class="pit-card">
-      <h3>最容易踩的三个坑</h3>
-      <div class="pit-list" id="pitList"></div>
-    </div>
-  </section>
-
   <!-- ===== 场地位置 ===== -->
   <div class="divider" aria-hidden="true"><span>囍</span></div>
   <section id="venue">
@@ -843,21 +834,15 @@ const TEAM = [
 
 const CARS = [
   {name:"方案一 · 主流参考", price:"3200 元", rec:true,
-   text:"头车：奔驰 S400L（黑色）×1；跟车：奔驰 E300L（黑色）×5。800 + 480×5 = 3200 元。"},
+   text:"头车 奔驰 S400L ×1　跟车 奔驰 E300L ×5"},
   {name:"方案二 · 迈巴赫", price:"3800 元", rec:false,
-   text:"头车：迈巴赫 S480（原厂迈巴赫，严禁奔驰 S 改装套件冒充，黑色）×1；跟车：奔驰 E300L（黑色）×5。1400 + 480×5 = 3800 元。"},
+   text:"头车 迈巴赫 S480 ×1（须原厂，勿用 S 级改装车冒充）　跟车 E300L ×5"},
   {name:"方案三 · 帕拉梅拉", price:"3500 元", dropped:true,
-   text:"头车：保时捷帕拉梅拉（行政加长版，黑色）×1；跟车：奔驰 E300L（黑色）×5。1100 + 480×5 = 3500 元。"}
+   text:"头车 保时捷帕拉梅拉行政加长 ×1　跟车 E300L ×5"}
 ];
 
 const CAR_NOTE = "流程大于半天，超出费用要按时间 / 里程另计；主流方案（方案一 1S5E）预计控制在 4500 元。保留车辆数量、解散时间、加班边界、转场路线，全部落实到婚车合同文字，不要只口头约定。" +
   "亲友统一用亲友自己的车接送：集合点、出发时间、走哪条路线，提前在群里发一份点名清单。";
-
-const PITS = [
-  "宾客标签：「全程参加」和「只吃一场」必须分开统计，否则两场桌数都会失准。",
-  "敬茶现场的「人」：东林敬茶时男方父母在宴会厅、双林敬茶时女方父母在宴会厅，要提前跟亲戚长辈说明，别让人白等。",
-  "转场车辆：午饭后男方亲属团回双林、下午女方至亲去双林，各要一趟专车加一份点名清单。"
-];
 
 const VENUES = [
   {tag:"午宴", name:"东明村文化礼堂", desc:"女方主场，接亲结束后由此入席；停车与进门路线提前确认。", cls:"donglin",
@@ -1021,16 +1006,14 @@ function renderTeam(){
 function renderCars(){
   $("#carGrid").innerHTML = CARS.map(c=>`
     <div class="info-card vehicle-card ${c.dropped?"dropped":""} ${c.rec?"recommended":""}">
-      ${c.rec?'<span class="badge-rec">主流参考</span>':""}
-      <div class="plan-name">${c.name}</div>
-      <div class="price">${c.price}</div>
-      <p style="margin-top:10px">${c.text}</p>
+      <div class="car-hd">
+        <span class="plan-name">${c.name}</span>
+        ${c.rec?'<span class="badge-rec">推荐</span>':""}
+      </div>
+      <div class="price">${c.price.replace(/ 元$/,"")}<i>元</i></div>
+      <p>${c.text}</p>
     </div>`).join("");
   $("#carNote").textContent = CAR_NOTE;
-}
-function renderPits(){
-  $("#pitList").innerHTML = PITS.map((p,i)=>`
-    <div class="pit-item"><span class="num">${i+1}</span><span>${p}</span></div>`).join("");
 }
 function renderVenues(){
   $("#venueGrid").innerHTML = VENUES.map(v=>`
@@ -1250,7 +1233,7 @@ function setupReveal(){
       }
     });
   },{threshold:.06});
-  document.querySelectorAll(".info-card,.venue-card,.pit-card,.phase-group").forEach(el=>{
+  document.querySelectorAll(".info-card,.venue-card,.phase-group").forEach(el=>{
     el.style.opacity = 0;
     el.style.transform = "translateY(12px)";
     el.style.transition = "opacity .5s ease, transform .5s ease";
@@ -1278,7 +1261,6 @@ renderLanes();
 renderMobile();
 renderTeam();
 renderCars();
-renderPits();
 renderVenues();
 renderChecklist();
 renderProgress();
