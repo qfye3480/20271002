@@ -230,6 +230,8 @@ section{padding:52px 0 6px}
   transition:.18s;
 }
 .check-item:hover{border-color:var(--gold);background:#FFFDF9}
+.check-item.locked{cursor:default}
+.check-item.locked:hover{border-color:var(--line);background:#F7F3EA}
 .check-item.done{background:#F7F3EA}
 .checkbox{
   flex:none;width:18px;height:18px;border-radius:5px;border:1.5px solid var(--gold);
@@ -436,10 +438,9 @@ section{padding:52px 0 6px}
 .finale-txt h2{font-family:"Noto Serif SC",serif;font-size:clamp(24px,4.4vw,34px);font-weight:900;letter-spacing:.07em;margin-top:12px}
 .finale-rule{width:42px;height:1px;background:rgba(201,162,94,.85);margin:14px auto 0}
 .finale-txt p{font-size:12.5px;letter-spacing:.1em;color:rgba(248,239,227,.74);margin-top:11px}
-.ver{font-size:10px;letter-spacing:.1em;color:var(--ink-faint);opacity:.5;text-align:center;padding:14px 0 26px}
 @media (min-width:761px){
-  .finale-shot{aspect-ratio:auto;height:min(86vh,860px)}
-  .finale-shot img{object-position:center 82%}
+  .finale-shot{aspect-ratio:4/5;height:auto}
+  .finale-shot img{object-position:0% 100%}
   .finale-veil{background:
     linear-gradient(180deg,rgba(246,241,232,1) 0px,rgba(246,241,232,.9) 40px,rgba(246,241,232,.62) 96px,rgba(246,241,232,.3) 160px,rgba(246,241,232,0) 224px),
     linear-gradient(180deg,rgba(18,10,8,0) 0%,rgba(18,10,8,0) 50%,rgba(18,10,8,.34) 74%,rgba(18,10,8,.82) 100%)}
@@ -694,8 +695,6 @@ section{padding:52px 0 6px}
     </div>
   </div>
 </section>
-
-<div class="ver" aria-hidden="true">v2026.11.14-3</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1131,7 +1130,7 @@ function loadState(){
   });
   FLAT.forEach(it=>{ if(it.lockTodo){ it.done = false; it.date = ""; } });
   // 已确认的真实日期以代码为准，不被浏览器里的旧记录（统一 11.11）覆盖
-  FLAT.forEach(it=>{ if(it.fixDate) it.date = it.fixDate; });
+  FLAT.forEach(it=>{ if(it.fixDate){ it.date = it.fixDate; it.done = true; } });
 }
 function persist(){
   const saved = {};
@@ -1158,7 +1157,7 @@ function renderChecklist(){
     if(!items.length) return;
     const groupDone = FLAT.filter(x=>x.gi===gi && x.done).length;
     const cards = items.map(it=>`
-      <div class="check-item ${it.done?"done":""}${it.idx===stampIdx?" stamping":""}" data-idx="${it.idx}" role="checkbox" aria-checked="${it.done}" tabindex="0">
+      <div class="check-item ${it.done?"done":""}${it.fixDate?" locked":""}${it.idx===stampIdx?" stamping":""}" data-idx="${it.idx}" role="checkbox" aria-checked="${it.done}" aria-disabled="${it.fixDate?"true":"false"}" tabindex="${it.fixDate?"-1":"0"}">
         <span class="check-seal" aria-hidden="true">囍</span>
         <div class="checkbox">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
@@ -1185,7 +1184,7 @@ function renderChecklist(){
     const toggle = ()=>{
       const idx = +el.dataset.idx;
       const st = FLAT[idx];
-      if(st.lockTodo) return;
+      if(st.lockTodo || st.fixDate) return;
       st.done = !st.done;
       st.date = st.done ? todayLabel() : "";
       stampIdx = st.done ? idx : -1;
