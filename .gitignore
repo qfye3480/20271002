@@ -10,4 +10,4 @@ task.html
 
 # 草稿与原始照片（站点实际用的是 images/ 里裁好的版本）
 _preview/
-pics/
+images/_source/
