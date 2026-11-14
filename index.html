@@ -482,11 +482,21 @@ section{padding:52px 0 6px}
 
 /* ---------- 时间轴：滚到才点亮 ---------- */
 .rm-item::before{transition:background .45s ease,border-color .45s ease,box-shadow .45s ease}
-.rm-item.on::before{background:var(--gold);border-color:var(--cinnabar);box-shadow:0 0 0 3px rgba(201,162,94,.18)}
+.rm-item.on::before{
+  background:radial-gradient(circle at 36% 28%,#FFFFFF 0 16%,rgba(255,255,255,0) 34%),radial-gradient(circle at 50% 50%,#FDFEFF 0 26%,#E4EFFE 56%,#B4CBEA 86%,#8AA5C9 100%);
+  border-color:#CFDEF4;
+  box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 11px 3px rgba(163,193,236,.55);
+  animation:diamondFlash .85s cubic-bezier(.2,.8,.3,1) forwards;
+}
+@keyframes diamondFlash{
+  0%{transform:scale(1.42);box-shadow:0 0 0 0 rgba(255,255,255,.95),0 0 24px 11px rgba(206,226,255,.92)}
+  46%{transform:scale(1.08);box-shadow:0 0 0 5px rgba(255,255,255,.16),0 0 15px 5px rgba(188,211,245,.62)}
+  100%{transform:scale(1);box-shadow:0 0 0 2px rgba(255,255,255,.72),0 0 9px 2px rgba(188,211,245,.52)}
+}
 .rm-item.on .rm-title{color:var(--cinnabar)}
 .lanes tbody tr{transition:box-shadow .45s ease}
-.lanes tbody tr.on td.tcell{box-shadow:inset 3px 0 0 var(--gold)}
-.lanes tbody tr.on td.tcell .seq{color:var(--gold)}
+.lanes tbody tr.on td.tcell{box-shadow:inset 3px 0 0 #E4EEFC,inset 7px 0 14px -8px rgba(196,216,246,.95)}
+.lanes tbody tr.on td.tcell .seq{color:#5E7CA8}
 
 /* ---------- 结尾：逐行浮现 ---------- */
 .finale-txt .fd,.finale-txt h2,.finale-txt p{opacity:0;transform:translateY(14px);transition:opacity .95s ease,transform .95s ease}
