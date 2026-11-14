@@ -483,17 +483,17 @@ section{padding:52px 0 6px}
 /* ---------- 时间轴：滚到才点亮 ---------- */
 .rm-item::before{transition:background .45s ease,border-color .45s ease,box-shadow .45s ease}
 .rm-item.on::before{
-  width:20px;height:20px;border-width:0;
+  width:15px;height:15px;left:-22.5px;top:7.5px;margin-left:0;border-width:0;
   background:
-    radial-gradient(circle at 33% 24%,#FFF6F3 0%,rgba(255,246,243,.62) 16%,rgba(255,255,255,0) 38%),
-    radial-gradient(circle at 50% 44%,#C74444 0%,#A63A3A 54%,#782525 100%);
-  box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 2px rgba(255,255,255,.9),0 0 9px 2px rgba(166,58,58,.18);
-  animation:rubyFlash .85s cubic-bezier(.2,.8,.3,1) forwards;
+    radial-gradient(circle at 40% 32%,rgba(255,226,216,.38) 0%,rgba(255,226,216,0) 30%),
+    radial-gradient(circle at 50% 48%,#B04343 0%,#9A3434 46%,#7A2323 78%,#5B1515 100%);
+  box-shadow:inset 0 0 0 1px rgba(66,14,14,.62),0 0 0 1px rgba(166,58,58,.20),0 0 6px 1px rgba(166,58,58,.14);
+  animation:rubyFlash .8s cubic-bezier(.2,.8,.3,1) forwards;
 }
 @keyframes rubyFlash{
-  0%{transform:scale(1.42);box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 0 rgba(255,255,255,.95),0 0 22px 9px rgba(199,68,68,.42)}
-  46%{transform:scale(1.08);box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 4px rgba(255,255,255,.55),0 0 13px 4px rgba(166,58,58,.26)}
-  100%{transform:scale(1);box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 2px rgba(255,255,255,.9),0 0 9px 2px rgba(166,58,58,.18)}
+  0%{transform:scale(1.5);box-shadow:inset 0 0 0 1px rgba(66,14,14,.62),0 0 0 0 rgba(166,58,58,.34),0 0 14px 5px rgba(166,58,58,.30)}
+  46%{transform:scale(1.1);box-shadow:inset 0 0 0 1px rgba(66,14,14,.62),0 0 0 2px rgba(166,58,58,.16),0 0 9px 3px rgba(166,58,58,.20)}
+  100%{transform:scale(1);box-shadow:inset 0 0 0 1px rgba(66,14,14,.62),0 0 0 1px rgba(166,58,58,.20),0 0 6px 1px rgba(166,58,58,.14)}
 }
 .rm-item.on .rm-title{color:var(--cinnabar)}
 .lanes tbody tr{transition:box-shadow .45s ease}
