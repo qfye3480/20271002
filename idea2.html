@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>还能加点什么 · 四个板块提案</title>
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="preconnect" href="https://sf3-scmcdn-cn.feishucdn.com" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23A63A3A'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='%23F6F1E8' font-family='serif' font-weight='700'%3E囍%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#F6F1E8; --paper-2:#EFE7D9; --card:#FFFDF9;
+  --ink:#2C2320; --ink-soft:#6B5D55; --ink-faint:#9A8B81;
+  --cinnabar:#A63A3A; --cinnabar-deep:#822B2B; --gold:#C9A25E;
+  --line:#E7DCCB; --line-soft:#EEE5D6;
+  --shadow:0 10px 30px rgba(74,52,38,.10);
+  --shadow-sm:0 3px 12px rgba(74,52,38,.07);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.serif{font-family:"Noto Serif SC","Songti SC","SimSun",serif}
+
+/* ---------- 页头 ---------- */
+.head{padding:56px 0 22px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:13px;letter-spacing:.24em;color:var(--cinnabar);font-weight:700}
+.head h1{font-size:34px;line-height:1.3;margin:12px 0 0;font-weight:700;letter-spacing:.02em}
+.head p{color:var(--ink-soft);max-width:660px;margin:14px 0 0;font-size:14.5px}
+
+/* ---------- 提案容器 ---------- */
+.po{padding:64px 0 0}
+.po-top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.num{font-family:"Noto Serif SC",serif;font-size:15px;font-weight:700;color:var(--cinnabar);letter-spacing:.1em;
+  border:1px solid rgba(166,58,58,.28);border-radius:4px;padding:2px 8px;line-height:1.5}
+.po h2{font-size:23px;margin:0;font-weight:700;letter-spacing:.02em}
+.po-why{color:var(--ink-soft);font-size:14px;margin:8px 0 0;max-width:700px}
+.stage{margin-top:24px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow-sm);overflow:hidden}
+
+/* ---------- 01 我们的故事 ---------- */
+.story-hero{position:relative;height:200px;overflow:hidden}
+.story-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 58%;display:block}
+.story-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(44,35,32,.05),rgba(44,35,32,.45))}
+.story-hero .cap{position:absolute;left:24px;bottom:20px;color:#FFFDF9;font-family:"Noto Serif SC",serif;
+  font-size:17px;letter-spacing:.04em;text-shadow:0 1px 12px rgba(0,0,0,.35);z-index:2}
+.story-list{padding:26px 24px 30px;position:relative}
+.story-list::before{content:"";position:absolute;left:40px;top:30px;bottom:34px;width:1px;background:var(--line)}
+.st{position:relative;padding:0 0 22px 34px}
+.st:last-child{padding-bottom:0}
+.st::before{content:"";position:absolute;left:-4px;top:7px;width:9px;height:9px;border-radius:50%;
+  background:var(--card);border:2px solid var(--gold)}
+.st.last::before{background:var(--cinnabar);border-color:var(--cinnabar)}
+.st time{font-size:12px;letter-spacing:.08em;color:var(--ink-faint)}
+.st b{display:block;font-family:"Noto Serif SC",serif;font-size:16px;font-weight:700;margin-top:2px}
+.st span{font-size:13.5px;color:var(--ink-soft)}
+.ph{color:var(--ink-faint);font-style:italic;font-size:13px}
+
+/* ---------- 02 一页纸联系人 ---------- */
+.people{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft)}
+.p{background:var(--card);padding:18px 18px 16px;display:flex;gap:14px;align-items:center}
+.p .ava{width:42px;height:42px;border-radius:50%;flex:0 0 42px;display:flex;align-items:center;justify-content:center;
+  font-family:"Noto Serif SC",serif;font-size:16px;font-weight:700;color:var(--cinnabar);
+  background:radial-gradient(circle at 34% 28%,#FFFDF9,#F2E6D6);border:1px solid var(--line)}
+.p .inf{min-width:0;flex:1}
+.p .role{font-size:12px;letter-spacing:.1em;color:var(--ink-faint)}
+.p .nm{font-family:"Noto Serif SC",serif;font-size:15px;font-weight:700;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p .tel{display:inline-block;margin-top:6px;font-size:13px;color:var(--cinnabar);text-decoration:none;
+  border-bottom:1px dashed rgba(166,58,58,.35);padding-bottom:1px}
+.people-note{padding:14px 18px;font-size:12.5px;color:var(--ink-faint);background:#FFFCF6;border-top:1px solid var(--line-soft)}
+
+/* ---------- 03 预算 ---------- */
+.budget{padding:22px 20px 6px}
+.btop{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--line-soft)}
+.btop .k{font-size:12px;letter-spacing:.12em;color:var(--ink-faint)}
+.btop .v{font-family:"Noto Serif SC",serif;font-size:26px;font-weight:700;letter-spacing:.03em}
+.btop .v small{font-size:13px;font-weight:400;color:var(--ink-faint);margin-left:6px}
+.bbar{margin:16px 0 6px;height:8px;border-radius:999px;background:var(--paper-2);overflow:hidden}
+.bbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#E8C98A);border-radius:999px}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13.5px}
+col.c1{width:34%} col.c2{width:22%} col.c3{width:22%} col.c4{width:22%}
+th,td{text-align:right;padding:11px 4px;border-bottom:1px solid var(--line-soft);font-variant-numeric:tabular-nums}
+th{font-weight:400;font-size:12px;color:var(--ink-faint);letter-spacing:.06em}
+th:first-child,td:first-child{text-align:left}
+td:first-child{color:var(--ink);font-size:14px}
+.dash{color:var(--ink-faint)}
+.budget .foot{padding:14px 0 18px;font-size:12.5px;color:var(--ink-faint)}
+
+/* ---------- 04 两个人的话 ---------- */
+.vows{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft)}
+.vow{background:
+  repeating-linear-gradient(180deg,transparent 0 33px,rgba(231,220,203,.55) 33px 34px), var(--card);
+  padding:26px 22px 30px;min-height:250px}
+.vow .to{font-family:"Noto Serif SC",serif;font-size:15px;font-weight:700;color:var(--cinnabar);letter-spacing:.04em}
+.vow p{margin:16px 0 0;font-size:14px;line-height:34px;color:var(--ink-faint);font-style:italic}
+
+/* ---------- 需要你提供 ---------- */
+.need{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--ink-soft)}
+.need b{font-weight:400;color:var(--cinnabar);letter-spacing:.04em;font-size:12px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:3px 11px;background:#FFFCF6;font-size:12.5px}
+
+/* ---------- 页脚 ---------- */
+.foot-note{margin:76px 0 60px;padding-top:26px;border-top:1px solid var(--line);
+  font-family:"Noto Serif SC",serif;font-size:15px;color:var(--ink-soft);text-align:center;line-height:2}
+
+@media (max-width:640px){
+  .head{padding:40px 0 18px}
+  .head h1{font-size:26px}
+  .po{padding:46px 0 0}
+  .po h2{font-size:19px}
+  .story-hero{height:158px}
+  .people{grid-template-columns:1fr}
+  .vows{grid-template-columns:1fr}
+  .btop .v{font-size:21px}
+  table{font-size:12.5px}
+  col.c1{width:38%} col.c2{width:20%} col.c3{width:21%} col.c4{width:21%}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="head">
+    <div class="eyebrow">EXTRA SECTIONS</div>
+    <h1>还能加点什么</h1>
+    <p>现在这个页面上全是执行信息：流程、人员、车辆、清单、场地。都不是“关于你们”的内容。下面四个是补缺口的候选，做成了真实样张，看着选，别凭想象选。</p>
+  </header>
+
+  <!-- 01 -->
+  <section class="po">
+    <div class="po-top">
+      <span class="num">01</span>
+      <h2>我们的故事</h2>
+    </div>
+    <p class="po-why">从订婚到婚礼，五六个节点，每个节点一张照片加一句话。这是整个页面唯一能让人“停一下”的地方——现在翻完流程表就到底了，没有余味。</p>
+    <div class="stage">
+      <div class="story-hero">
+        <img src="images/hero-hands.jpg" alt="">
+        <span class="cap">二〇二七 · 十月二日</span>
+      </div>
+      <div class="story-list">
+        <div class="st">
+          <time>2025 · 秋</time>
+          <b>认识</b>
+          <span class="ph">这里放一句话，比如那天在哪儿、谁先开的口</span>
+        </div>
+        <div class="st">
+          <time>2026 · 春</time>
+          <b>订婚</b>
+          <span class="ph">一句话，加上那天的照片</span>
+        </div>
+        <div class="st">
+          <time>2026 · 09 · 13</time>
+          <b>拍婚纱照</b>
+          <span class="ph">这一格有真实照片可用（你们那组红底囍字）</span>
+        </div>
+        <div class="st">
+          <time>2026 · 11</time>
+          <b>把日子定下来</b>
+          <span>看日子、订场地、定司仪，一件件落定</span>
+        </div>
+        <div class="st last">
+          <time>2027 · 10 · 02</time>
+          <b>婚礼</b>
+          <span>东林午宴 · 双林晚宴</span>
+        </div>
+      </div>
+    </div>
+    <div class="need"><b>需要你给</b>
+      <span class="chip">3～5 张照片</span>
+      <span class="chip">每个节点一句话</span>
+      <span class="chip">相识与订婚的大致月份</span>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="po">
+    <div class="po-top">
+      <span class="num">02</span>
+      <h2>现场一页纸</h2>
+    </div>
+    <p class="po-why">婚礼当天最常做的事是找人。把六个关键人的电话做成一页，点一下就拨出去——不用翻聊天记录，也不用问“司仪电话多少来着”。这一块在当天比任何动效都有用。</p>
+    <div class="stage">
+      <div class="people">
+        <div class="p">
+          <div class="ava">司</div>
+          <div class="inf">
+            <div class="role">司仪 · 全场</div>
+            <div class="nm">待填姓名</div>
+            <a class="tel" href="#">点击拨号 · 待填</a>
+          </div>
+        </div>
+        <div class="p">
+          <div class="ava">摄</div>
+          <div class="inf">
+            <div class="role">摄像 · 两台</div>
+            <div class="nm">待填姓名</div>
+            <a class="tel" href="#">点击拨号 · 待填</a>
+          </div>
+        </div>
+        <div class="p">
+          <div class="ava">影</div>
+          <div class="inf">
+            <div class="role">摄影 · 跟拍</div>
+            <div class="nm">待填姓名</div>
+            <a class="tel" href="#">点击拨号 · 待填</a>
+          </div>
+        </div>
+        <div class="p">
+          <div class="ava">妆</div>
+          <div class="inf">
+            <div class="role">跟妆 · 两位妈妈妆</div>
+            <div class="nm">待填姓名</div>
+            <a class="tel" href="#">点击拨号 · 待填</a>
+          </div>
+        </div>
+        <div class="p">
+          <div class="ava">车</div>
+          <div class="inf">
+            <div class="role">车队 · 头车调度</div>
+            <div class="nm">待填姓名</div>
+            <a class="tel" href="#">点击拨号 · 待填</a>
+          </div>
+        </div>
+        <div class="p">
+          <div class="ava">场</div>
+          <div class="inf">
+            <div class="role">两处场地 · 开门人</div>
+            <div class="nm">东林礼堂 / 倪家滩</div>
+            <a class="tel" href="#">点击拨号 · 待填</a>
+          </div>
+        </div>
+      </div>
+      <div class="people-note">号码在手机上点一下就直接拨出去，电脑上点开会跳到拨号界面。</div>
+    </div>
+    <div class="need"><b>需要你给</b>
+      <span class="chip">六个人的电话</span>
+      <span class="chip">称呼想写全名还是“王师傅”</span>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="po">
+    <div class="po-top">
+      <span class="num">03</span>
+      <h2>钱花在哪了</h2>
+    </div>
+    <p class="po-why">两场酒席、六台车、一套团队，钱散在很多地方，最容易出现“以为还剩不少，其实已经超了”。一个总预算条加分项台账，随时知道余多少。</p>
+    <div class="stage">
+      <div class="budget">
+        <div class="btop">
+          <div>
+            <div class="k">总预算</div>
+            <div class="v">— <small>待填</small></div>
+          </div>
+          <div style="text-align:right">
+            <div class="k">已付 / 待付</div>
+            <div class="v" style="font-size:19px">— / —</div>
+          </div>
+        </div>
+        <div class="bbar"><i style="width:38%"></i></div>
+        <table>
+          <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+          <thead><tr><th>项目</th><th>预算</th><th>已付</th><th>余款</th></tr></thead>
+          <tbody>
+            <tr><td>东林午宴 · 礼堂与餐标</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>双林晚宴 · 倪家滩</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>婚庆布置与灯光</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>车辆 · 头车与跟车</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>礼服、跟妆、摄影摄像</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>烟酒糖茶与其他</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          </tbody>
+        </table>
+        <div class="foot">数字全部留白，没有一个是我编的——你给多少我填多少。</div>
+      </div>
+    </div>
+    <div class="need"><b>需要你给</b>
+      <span class="chip">总预算</span>
+      <span class="chip">各大项已经付掉的金额</span>
+      <span class="chip">不想露金额的话，也可以只显示百分比</span>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="po">
+    <div class="po-top">
+      <span class="num">04</span>
+      <h2>两个人的话</h2>
+    </div>
+    <p class="po-why">留两块信纸，写给自己那位。不用长，三五句就够。放在页面靠后，是给愿意翻到底的人看的。</p>
+    <div class="stage">
+      <div class="vows">
+        <div class="vow">
+          <div class="to">给小倪</div>
+          <p>这里写你想说的。写到一半卡住也没关系，留着，婚礼前一周再补。</p>
+        </div>
+        <div class="vow">
+          <div class="to">给小叶</div>
+          <p>同理。也可以只写一句，比如“以后早饭我来做”。</p>
+        </div>
+      </div>
+    </div>
+    <div class="need"><b>需要你给</b>
+      <span class="chip">两段文字（想自己写，不用交给我改）</span>
+    </div>
+  </section>
+
+  <div class="foot-note">
+    挑中的，我照着做进主页面，跟现在的朱砂红与米纸是一套的。<br>
+    四个都要也可以，但页面会变长，我建议先上 01 和 02。
+  </div>
+</div>
+
+</body>
+</html>
