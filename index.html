@@ -483,20 +483,22 @@ section{padding:52px 0 6px}
 /* ---------- 时间轴：滚到才点亮 ---------- */
 .rm-item::before{transition:background .45s ease,border-color .45s ease,box-shadow .45s ease}
 .rm-item.on::before{
-  background:radial-gradient(circle at 36% 28%,#FFFFFF 0 16%,rgba(255,255,255,0) 34%),radial-gradient(circle at 50% 50%,#FDFEFF 0 26%,#E4EFFE 56%,#B4CBEA 86%,#8AA5C9 100%);
-  border-color:#CFDEF4;
-  box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 11px 3px rgba(163,193,236,.55);
-  animation:diamondFlash .85s cubic-bezier(.2,.8,.3,1) forwards;
+  width:20px;height:20px;border-width:0;
+  background:
+    radial-gradient(circle at 33% 24%,#FFF6F3 0%,rgba(255,246,243,.62) 16%,rgba(255,255,255,0) 38%),
+    radial-gradient(circle at 50% 44%,#C74444 0%,#A63A3A 54%,#782525 100%);
+  box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 2px rgba(255,255,255,.9),0 0 9px 2px rgba(166,58,58,.18);
+  animation:rubyFlash .85s cubic-bezier(.2,.8,.3,1) forwards;
 }
-@keyframes diamondFlash{
-  0%{transform:scale(1.42);box-shadow:0 0 0 0 rgba(255,255,255,.95),0 0 24px 11px rgba(206,226,255,.92)}
-  46%{transform:scale(1.08);box-shadow:0 0 0 5px rgba(255,255,255,.16),0 0 15px 5px rgba(188,211,245,.62)}
-  100%{transform:scale(1);box-shadow:0 0 0 2px rgba(255,255,255,.72),0 0 9px 2px rgba(188,211,245,.52)}
+@keyframes rubyFlash{
+  0%{transform:scale(1.42);box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 0 rgba(255,255,255,.95),0 0 22px 9px rgba(199,68,68,.42)}
+  46%{transform:scale(1.08);box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 4px rgba(255,255,255,.55),0 0 13px 4px rgba(166,58,58,.26)}
+  100%{transform:scale(1);box-shadow:inset 0 0 0 1.5px rgba(110,30,30,.55),inset 0 2px 5px rgba(255,255,255,.18),0 0 0 2px rgba(255,255,255,.9),0 0 9px 2px rgba(166,58,58,.18)}
 }
 .rm-item.on .rm-title{color:var(--cinnabar)}
 .lanes tbody tr{transition:box-shadow .45s ease}
-.lanes tbody tr.on td.tcell{box-shadow:inset 3px 0 0 #E4EEFC,inset 7px 0 14px -8px rgba(196,216,246,.95)}
-.lanes tbody tr.on td.tcell .seq{color:#5E7CA8}
+.lanes tbody tr.on td.tcell{box-shadow:inset 3px 0 0 rgba(166,58,58,.55),inset 7px 0 14px -8px rgba(166,58,58,.28)}
+.lanes tbody tr.on td.tcell .seq{color:#A63A3A}
 
 /* ---------- 结尾：逐行浮现 ---------- */
 .finale-txt .fd,.finale-txt h2,.finale-txt p{opacity:0;transform:translateY(14px);transition:opacity .95s ease,transform .95s ease}
