@@ -922,27 +922,27 @@ const VENUES = [
 /* whoKey: both 双方 / groom 男方·新郎 / bride 女方·新娘 */
 const CHECKLIST = [
   {phase:"提前 12 个月", when:"2026.11–12", items:[
-    {t:"初步交流整体流程、婚礼形式", who:"双方", k:"both", tip:"地点双林或东林都行，一次谈完当场记下来，写成几条共识", done:true, date:"2026.10.16"},
-    {t:"请人看日子，确认 10.02 及午宴、晚宴的开席时辰", who:"双方", k:"both", tip:"按双方生辰合日子；开席时间要配合「上午接亲、下午转场」的节奏", done:true, date:"2026.07.30"},
+    {t:"初步交流整体流程、婚礼形式", who:"双方", k:"both", tip:"地点双林或东林都行，一次谈完当场记下来，写成几条共识", done:true, fixDate:"2026.10.16"},
+    {t:"请人看日子，确认 10.02 及午宴、晚宴的开席时辰", who:"双方", k:"both", tip:"按双方生辰合日子；开席时间要配合「上午接亲、下午转场」的节奏", done:true, fixDate:"2026.07.30"},
     {t:"各定一名「总管」，建筹备总群 + 当天执行群", who:"双方", k:"both", tip:"总管管车辆调度、人员清点；群里必须有婚庆、车队", done:false},
     {t:"先摸东林午宴的规模、长辈意见和礼堂档期", who:"女方", k:"bride", tip:"大致桌数先有数，后面订场地才好谈餐标", done:true}
   ]},
   {phase:"提前 9 个月", when:"2027.01", items:[
-    {t:"订双林晚宴场地", who:"男方", k:"groom", tip:"桌数区间、定金、能否自带厨师、停车位、音响、雨天备案", done:true, date:"2026.07.30"},
-    {t:"订东林午宴场地（文化礼堂）", who:"女方", k:"bride", tip:"用电、厨房、桌椅、外场布置空间、开门人电话", done:true, date:"2026.08.30"},
+    {t:"订双林晚宴场地", who:"男方", k:"groom", tip:"桌数区间、定金、能否自带厨师、停车位、音响、雨天备案", done:true, fixDate:"2026.07.30"},
+    {t:"订东林午宴场地（文化礼堂）", who:"女方", k:"bride", tip:"用电、厨房、桌椅、外场布置空间、开门人电话", done:true, fixDate:"2026.08.30"},
     {t:"宾客初步统计", who:"双方", k:"both", tip:"摸底桌数、规模", done:false},
     {t:"给宾客打标签：全程（两场都到）／只到东林／只到双林，出初版人数", who:"双方", k:"both", tip:"父母与主要至亲默认两场都到，这是两场酒席最容易乱的一步", done:false, lockTodo:true},
     {t:"接亲路线熟悉：双林到东林，定出发时间、到达时间和下午返程路线", who:"男方", k:"groom", tip:"国庆路上可能会堵", done:false},
     {t:"定婚庆或一站式（布置、灯光、督导）", who:"双方", k:"both", tip:"一套团队要跑两个场地，要问清加价和转场时间够不够", done:true},
     {t:"定伴郎 2 人", who:"新郎", k:"groom", tip:"伴郎管红包、烟糖、对接总管", done:false},
-    {t:"定伴娘 2 人", who:"女方", k:"bride", tip:"伴娘管拦门、换装、随身物品和改口红包", done:true, date:"2026.09.30"}
+    {t:"定伴娘 2 人", who:"女方", k:"bride", tip:"伴娘管拦门、换装、随身物品和改口红包", done:true, fixDate:"2026.09.30"}
   ]},
   {phase:"提前 6 个月", when:"2027.04", items:[
     {t:"婚纱照拍摄，倒排到 8 月前出片", who:"双方", k:"both", tip:"请柬、易拉宝、签到背景都要用这套片", done:false},
     {t:"定婚车", who:"男方", k:"groom", tip:"国庆好日子早订锁价，合同写清超时与超公里怎么算", done:false},
     {t:"定跟妆团队（至少 2 人，含试妆）", who:"双方", k:"both", tip:"一早分头去双林跟新郎、东林跟新娘；含两位妈妈妆与三次换装", done:true},
     {t:"定摄影摄像：双机位跟拍", who:"双方", k:"both", tip:"排班写清：上午东林、下午双林外景、晚上双林晚宴", done:false},
-    {t:"定司仪团队（司仪＋音响师＋督导）", who:"双方", k:"both", tip:"午宴、晚宴各主持一场；转场不加价，须含彩排", done:true, date:"2026.11.09"},
+    {t:"定司仪团队（司仪＋音响师＋督导）", who:"双方", k:"both", tip:"午宴、晚宴各主持一场；转场不加价，须含彩排", done:true, fixDate:"2026.11.09"},
     {t:"定新娘全套、妈妈装、伴娘服", who:"女方", k:"bride", tip:"午宴一套造型、晚宴一套造型，跟妆要跟一整天、跑两个场地", done:false},
     {t:"定酒水烟糖（按两场总人数×1.2 备）", who:"双方", k:"both", tip:"", done:false},
     {t:"定伴手礼、回礼，两场分别配货", who:"双方", k:"both", tip:"", done:false}
@@ -1127,6 +1127,8 @@ function loadState(){
     }
   });
   FLAT.forEach(it=>{ if(it.lockTodo){ it.done = false; it.date = ""; } });
+  // 已确认的真实日期以代码为准，不被浏览器里的旧记录（统一 11.11）覆盖
+  FLAT.forEach(it=>{ if(it.fixDate) it.date = it.fixDate; });
 }
 function persist(){
   const saved = {};
