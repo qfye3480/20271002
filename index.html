@@ -571,7 +571,7 @@ section{padding:52px 0 6px}
           <svg id="icoPause" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
           <span class="p-btn-text" id="pBtnText">播放</span>
         </button>
-        <audio id="audioRef" src="music/just-say-hello.mp3" loop preload="metadata"></audio>
+        <audio id="audioRef" src="music/just-say-hello.mp3" preload="metadata"></audio>
       </aside>
     </div>
   </div>
@@ -1228,7 +1228,10 @@ const pTitleEl = $("#pTitle"), pSubEl = $("#pSub"), discSongEl = $("#discSong");
 
 const PLAYLIST = [
   {title:"Just Say Hello", sub:"背景音乐 · 循环播放", src:"music/just-say-hello.mp3"},
-  {title:"今天你要嫁给我", sub:"陶喆 · 蔡依林", src:"music/tianjin-ni-yao-jia-gei-wo.mp3"}
+  {title:"今天你要嫁给我", sub:"陶喆 · 蔡依林", src:"music/tianjin-ni-yao-jia-gei-wo.mp3"},
+  {title:"慢慢喜欢你", sub:"莫文蔚", src:"music/man-man-xi-huan-ni.mp3"},
+  {title:"Melody", sub:"陶喆", src:"music/tao-zhe-melody.mp3"},
+  {title:"我喜欢上你时的内心活动", sub:"陈绮贞", src:"music/xi-huan-shang-ni.mp3"}
 ];
 let trackIndex = 0;
 let hasTrack = true;
@@ -1266,6 +1269,7 @@ function applyTrack(){
   discSongEl.textContent = t.title;
   pTime.textContent = "00:00";
   pFill.style.width = "0%";
+  if(discRing) discRing.style.setProperty("--p", "0");
 }
 function nextTrack(){
   const wasPlaying = !audio.paused;
@@ -1284,7 +1288,11 @@ pickBtn.addEventListener("click", nextTrack);
 audio.addEventListener("play", ()=>setPlayingUI(true));
 audio.addEventListener("loadedmetadata", ()=>{ hasTrack = true; });
 audio.addEventListener("pause", ()=>setPlayingUI(false));
-audio.addEventListener("ended", ()=>setPlayingUI(false));
+audio.addEventListener("ended", ()=>{
+  trackIndex = (trackIndex + 1) % PLAYLIST.length;
+  applyTrack();
+  safePlay();
+});
 audio.addEventListener("error", ()=>{
   setPlayingUI(false);
   toast("这首没加载出来：确认 music/ 文件夹随网页一起上传了，或点「下一首」换一首");
