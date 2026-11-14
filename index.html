@@ -926,14 +926,14 @@ const CHECKLIST = [
     {t:"先摸东林午宴的规模、长辈意见和礼堂档期", who:"女方", k:"bride", tip:"大致桌数先有数，后面订场地才好谈餐标", done:true}
   ]},
   {phase:"提前 9 个月", when:"2027.01", items:[
-    {t:"订双林晚宴场地", who:"男方", k:"groom", tip:"桌数区间、定金、能否自带厨师、停车位、音响、雨天备案", done:true},
-    {t:"订东林午宴场地（文化礼堂）", who:"女方", k:"bride", tip:"用电、厨房、桌椅、外场布置空间、开门人电话", done:true},
+    {t:"订双林晚宴场地", who:"男方", k:"groom", tip:"桌数区间、定金、能否自带厨师、停车位、音响、雨天备案", done:true, date:"2026.07.30"},
+    {t:"订东林午宴场地（文化礼堂）", who:"女方", k:"bride", tip:"用电、厨房、桌椅、外场布置空间、开门人电话", done:true, date:"2026.08.30"},
     {t:"宾客初步统计", who:"双方", k:"both", tip:"摸底桌数、规模", done:false},
-    {t:"给宾客打标签：全程（两场都到）／只到东林／只到双林，出初版人数", who:"双方", k:"both", tip:"父母与主要至亲默认两场都到，这是两场酒席最容易乱的一步", done:false},
+    {t:"给宾客打标签：全程（两场都到）／只到东林／只到双林，出初版人数", who:"双方", k:"both", tip:"父母与主要至亲默认两场都到，这是两场酒席最容易乱的一步", done:false, lockTodo:true},
     {t:"接亲路线熟悉：双林到东林，定出发时间、到达时间和下午返程路线", who:"男方", k:"groom", tip:"国庆路上可能会堵", done:false},
     {t:"定婚庆或一站式（布置、灯光、督导）", who:"双方", k:"both", tip:"一套团队要跑两个场地，要问清加价和转场时间够不够", done:true},
     {t:"定伴郎 2 人", who:"新郎", k:"groom", tip:"伴郎管红包、烟糖、对接总管", done:false},
-    {t:"定伴娘 2 人", who:"女方", k:"bride", tip:"伴娘管拦门、换装、随身物品和改口红包", done:true}
+    {t:"定伴娘 2 人", who:"女方", k:"bride", tip:"伴娘管拦门、换装、随身物品和改口红包", done:true, date:"2026.09.30"}
   ]},
   {phase:"提前 6 个月", when:"2027.04", items:[
     {t:"婚纱照拍摄，倒排到 8 月前出片", who:"双方", k:"both", tip:"请柬、易拉宝、签到背景都要用这套片", done:false},
@@ -1102,7 +1102,7 @@ const LEGACY_DATE = "2026.11.11";   // 早期已完成项统一记为这天
 let stampIdx = -1;                  // 刚勾选的那一项，只让它播放盖章动画
 let statusFilter = "all", whoFilter = "all";
 const FLAT = [];
-CHECKLIST.forEach((g,gi)=>g.items.forEach((it,ii)=>FLAT.push({gi,ii,...it,date:""})));
+CHECKLIST.forEach((g,gi)=>g.items.forEach((it,ii)=>FLAT.push({gi,ii,...it,date:it.date||""})));
 
 function todayLabel(){
   const d = new Date();
@@ -1121,9 +1121,10 @@ function loadState(){
       it.date = v.date || (v.done ? LEGACY_DATE : "");
     } else {
       it.done = !!(it.done);
-      it.date = it.done ? LEGACY_DATE : "";
+      it.date = it.done ? (it.date || LEGACY_DATE) : "";
     }
   });
+  FLAT.forEach(it=>{ if(it.lockTodo){ it.done = false; it.date = ""; } });
 }
 function persist(){
   const saved = {};
@@ -1144,7 +1145,7 @@ function renderChecklist(){
   CHECKLIST.forEach((g,gi)=>{
     const items = g.items.map((it,ii)=>{
       const idx = FLAT.findIndex(x=>x.gi===gi && x.ii===ii);
-      const st = FLAT[idx] || {done:it.done, date:it.done?LEGACY_DATE:""};
+      const st = FLAT[idx] || {done:it.done, date:it.date||(it.done?LEGACY_DATE:"")};
       return {...it, idx, done: !!st.done, date: st.date || ""};
     }).filter(it=>whoMatch(it.k) && statusMatch(it.done));
     if(!items.length) return;
@@ -1177,6 +1178,7 @@ function renderChecklist(){
     const toggle = ()=>{
       const idx = +el.dataset.idx;
       const st = FLAT[idx];
+      if(st.lockTodo) return;
       st.done = !st.done;
       st.date = st.done ? todayLabel() : "";
       stampIdx = st.done ? idx : -1;
