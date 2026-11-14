@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>可以加的东西 · 效果预览</title>
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap">
+<style>
+:root{
+  --paper:#FBF4E4; --paper2:#F4E9D3; --gold:#C9A25E; --goldlt:#E8C98A;
+  --cinnabar:#822B2B; --ink:#2C1A16;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:radial-gradient(130% 80% at 20% 0%,#3A2020 0%,#2A1512 46%,#1F0F0D 100%) fixed;
+  color:var(--paper);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  padding:26px 18px 46px;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-family:"Noto Serif SC",serif;font-size:clamp(20px,5vw,26px);letter-spacing:.1em;margin:0 0 8px}
+.lead{font-size:13.5px;line-height:1.95;color:rgba(251,244,228,.62);margin:0 0 26px}
+.card{
+  border:1px solid rgba(248,239,227,.15);border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  padding:16px 16px 20px;margin-bottom:18px;
+}
+.hd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:5px}
+.hd b{font-family:"Noto Serif SC",serif;font-size:15.5px;letter-spacing:.03em;color:#FFF8EE}
+.pill{font-size:10.5px;letter-spacing:.1em;border-radius:6px;padding:2px 7px;border:1px solid rgba(201,162,94,.5);color:var(--gold)}
+.pill.must{border-color:rgba(232,201,138,.75);color:#F6DEA8;background:rgba(201,162,94,.12)}
+.tip{font-size:12.5px;line-height:1.8;color:rgba(251,244,228,.56);margin:0 0 14px}
+.stage{
+  border-radius:14px;padding:20px 16px;
+  background:linear-gradient(180deg,rgba(201,162,94,.09),rgba(201,162,94,.02));
+  border:1px solid rgba(248,239,227,.08);
+}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* ---------- 1 翻牌倒计时 ---------- */
+.flip{display:flex;gap:8px;justify-content:center}
+.fu{text-align:center}
+.fbox{
+  position:relative;width:58px;height:70px;border-radius:9px;
+  background:linear-gradient(180deg,#3B231E,#241212);
+  border:1px solid rgba(201,162,94,.34);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 16px rgba(0,0,0,.3);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  perspective:600px;
+}
+.fbox::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.55)}
+.fbox span{
+  font-family:"Noto Serif SC",serif;font-weight:700;font-size:34px;color:#F6E2B8;
+  will-change:transform;
+}
+.fbox span.roll{animation:roll .46s cubic-bezier(.2,.8,.3,1)}
+@keyframes roll{
+  0%{transform:rotateX(-90deg);opacity:.15}
+  55%{transform:rotateX(8deg);opacity:1}
+  100%{transform:rotateX(0)}
+}
+.fu label{display:block;font-size:10.5px;letter-spacing:.14em;color:rgba(251,244,228,.45);margin-top:7px}
+
+/* ---------- 2 印章 ---------- */
+.list{max-width:360px;margin:0 auto}
+.li{
+  display:flex;align-items:center;gap:10px;padding:11px 2px;
+  border-bottom:1px solid rgba(248,239,227,.1);font-size:13.5px;cursor:pointer;
+  transition:.25s;position:relative;
+}
+.li .box{
+  width:20px;height:20px;border-radius:5px;border:1px solid rgba(201,162,94,.55);flex:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.li.on .box{border-color:rgba(201,162,94,.9);background:rgba(201,162,94,.16)}
+.li.on .txt{color:rgba(251,244,228,.5);text-decoration:line-through;text-decoration-color:rgba(201,162,94,.45)}
+.seal{
+  position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;
+  border-radius:50%;border:2px solid #B24343;color:#B24343;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Noto Serif SC",serif;font-size:24px;font-weight:700;
+  transform:translate(-50%,-50%) scale(1.7) rotate(-14deg);opacity:0;
+  pointer-events:none;mix-blend-mode:screen;
+}
+.li.on .seal{animation:stamp .52s cubic-bezier(.2,1.15,.35,1) forwards}
+@keyframes stamp{
+  0%{transform:translate(-50%,-50%) scale(1.75) rotate(-14deg);opacity:0}
+  55%{transform:translate(-50%,-50%) scale(.94) rotate(-14deg);opacity:1}
+  72%{transform:translate(-50%,-50%) scale(1.03) rotate(-14deg)}
+  100%{transform:translate(-50%,-50%) scale(1) rotate(-14deg);opacity:.85}
+}
+
+/* ---------- 3 时间轴行进 ---------- */
+.tl{position:relative;padding-left:34px;max-width:420px;margin:0 auto}
+.tl .spine{
+  position:absolute;left:13px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,rgba(201,162,94,.5),rgba(201,162,94,.12));
+  transform:scaleY(.15);transform-origin:top;transition:transform .6s ease;
+}
+.tl.grow .spine{transform:scaleY(1)}
+.tli{position:relative;padding:10px 0 16px}
+.tli .dot{
+  position:absolute;left:-27px;top:13px;width:11px;height:11px;border-radius:50%;
+  background:rgba(201,162,94,.25);border:1px solid rgba(201,162,94,.5);
+  transition:.35s;
+}
+.tli.on .dot{background:#E8C98A;box-shadow:0 0 0 4px rgba(201,162,94,.16),0 0 14px rgba(232,201,138,.45)}
+.tli .tm{font-size:11px;letter-spacing:.1em;color:rgba(251,244,228,.45)}
+.tli .nm{font-family:"Noto Serif SC",serif;font-size:14px;margin-top:3px;transition:.35s;color:rgba(251,244,228,.6)}
+.tli.on .nm{color:#FFF8EE}
+
+/* ---------- 4 结尾浮现 ---------- */
+.fin{position:relative;height:240px;border-radius:14px;overflow:hidden;background:#171010}
+.fin .bg{
+  position:absolute;inset:-10% 0;
+  background-image:
+    linear-gradient(180deg,#2A1512 0%,rgba(42,21,18,.55) 14%,rgba(42,21,18,0) 34%),
+    url("https://qfye3480.github.io/20271002/images/finale-sunset.jpg");
+  background-size:cover,cover;background-position:center,center;
+  will-change:transform;
+}
+.fin .txt{position:absolute;left:0;right:0;bottom:26px;text-align:center}
+.fin .txt p{margin:0;font-family:"Noto Serif SC",serif;font-size:15px;letter-spacing:.22em;color:#F6E2B8;
+  opacity:0;transform:translateY(10px);transition:.9s ease}
+.fin.show .txt p{opacity:1;transform:none}
+.fin .txt p:nth-child(2){transition-delay:.35s;font-size:11.5px;letter-spacing:.14em;color:rgba(251,244,228,.6);margin-top:8px}
+
+/* ---------- 5 联络卡 ---------- */
+.contacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.contacts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ct{
+  border:1px solid rgba(201,162,94,.35);border-radius:12px;padding:11px 10px 10px;
+  background:rgba(201,162,94,.07);text-decoration:none;color:inherit;display:block;
+}
+.ct .who{font-size:10.5px;letter-spacing:.12em;color:rgba(201,162,94,.9)}
+.ct .nm{font-family:"Noto Serif SC",serif;font-size:14px;margin-top:3px}
+.ct .tel{font-size:12px;color:rgba(251,244,228,.55);margin-top:5px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>可以加的东西 · 效果先看</h1>
+  <p class="lead">每个都做成能点的样子，你觉得哪个值得加，告诉我编号，我接到正式页面上。下面的动效都是在你现有配色里做的，不加新颜色。</p>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="hd"><b>① 倒计时翻牌</b><span class="pill">视觉</span></div>
+    <p class="tip">把现在的「淡变」数字换成真正的翻页钟，每秒翻一格。仪式感强很多，婚礼当天盯着看也不腻。</p>
+    <div class="stage">
+      <div class="flip" id="flip">
+        <div class="fu"><div class="fbox"><span id="fD">00</span></div><label>天</label></div>
+        <div class="fu"><div class="fbox"><span id="fH">00</span></div><label>时</label></div>
+        <div class="fu"><div class="fbox"><span id="fM">00</span></div><label>分</label></div>
+        <div class="fu"><div class="fbox"><span id="fS">00</span></div><label>秒</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="hd"><b>② 勾选盖一枚印章</b><span class="pill">视觉</span></div>
+    <p class="tip">备婚清单每勾一项，落一枚囍字章。比进度条纯增长更有"完成了一件事"的手感。点下面几行试试。</p>
+    <div class="stage">
+      <div class="list" id="sealList">
+        <div class="li"><span class="box"></span><span class="txt">定新娘跟妆（含试妆）</span><span class="seal">囍</span></div>
+        <div class="li"><span class="box"></span><span class="txt">婚车合同写清解散时间</span><span class="seal">囍</span></div>
+        <div class="li"><span class="box"></span><span class="txt">司仪提前沟通敬茶环节</span><span class="seal">囍</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="hd"><b>③ 时间轴随滚动点亮</b><span class="pill">动效</span></div>
+    <p class="tip">当日流程现在是一张张卡片。换成一条会生长的时间轴，边滚边亮起，婚礼当天还能自动停在"现在该干嘛"。往下滚这块试试。</p>
+    <div class="stage">
+      <div class="tl" id="tl">
+        <div class="spine"></div>
+        <div class="tli"><span class="dot"></span><div class="tm">09:30</div><div class="nm">新郎家集合 · 车队出发</div></div>
+        <div class="tli"><span class="dot"></span><div class="tm">10:20</div><div class="nm">到东林 · 接亲进门</div></div>
+        <div class="tli"><span class="dot"></span><div class="tm">11:00</div><div class="nm">敬茶 · 与女方父母</div></div>
+        <div class="tli"><span class="dot"></span><div class="tm">11:28</div><div class="nm">午宴开席 · 东林礼堂</div></div>
+        <div class="tli"><span class="dot"></span><div class="tm">17:30</div><div class="nm">晚宴开席 · 双林宴会中心</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="hd"><b>④ 结尾文字逐行浮现</b><span class="pill">动效</span></div>
+    <p class="tip">现在结尾是静态的。让它滚到视野里时，句子一行行升起来，背景图比文字慢一点（轻微视差），收尾会更像"落幕"。滚过来看看。</p>
+    <div class="stage" style="padding:0">
+      <div class="fin" id="fin">
+        <div class="bg"></div>
+        <div class="txt">
+          <p>往后每一天，都想和你一起看夕阳</p>
+          <p>2027.10.02 · 湖州</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="hd"><b>⑤ 当天联络卡</b><span class="pill must">最实用</span></div>
+    <p class="tip">婚礼当天最怕"找不到人"。做一屏大按钮，点一下直接拨号——司仪、督导、摄影、跟妆、车队、酒店。这条我建议一定加，比任何动效都有用。</p>
+    <div class="stage">
+      <div class="contacts">
+        <a class="ct" href="tel:10000"><span class="who">司仪</span><div class="nm">王老师</div><div class="tel">138 ···· 8821</div></a>
+        <a class="ct" href="tel:10000"><span class="who">督导</span><div class="nm">小李</div><div class="tel">139 ···· 4402</div></a>
+        <a class="ct" href="tel:10000"><span class="who">跟妆</span><div class="nm">陈老师</div><div class="tel">137 ···· 6615</div></a>
+        <a class="ct" href="tel:10000"><span class="who">车队</span><div class="nm">张师傅</div><div class="tel">135 ···· 2093</div></a>
+        <a class="ct" href="tel:10000"><span class="who">东林礼堂</span><div class="nm">前台</div><div class="tel">0572 ···· 1180</div></a>
+        <a class="ct" href="tel:10000"><span class="who">双林酒店</span><div class="nm">宴会对接</div><div class="tel">0572 ···· 3376</div></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- ① 翻牌 ---------- */
+var target = new Date(2027, 9, 2, 11, 28, 0);
+var fD=document.getElementById('fD'), fH=document.getElementById('fH'), fM=document.getElementById('fM'), fS=document.getElementById('fS');
+var prev = {d:'',h:'',m:'',s:''};
+function pad(n){ return n<10 ? '0'+n : ''+n; }
+function setNum(el, key, val){
+  if(prev[key] === val) return;
+  prev[key] = val;
+  el.textContent = val;
+  el.classList.remove('roll');
+  void el.offsetWidth;
+  el.classList.add('roll');
+}
+function tick(){
+  var now = new Date();
+  var diff = Math.max(0, target - now);
+  var s = Math.floor(diff/1000);
+  setNum(fD,'d', pad(Math.floor(s/86400)));
+  setNum(fH,'h', pad(Math.floor(s%86400/3600)));
+  setNum(fM,'m', pad(Math.floor(s%3600/60)));
+  setNum(fS,'s', pad(s%60));
+}
+tick(); setInterval(tick, 1000);
+
+/* ---------- ② 印章 ---------- */
+document.getElementById('sealList').addEventListener('click', function(e){
+  var li = e.target.closest('.li');
+  if(!li) return;
+  li.classList.toggle('on');
+});
+
+/* ---------- ③ 时间轴 ---------- */
+var tl = document.getElementById('tl');
+var tio = new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(en.isIntersecting){ tl.classList.add('grow'); }
+  });
+}, {threshold:.25});
+tio.observe(tl);
+
+var items = tl.querySelectorAll('.tli');
+var iio2 = new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(en.isIntersecting) en.target.classList.add('on');
+  });
+}, {rootMargin:'-10% 0px -30% 0px'});
+items.forEach(function(it){ iio2.observe(it); });
+
+/* ---------- ④ 结尾浮现 + 视差 ---------- */
+var fin = document.getElementById('fin');
+var finIO = new IntersectionObserver(function(es){
+  es.forEach(function(en){ if(en.isIntersecting) fin.classList.add('show'); });
+}, {threshold:.4});
+finIO.observe(fin);
+
+var finBg = fin.querySelector('.bg');
+var ticking = false;
+function parallax(){
+  var r = fin.getBoundingClientRect();
+  var vh = window.innerHeight;
+  var p = (r.top + r.height/2 - vh/2) / vh;
+  finBg.style.transform = 'translateY(' + (p * -18).toFixed(1) + 'px)';
+  ticking = false;
+}
+window.addEventListener('scroll', function(){
+  if(!ticking){ ticking = true; setTimeout(parallax, 60); }
+}, {passive:true});
+parallax();
+</script>
+</body>
+</html>

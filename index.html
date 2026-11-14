@@ -420,7 +420,7 @@ section{padding:52px 0 6px}
 .finale-mark i{display:block;width:46px;height:1px;background:rgba(166,58,58,.28)}
 .finale-mark span{font-family:"Noto Serif SC",serif;font-size:17px;color:var(--cinnabar);opacity:.85;letter-spacing:.1em}
 .finale-shot{position:relative;overflow:hidden;background:#171010;aspect-ratio:4/5}
-.finale-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:24% 60%;display:block}
+.finale-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:24% 60%;display:block;will-change:transform;transform:scale(1.03)}
 .finale-veil{position:absolute;inset:0;background:
   linear-gradient(180deg,
     rgba(246,241,232,1) 0px,
@@ -453,6 +453,48 @@ section{padding:52px 0 6px}
   .player,.topnav,.toast{display:none}
   body{padding-bottom:0;background:#fff}
 }
+/* ---------- 倒计时：翻页式数字 ---------- */
+.cd-unit b{display:inline-block;transform-origin:50% 58%;backface-visibility:hidden;will-change:transform}
+.cd-unit b.flipx{animation:flipx .52s cubic-bezier(.2,.85,.3,1)}
+@keyframes flipx{
+  0%{transform:rotateX(-78deg);opacity:.18}
+  58%{transform:rotateX(6deg);opacity:1}
+  100%{transform:rotateX(0)}
+}
+
+/* ---------- 备婚清单：勾选盖章 + 完成日期 ---------- */
+.check-item{position:relative}
+.check-seal{
+  position:absolute;left:1px;top:18px;width:44px;height:44px;margin-top:-22px;border-radius:50%;
+  border:2px solid #B24343;color:#B24343;display:flex;align-items:center;justify-content:center;
+  font-family:"Noto Serif SC",serif;font-size:17px;font-weight:700;line-height:1;
+  transform:scale(1.72) rotate(-14deg);opacity:0;pointer-events:none;
+}
+.check-item.stamping .check-seal{animation:stampIn 1.05s cubic-bezier(.2,1.15,.35,1) forwards}
+@keyframes stampIn{
+  0%{transform:scale(1.78) rotate(-17deg);opacity:0}
+  26%{transform:scale(.93) rotate(-13deg);opacity:1}
+  46%{transform:scale(1.05) rotate(-13deg);opacity:1}
+  66%{transform:scale(1) rotate(-13deg);opacity:.92}
+  100%{transform:scale(1) rotate(-13deg);opacity:0}
+}
+.check-date{margin-left:8px;font-size:11px;letter-spacing:.05em;color:rgba(139,106,60,.92);white-space:nowrap}
+
+/* ---------- 时间轴：滚到才点亮 ---------- */
+.rm-item::before{transition:background .45s ease,border-color .45s ease,box-shadow .45s ease}
+.rm-item.on::before{background:var(--gold);border-color:var(--cinnabar);box-shadow:0 0 0 3px rgba(201,162,94,.18)}
+.rm-item.on .rm-title{color:var(--cinnabar)}
+.lanes tbody tr{transition:box-shadow .45s ease}
+.lanes tbody tr.on td.tcell{box-shadow:inset 3px 0 0 var(--gold)}
+.lanes tbody tr.on td.tcell .seq{color:var(--gold)}
+
+/* ---------- 结尾：逐行浮现 ---------- */
+.finale-txt .fd,.finale-txt h2,.finale-txt p{opacity:0;transform:translateY(14px);transition:opacity .95s ease,transform .95s ease}
+.finale-txt .finale-rule{opacity:0;transform:scaleX(.35);transform-origin:center;transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.3,1)}
+.finale.show .fd{opacity:.92;transform:none}
+.finale.show h2{opacity:1;transform:none;transition-delay:.18s}
+.finale.show .finale-rule{opacity:1;transform:scaleX(1);transition-delay:.36s}
+.finale.show p{opacity:1;transform:none;transition-delay:.52s}
 </style>
 </head>
 <body>
@@ -991,6 +1033,7 @@ function renderLanes(){
   });
 
   table.innerHTML = cols + head + `<tbody>${body}</tbody>`;
+  setupFlowReveal();
 }
 
 /* ================= 渲染：移动端单角色时间线 ================= */
@@ -1008,6 +1051,7 @@ function renderMobile(){
       <div class="rm-title">${n.title}</div>
       <div class="rm-text">${n.roles[mobileRole]}</div>
     </div>`).join("") : `<div class="rm-empty">这位角色当天没有单独任务。</div>`;
+  setupFlowReveal();
 }
 
 /* ================= 其它板块 ================= */
@@ -1044,18 +1088,36 @@ function renderVenues(){
 
 /* ================= 备婚清单 ================= */
 const STORE_KEY = "wedding-checklist-v1";
+const LEGACY_DATE = "2026.11.11";   // 早期已完成项统一记为这天
+let stampIdx = -1;                  // 刚勾选的那一项，只让它播放盖章动画
 let statusFilter = "all", whoFilter = "all";
 const FLAT = [];
-CHECKLIST.forEach((g,gi)=>g.items.forEach((it,ii)=>FLAT.push({gi,ii,...it})));
+CHECKLIST.forEach((g,gi)=>g.items.forEach((it,ii)=>FLAT.push({gi,ii,...it,date:""})));
 
+function todayLabel(){
+  const d = new Date();
+  return d.getFullYear() + "." + pad2(d.getMonth()+1) + "." + pad2(d.getDate());
+}
 function loadState(){
   let saved = {};
   try{ saved = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){}
-  FLAT.forEach((it,idx)=>{ if(typeof saved[idx] === "boolean") it.done = saved[idx]; });
+  FLAT.forEach((it,idx)=>{
+    const v = saved[idx];
+    if(typeof v === "boolean"){
+      it.done = v;
+      it.date = v ? LEGACY_DATE : "";
+    } else if(v && typeof v === "object"){
+      it.done = !!v.done;
+      it.date = v.date || (v.done ? LEGACY_DATE : "");
+    } else {
+      it.done = !!(it.done);
+      it.date = it.done ? LEGACY_DATE : "";
+    }
+  });
 }
 function persist(){
   const saved = {};
-  FLAT.forEach((it,idx)=>{ saved[idx] = it.done; });
+  FLAT.forEach((it,idx)=>{ saved[idx] = {done: !!it.done, date: it.date || ""}; });
   try{ localStorage.setItem(STORE_KEY, JSON.stringify(saved)); }catch(e){}
 }
 function whoMatch(k){
@@ -1072,12 +1134,14 @@ function renderChecklist(){
   CHECKLIST.forEach((g,gi)=>{
     const items = g.items.map((it,ii)=>{
       const idx = FLAT.findIndex(x=>x.gi===gi && x.ii===ii);
-      return {...it, idx};
+      const st = FLAT[idx] || {done:it.done, date:it.done?LEGACY_DATE:""};
+      return {...it, idx, done: !!st.done, date: st.date || ""};
     }).filter(it=>whoMatch(it.k) && statusMatch(it.done));
     if(!items.length) return;
     const groupDone = FLAT.filter(x=>x.gi===gi && x.done).length;
     const cards = items.map(it=>`
-      <div class="check-item ${it.done?"done":""}" data-idx="${it.idx}" role="checkbox" aria-checked="${it.done}" tabindex="0">
+      <div class="check-item ${it.done?"done":""}${it.idx===stampIdx?" stamping":""}" data-idx="${it.idx}" role="checkbox" aria-checked="${it.done}" tabindex="0">
+        <span class="check-seal" aria-hidden="true">囍</span>
         <div class="checkbox">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
             <path d="M3 8.5l3 3 7-7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1085,7 +1149,7 @@ function renderChecklist(){
         </div>
         <div class="check-body">
           <div class="check-title">${it.t}</div>
-          <div class="check-meta"><span class="who ${it.k}">${it.who}</span></div>
+          <div class="check-meta"><span class="who ${it.k}">${it.who}</span>${it.done && it.date ? `<span class="check-date">${it.date} 完成</span>` : ""}</div>
           ${it.tip?`<div class="check-tip">${it.tip}</div>`:""}
         </div>
       </div>`).join("");
@@ -1102,8 +1166,12 @@ function renderChecklist(){
   wrap.querySelectorAll(".check-item").forEach(el=>{
     const toggle = ()=>{
       const idx = +el.dataset.idx;
-      FLAT[idx].done = !FLAT[idx].done;
+      const st = FLAT[idx];
+      st.done = !st.done;
+      st.date = st.done ? todayLabel() : "";
+      stampIdx = st.done ? idx : -1;
       persist(); renderChecklist(); renderProgress();
+      if(stampIdx >= 0) setTimeout(()=>{ stampIdx = -1; }, 1100);
     };
     el.addEventListener("click", toggle);
     el.addEventListener("keydown", e=>{
@@ -1263,18 +1331,69 @@ function setupReveal(){
   });
 }
 
-/* ================= 倒计时（实时到秒） ================= */
+/* ================= 当日流程时间轴：滚到才点亮 ================= */
+let flowIO = null;
+function setupFlowReveal(){
+  if(!("IntersectionObserver" in window)) return;
+  if(!flowIO){
+    flowIO = new IntersectionObserver(es=>{
+      es.forEach(en=>{
+        if(en.isIntersecting){ en.target.classList.add("on"); flowIO.unobserve(en.target); }
+      });
+    },{rootMargin:"-8% 0px -22% 0px"});
+  }
+  document.querySelectorAll(".rm-item, .lanes tbody tr:not(.bandrow)").forEach(el=>{
+    if(!el.classList.contains("on")) flowIO.observe(el);
+  });
+}
+
+/* ================= 结尾：文字逐行浮现 + 图片轻视差 ================= */
+function setupFinale(){
+  const fin = document.querySelector(".finale");
+  if(!fin) return;
+  const shot = fin.querySelector(".finale-shot img");
+  if("IntersectionObserver" in window){
+    const io = new IntersectionObserver(es=>{
+      es.forEach(en=>{ if(en.isIntersecting){ fin.classList.add("show"); io.unobserve(en.target); } });
+    },{threshold:.3});
+    io.observe(fin);
+  } else {
+    fin.classList.add("show");
+  }
+  if(shot){
+    let pending = false;
+    const move = ()=>{
+      const r = fin.getBoundingClientRect();
+      const p = (r.top + r.height/2 - window.innerHeight/2) / window.innerHeight;
+      shot.style.transform = "translate3d(0," + (p * 8).toFixed(1) + "px,0) scale(1.03)";
+      pending = false;
+    };
+    window.addEventListener("scroll", ()=>{ if(!pending){ pending = true; setTimeout(move, 60); } }, {passive:true});
+    move();
+  }
+}
+
+/* ================= 倒计时（翻页式，实时到秒） ================= */
 function pad2(n){ return n < 10 ? "0" + n : "" + n; }
+
+function flipSet(el, val){
+  if(!el) return;
+  if(el.textContent === String(val)) return;
+  el.textContent = val;
+  el.classList.remove("flipx");
+  void el.offsetWidth;
+  el.classList.add("flipx");
+}
 
 function renderCountdown(){
   const dEl = $("#cdDays"), hEl = $("#cdHours"), mEl = $("#cdMins"), sEl = $("#cdSecs");
   if(!dEl || !hEl || !mEl || !sEl) return;
   const target = new Date("2027-10-02T00:00:00+08:00").getTime();
   const diff = Math.max(0, target - Date.now());
-  dEl.textContent = Math.floor(diff / 86400000);
-  hEl.textContent = pad2(Math.floor((diff % 86400000) / 3600000));
-  mEl.textContent = pad2(Math.floor((diff % 3600000) / 60000));
-  sEl.textContent = pad2(Math.floor((diff % 60000) / 1000));
+  flipSet(dEl, Math.floor(diff / 86400000));
+  flipSet(hEl, pad2(Math.floor((diff % 86400000) / 3600000)));
+  flipSet(mEl, pad2(Math.floor((diff % 3600000) / 60000)));
+  flipSet(sEl, pad2(Math.floor((diff % 60000) / 1000)));
 }
 
 /* ================= 导航：随滚动高亮当前区块 ================= */
@@ -1350,6 +1469,7 @@ renderProgress();
 renderCountdown();
 setInterval(renderCountdown, 1000);
 setupReveal();
+setupFinale();
 setupNavSpy();
 </script>
 </body>
